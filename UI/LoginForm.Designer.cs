@@ -42,6 +42,7 @@
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             phone_box = new TextBox();
+            app_label = new Label();
             ((System.ComponentModel.ISupportInitialize)banking_banner).BeginInit();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -60,7 +61,7 @@
             // email_box
             // 
             email_box.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            email_box.Location = new Point(98, 230);
+            email_box.Location = new Point(97, 305);
             email_box.Name = "email_box";
             email_box.PlaceholderText = "E-Mail";
             email_box.Size = new Size(237, 29);
@@ -69,7 +70,7 @@
             // password_box
             // 
             password_box.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            password_box.Location = new Point(98, 265);
+            password_box.Location = new Point(97, 340);
             password_box.Name = "password_box";
             password_box.PlaceholderText = "Password";
             password_box.Size = new Size(237, 29);
@@ -79,7 +80,7 @@
             // submit_button
             // 
             submit_button.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            submit_button.Location = new Point(98, 445);
+            submit_button.Location = new Point(97, 520);
             submit_button.Name = "submit_button";
             submit_button.Size = new Size(237, 35);
             submit_button.TabIndex = 5;
@@ -90,7 +91,7 @@
             // forgot_link
             // 
             forgot_link.AutoSize = true;
-            forgot_link.Location = new Point(240, 427);
+            forgot_link.Location = new Point(239, 502);
             forgot_link.Name = "forgot_link";
             forgot_link.Size = new Size(95, 15);
             forgot_link.TabIndex = 6;
@@ -102,7 +103,7 @@
             // signup_link
             // 
             signup_link.AutoSize = true;
-            signup_link.Location = new Point(168, 492);
+            signup_link.Location = new Point(167, 567);
             signup_link.Name = "signup_link";
             signup_link.Size = new Size(99, 15);
             signup_link.TabIndex = 7;
@@ -113,7 +114,7 @@
             // name_box
             // 
             name_box.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            name_box.Location = new Point(98, 300);
+            name_box.Location = new Point(97, 375);
             name_box.Name = "name_box";
             name_box.PlaceholderText = "Name";
             name_box.Size = new Size(237, 29);
@@ -123,7 +124,7 @@
             // surname_box
             // 
             surname_box.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            surname_box.Location = new Point(98, 335);
+            surname_box.Location = new Point(97, 410);
             surname_box.Name = "surname_box";
             surname_box.PlaceholderText = "Surname";
             surname_box.Size = new Size(237, 29);
@@ -133,7 +134,7 @@
             // role_radio_1
             // 
             role_radio_1.AutoSize = true;
-            role_radio_1.Location = new Point(138, 405);
+            role_radio_1.Location = new Point(137, 480);
             role_radio_1.Name = "role_radio_1";
             role_radio_1.Size = new Size(70, 19);
             role_radio_1.TabIndex = 10;
@@ -146,7 +147,7 @@
             // role_radio_2
             // 
             role_radio_2.AutoSize = true;
-            role_radio_2.Location = new Point(214, 405);
+            role_radio_2.Location = new Point(213, 480);
             role_radio_2.Name = "role_radio_2";
             role_radio_2.Size = new Size(70, 19);
             role_radio_2.TabIndex = 11;
@@ -159,7 +160,7 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(0, 520);
+            statusStrip1.Location = new Point(0, 597);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(438, 22);
             statusStrip1.TabIndex = 12;
@@ -174,18 +175,29 @@
             // phone_box
             // 
             phone_box.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            phone_box.Location = new Point(98, 370);
+            phone_box.Location = new Point(97, 445);
             phone_box.Name = "phone_box";
             phone_box.PlaceholderText = "Phone";
             phone_box.Size = new Size(237, 29);
             phone_box.TabIndex = 13;
             phone_box.Visible = false;
             // 
+            // app_label
+            // 
+            app_label.AutoSize = true;
+            app_label.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            app_label.Location = new Point(117, 236);
+            app_label.Name = "app_label";
+            app_label.Size = new Size(206, 45);
+            app_label.TabIndex = 14;
+            app_label.Text = "BankingAPP";
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(438, 542);
+            ClientSize = new Size(438, 619);
+            Controls.Add(app_label);
             Controls.Add(phone_box);
             Controls.Add(statusStrip1);
             Controls.Add(role_radio_2);
@@ -222,5 +234,6 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private TextBox phone_box;
+        private Label app_label;
     }
 }
