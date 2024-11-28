@@ -1,6 +1,8 @@
 ﻿using BankingApp.DAL;
 using BankingApp.Models;
 using BankingApp.Models.Enums;
+using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,26 +16,38 @@ using System.Windows.Forms;
 
 namespace BankingApp.UI
 {
-    public partial class ModForm : Form
+    public partial class ModForm : MaterialForm
     {
         private readonly BindingList<Customer> _customersList = [];
 
         public ModForm()
         {
             InitializeComponent();
+            AppSkin.materialSkinManager.AddFormToManage(this);
+
+            Size = new Size(1245, 643);
+            MaximumSize = Size;
+            MinimumSize = Size;
+
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+
+            dataGridView1.BackgroundColor = AppSkin.materialSkinManager.BackgroundColor;
+            dataGridView1.ForeColor = AppSkin.materialSkinManager.ColorScheme.PrimaryColor;
+            dataGridView1.GridColor = AppSkin.materialSkinManager.ColorScheme.TextColor;
+
             dataGridView1.DataSource = _customersList;
         }
 
-        private void delete_button_Click(object sender, EventArgs e)
+        private void Delete_button_Click(object sender, EventArgs e)
         {
-            int count = CustomerRepository.Delete(Convert.ToInt32(textBox1.Text));
+            int count = CustomerRepository.Delete(Convert.ToInt32(textBox1.Text.Trim()));
             toolStripStatusLabel1.Text = "Deleted " + count + " Customer(s)";
         }
 
-        private void get_all_button_Click(object sender, EventArgs e)
+        private void Get_all_button_Click(object sender, EventArgs e)
         {
             int inCounter = 0;
-            toolStripProgressBar1.Value = 0;
+            progress_bar.Value = 0;
 
             List<Customer> remoteList = CustomerRepository.GetAll();
             foreach (Customer c in remoteList)
@@ -42,40 +56,40 @@ namespace BankingApp.UI
                 inCounter++;
             }
             toolStripStatusLabel1.Text = "Got " + inCounter.ToString() + " Customer(s)";
-            toolStripProgressBar1.Value = 100;
+            progress_bar.Value = 100;
         }
 
-        private void clear_button_Click(object sender, EventArgs e)
+        private void Clear_button_Click(object sender, EventArgs e)
         {
-            toolStripProgressBar1.Value = 0;
+            progress_bar.Value = 0;
             _customersList.Clear();
             toolStripStatusLabel1.Text = "Cleared";
-            toolStripProgressBar1.Value = 100;
+            progress_bar.Value = 100;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
-            toolStripProgressBar1.Value = 0;
+            progress_bar.Value = 0;
             CustomerRepository.Add(new Customer()
             {
-                Email = "unknown@home.alak",
-                Name = "Unknown",
-                Surname = "Unknownov",
+                Email = "admin@home.alak",
+                Name = "Gringott",
+                Surname = "the goblin",
                 Phone = "+994000000000",
                 Password = "",
-                Role = Rolet.Visitor
+                Role = Rolet.Admin
             });
             toolStripStatusLabel1.Text = "Added a predefined Customer";
-            toolStripProgressBar1.Value = 100;
+            progress_bar.Value = 100;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
-            toolStripProgressBar1.Value = 0;
+            progress_bar.Value = 0;
             Customer customer;
             try
             {
-                customer = CustomerRepository.Get(Convert.ToInt32(textBox2.Text));
+                customer = CustomerRepository.Get(Convert.ToInt32(textBox2.Text.Trim()));
                 _customersList.Add(customer);
                 toolStripStatusLabel1.Text = "Got 1 Customer";
             }
@@ -83,14 +97,14 @@ namespace BankingApp.UI
             {
                 toolStripStatusLabel1.Text = ce.Message;
             }
-            toolStripProgressBar1.Value = 100;
+            progress_bar.Value = 100;
         }
 
-        private void insert_all_button_Click(object sender, EventArgs e)
+        private void Insert_all_button_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                toolStripProgressBar1.Value = 0;
+                progress_bar.Value = 0;
                 if (row.Cells.Count > 0)
                     if (row.Cells["Manual"].Value != null)
                         if ((bool)row.Cells["Manual"].Value)
@@ -106,8 +120,16 @@ namespace BankingApp.UI
                                 Debug.WriteLine("Customer being inserted is null");
                             }
                         }
-                toolStripProgressBar1.Value = 100;
+                progress_bar.Value = 100;
             }
+        }
+
+        private void MaterialButton1_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form login = new LoginForm();
+            login.FormClosed += (s, args) => Close();
+            login.Show();
         }
     }
 }

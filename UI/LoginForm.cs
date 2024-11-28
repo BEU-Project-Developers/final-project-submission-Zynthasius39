@@ -2,6 +2,9 @@ using BankingApp.BLL;
 using BankingApp.DAL;
 using BankingApp.Models;
 using BankingApp.Models.Enums;
+using BankingApp.UI;
+using MaterialSkin;
+using MaterialSkin.Controls;
 using Npgsql;
 using System.Diagnostics;
 using System.Security.Cryptography;
@@ -9,16 +12,28 @@ using System.Text;
 
 namespace BankingApp
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : MaterialForm
     {
         private bool _isLogin = true;
+        
         public LoginForm()
         {
             InitializeComponent();
+            AppSkin.materialSkinManager.AddFormToManage(this);
+
+            Size = new Size(433, 904);
+            MaximumSize = Size;
+            MinimumSize = Size;
+
             toolStripStatusLabel1.Text = string.Empty;
+            forgot_link.LinkColor = AppSkin.materialSkinManager.ColorScheme.AccentColor;
+            forgot_link.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+
+            signup_link.LinkColor = AppSkin.materialSkinManager.ColorScheme.AccentColor;
+            signup_link.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
         }
 
-        private void switch_Menu()
+        private void Switch_Menu()
         {
             if (_isLogin)
             {
@@ -29,6 +44,7 @@ namespace BankingApp
                 surname_box.Visible = true;
                 role_radio_1.Visible = true;
                 role_radio_2.Visible = true;
+                phone_box.Visible = true;
                 _isLogin = false;
             }
             else
@@ -40,32 +56,39 @@ namespace BankingApp
                 surname_box.Visible = false;
                 role_radio_1.Visible = false;
                 role_radio_2.Visible = false;
+                phone_box.Visible = false;
                 _isLogin = true;
             }
         }
 
-        private void forgot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Forgot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            switch_Menu();
+            Switch_Menu();
         }
 
-        private void signup_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Signup_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            switch_Menu();
+            Switch_Menu();
         }
 
-        private void submit_button_Click(object sender, EventArgs e)
+        private void Submit_button_Click(object sender, EventArgs e)
         {
             if (_isLogin)
             {
                 try
                 {
                     Customer customer = CustomerService.GetCustomer(email_box.Text.Trim());
-                    //toolStripStatusLabel1.Text = CustomerService.VerifyPassword(customer, password_box.Text.Trim());
                     if (CustomerService.VerifyPassword(customer, password_box.Text.Trim()))
                     {
                         Debug.WriteLine(customer.Id + " logged in at " + DateTime.Now);
                         toolStripStatusLabel1.Text = "Welcome back, " + customer.Name + "!";
+                        if (customer.Role == Rolet.Admin || customer.Role == Rolet.Mod)
+                        {
+                            Hide();
+                            Form mod = new ModForm();
+                            mod.FormClosed += (s, args) => Close();
+                            mod.Show();
+                        }
                     }
                     else
                     {
@@ -106,7 +129,7 @@ namespace BankingApp
                 }
                 toolStripStatusLabel1.Text = "Successfully registered. You can now login to your account!";
                 _isLogin = true;
-                switch_Menu();
+                Switch_Menu();
             }
         }
     }
