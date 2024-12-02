@@ -24,6 +24,12 @@ namespace BankingApp.Models.Enums
         Admin
     }
 
+    public enum Contractt
+    {
+        Mortgage,
+        Loan
+    }
+
     public enum Currency
     {
         USD,
@@ -31,5 +37,21 @@ namespace BankingApp.Models.Enums
         EUR,
         GOLD,
         TRY
+    }
+
+    public enum Resourcet
+    {
+        Cash,
+        Metal,
+        Share,
+        Fund,
+        Crypto
+    }
+
+    public enum Transactiont
+    {
+        Withdrawal,
+        Deposit,
+        Exchange
     }
 }

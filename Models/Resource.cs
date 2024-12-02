@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankingApp.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace BankingApp.Models
 {
     public class Resource
     {
-        public int Id { get; set; }
-        public string ResourseType { get; set; } = string.Empty;
-        public string Currency { get; set; } = string.Empty;
-        public decimal Amount { get; set; }
+        public required int Id { get; set; }
+        public required Resourcet ResourseType { get; set; }
+        public required Currency Currency { get; set; }
+        public required decimal Amount { get; set; }
     }
 }

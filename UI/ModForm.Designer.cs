@@ -216,9 +216,9 @@ namespace BankingApp.UI
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(3, 616);
+            statusStrip1.Location = new Point(3, 655);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1237, 22);
+            statusStrip1.Size = new Size(1253, 22);
             statusStrip1.TabIndex = 8;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -348,14 +348,13 @@ namespace BankingApp.UI
             progress_bar.MouseState = MaterialSkin.MouseState.HOVER;
             progress_bar.Name = "progress_bar";
             progress_bar.Size = new Size(269, 5);
-            progress_bar.Style = ProgressBarStyle.Continuous;
             progress_bar.TabIndex = 12;
             // 
             // ModForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1243, 641);
+            ClientSize = new Size(1259, 680);
             Controls.Add(progress_bar);
             Controls.Add(logout_button);
             Controls.Add(insert_all_button);

@@ -63,9 +63,9 @@ namespace BankingApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _4115235_exit_logout_sign_out_114030 {
+        internal static System.Drawing.Bitmap card_0 {
             get {
-                object obj = ResourceManager.GetObject("4115235-exit-logout-sign-out_114030", resourceCulture);
+                object obj = ResourceManager.GetObject("card_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace BankingApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cardpins {
+        internal static System.Drawing.Bitmap card_1 {
             get {
-                object obj = ResourceManager.GetObject("cardpins", resourceCulture);
+                object obj = ResourceManager.GetObject("card_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace BankingApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pngwing_com {
+        internal static System.Drawing.Bitmap gringotts_black {
             get {
-                object obj = ResourceManager.GetObject("pngwing.com", resourceCulture);
+                object obj = ResourceManager.GetObject("gringotts_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,29 +93,9 @@ namespace BankingApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SOBK0422040_780x440_mobile {
+        internal static System.Drawing.Bitmap gringotts_white {
             get {
-                object obj = ResourceManager.GetObject("SOBK0422040_780x440_mobile", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SOBK0422040_780x440_mobile2 {
-            get {
-                object obj = ResourceManager.GetObject("SOBK0422040_780x440_mobile2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SOBK0422040_780x440_mobile21 {
-            get {
-                object obj = ResourceManager.GetObject("SOBK0422040_780x440_mobile21", resourceCulture);
+                object obj = ResourceManager.GetObject("gringotts_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

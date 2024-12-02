@@ -23,7 +23,7 @@ namespace BankingApp.UI
         public ModForm()
         {
             InitializeComponent();
-            AppSkin.materialSkinManager.AddFormToManage(this);
+            AppSkinHelper.materialSkinManager.AddFormToManage(this);
 
             Size = new Size(1245, 643);
             MaximumSize = Size;
@@ -31,9 +31,9 @@ namespace BankingApp.UI
 
             FormBorderStyle = FormBorderStyle.Fixed3D;
 
-            dataGridView1.BackgroundColor = AppSkin.materialSkinManager.BackgroundColor;
-            dataGridView1.ForeColor = AppSkin.materialSkinManager.ColorScheme.PrimaryColor;
-            dataGridView1.GridColor = AppSkin.materialSkinManager.ColorScheme.TextColor;
+            dataGridView1.BackgroundColor = AppSkinHelper.materialSkinManager.BackgroundColor;
+            dataGridView1.ForeColor = AppSkinHelper.materialSkinManager.ColorScheme.PrimaryColor;
+            dataGridView1.GridColor = AppSkinHelper.materialSkinManager.ColorScheme.TextColor;
 
             dataGridView1.DataSource = _customersList;
         }
@@ -41,7 +41,7 @@ namespace BankingApp.UI
         private void Delete_button_Click(object sender, EventArgs e)
         {
             int count = CustomerRepository.Delete(Convert.ToInt32(textBox1.Text.Trim()));
-            toolStripStatusLabel1.Text = "Deleted " + count + " Customer(s)";
+            StatusBar.Status = "Deleted " + count + " Customer(s)";
         }
 
         private void Get_all_button_Click(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace BankingApp.UI
                 _customersList.Add(c);
                 inCounter++;
             }
-            toolStripStatusLabel1.Text = "Got " + inCounter.ToString() + " Customer(s)";
+            StatusBar.Status = "Got " + inCounter.ToString() + " Customer(s)";
             progress_bar.Value = 100;
         }
 
@@ -63,7 +63,7 @@ namespace BankingApp.UI
         {
             progress_bar.Value = 0;
             _customersList.Clear();
-            toolStripStatusLabel1.Text = "Cleared";
+            StatusBar.Status = "Cleared";
             progress_bar.Value = 100;
         }
 
@@ -76,10 +76,10 @@ namespace BankingApp.UI
                 Name = "Gringott",
                 Surname = "the goblin",
                 Phone = "+994000000000",
-                Password = "",
+                Password = "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
                 Role = Rolet.Admin
             });
-            toolStripStatusLabel1.Text = "Added a predefined Customer";
+            StatusBar.Status = "Added a predefined Customer";
             progress_bar.Value = 100;
         }
 
@@ -91,11 +91,11 @@ namespace BankingApp.UI
             {
                 customer = CustomerRepository.Get(Convert.ToInt32(textBox2.Text.Trim()));
                 _customersList.Add(customer);
-                toolStripStatusLabel1.Text = "Got 1 Customer";
+                StatusBar.Status = "Got 1 Customer";
             }
             catch (Exception ce)
             {
-                toolStripStatusLabel1.Text = ce.Message;
+                StatusBar.Status = ce.Message;
             }
             progress_bar.Value = 100;
         }

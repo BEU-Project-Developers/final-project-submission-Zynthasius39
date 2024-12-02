@@ -11,14 +11,13 @@ namespace BankingApp.Models
     
     public class Account
     {
-        public int Id { get; set; }
-        public int[] CIdList { get; set; } = [];
-        public Accountt AccountType { get; set; }
-        public Currency Currency {  get; set; }
-
-        public DateTime CreationDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
-
-        public decimal Amount { get; set; }
+        public required int Id { get; set; }
+        public required int[] CIdList { get; set; } = [];
+        public required Accountt AccountType { get; set; }
+        public required Currency Currency {  get; set; }
+        public required DateTime CreationDate { get; set; }
+        public required DateTime ExpirationDate { get; set; }
+        public required decimal Amount { get; set; }
+        public required long AccountNumber { get; set; }
     }
 }

@@ -6,8 +6,9 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.ComponentResourceManager resources = null;
 
-        /// <summary>
+        /// <sumGmary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -32,16 +33,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             TabControl = new MaterialSkin.Controls.MaterialTabControl();
             tabPage1 = new TabPage();
-            label1 = new Label();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            cards = new UserControl1();
             tabPage2 = new TabPage();
             imageList1 = new ImageList(components);
-            label2 = new Label();
             TabControl.SuspendLayout();
             tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // TabControl
@@ -63,9 +59,7 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.Transparent;
-            tabPage1.Controls.Add(label1);
-            tabPage1.Controls.Add(pictureBox1);
-            tabPage1.Controls.Add(pictureBox2);
+            tabPage1.Controls.Add(cards);
             tabPage1.ImageKey = "home.png";
             tabPage1.Location = new Point(4, 57);
             tabPage1.Name = "tabPage1";
@@ -74,37 +68,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Home";
             // 
-            // label1
+            // cards
             // 
-            label1.AutoSize = true;
-            label1.FlatStyle = FlatStyle.Flat;
-            label1.Font = new Font("Kredit Back", 27.7499962F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Gold;
-            label1.Location = new Point(583, 193);
-            label1.Name = "label1";
-            label1.Size = new Size(360, 44);
-            label1.TabIndex = 1;
-            label1.Text = "5550 1309 6672 6224";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(505, 16);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(416, 263);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(6, 6);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(416, 263);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
+            cards.AutoScroll = true;
+            cards.AutoSize = true;
+            cards.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            cards.Dock = DockStyle.Fill;
+            cards.Location = new Point(3, 3);
+            cards.Name = "cards";
+            cards.Size = new Size(1007, 626);
+            cards.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -125,18 +98,6 @@
             imageList1.Images.SetKeyName(0, "home.png");
             imageList1.Images.SetKeyName(1, "wallet.png");
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.FlatStyle = FlatStyle.Flat;
-            label2.Font = new Font("Kredit Back", 27.7499962F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.Gold;
-            label2.Location = new Point(45, 188);
-            label2.Name = "label2";
-            label2.Size = new Size(360, 44);
-            label2.TabIndex = 1;
-            label2.Text = "5550 1309 6672 6224";
-            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -150,13 +111,10 @@
             MinimumSize = new Size(1024, 768);
             Name = "Dashboard";
             Padding = new Padding(0, 72, 3, 3);
-            Sizable = false;
             Text = "Dashboard";
             TabControl.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -166,9 +124,6 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private ImageList imageList1;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private Label label1;
-        private Label label2;
+        private UserControl1 cards;
     }
 }
