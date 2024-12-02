@@ -33,11 +33,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             TabControl = new MaterialSkin.Controls.MaterialTabControl();
             tabPage1 = new TabPage();
-            cards = new UserControl1();
+            userControl11 = new Cards();
             tabPage2 = new TabPage();
+            userControl21 = new Payments();
             imageList1 = new ImageList(components);
             TabControl.SuspendLayout();
             tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // TabControl
@@ -59,7 +61,7 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.Transparent;
-            tabPage1.Controls.Add(cards);
+            tabPage1.Controls.Add(userControl11);
             tabPage1.ImageKey = "home.png";
             tabPage1.Location = new Point(4, 57);
             tabPage1.Name = "tabPage1";
@@ -68,19 +70,18 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Home";
             // 
-            // cards
+            // userControl11
             // 
-            cards.AutoScroll = true;
-            cards.AutoSize = true;
-            cards.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            cards.Dock = DockStyle.Fill;
-            cards.Location = new Point(3, 3);
-            cards.Name = "cards";
-            cards.Size = new Size(1007, 626);
-            cards.TabIndex = 0;
+            userControl11.AutoSize = true;
+            userControl11.Dock = DockStyle.Top;
+            userControl11.Location = new Point(3, 3);
+            userControl11.Name = "userControl11";
+            userControl11.Size = new Size(1007, 188);
+            userControl11.TabIndex = 0;
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(userControl21);
             tabPage2.ImageKey = "wallet.png";
             tabPage2.Location = new Point(4, 57);
             tabPage2.Name = "tabPage2";
@@ -89,6 +90,15 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Payments";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // userControl21
+            // 
+            userControl21.AutoSize = true;
+            userControl21.Dock = DockStyle.Fill;
+            userControl21.Location = new Point(3, 3);
+            userControl21.Name = "userControl21";
+            userControl21.Size = new Size(1007, 626);
+            userControl21.TabIndex = 0;
             // 
             // imageList1
             // 
@@ -115,6 +125,8 @@
             TabControl.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -124,6 +136,8 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private ImageList imageList1;
-        private UserControl1 cards;
+        private Cards cards;
+        private Cards userControl11;
+        private Payments userControl21;
     }
 }
