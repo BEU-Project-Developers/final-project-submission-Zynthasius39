@@ -23,7 +23,7 @@ namespace BankingApp.UI
         public ModForm()
         {
             InitializeComponent();
-            AppSkinHelper.materialSkinManager.AddFormToManage(this);
+            AppSkinHelper.msm.AddFormToManage(this);
 
             Size = new Size(1245, 643);
             MaximumSize = Size;
@@ -31,9 +31,9 @@ namespace BankingApp.UI
 
             FormBorderStyle = FormBorderStyle.Fixed3D;
 
-            dataGridView1.BackgroundColor = AppSkinHelper.materialSkinManager.BackgroundColor;
-            dataGridView1.ForeColor = AppSkinHelper.materialSkinManager.ColorScheme.PrimaryColor;
-            dataGridView1.GridColor = AppSkinHelper.materialSkinManager.ColorScheme.TextColor;
+            dataGridView1.BackgroundColor = AppSkinHelper.msm.BackgroundColor;
+            dataGridView1.ForeColor = AppSkinHelper.msm.ColorScheme.PrimaryColor;
+            dataGridView1.GridColor = AppSkinHelper.msm.ColorScheme.TextColor;
 
             dataGridView1.DataSource = _customersList;
         }

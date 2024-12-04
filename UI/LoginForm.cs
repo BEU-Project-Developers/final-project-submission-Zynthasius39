@@ -19,17 +19,18 @@ namespace BankingApp
         public LoginForm()
         {
             InitializeComponent();
-            AppSkinHelper.materialSkinManager.AddFormToManage(this);
+            MaterialSkinManager_ThemeChanged(this);
+            AppSkinHelper.msm.AddFormToManage(this);
 
             banking_banner.Location = new Point((Width - banking_banner.Width) / 2 - 10, banking_banner.Location.Y);
             banking_title.Location = new Point((Width - banking_title.Width) / 2 - 10, banking_title.Location.Y);
 
-            StatusBar.AddStatusBar(toolStripStatusLabel1);
+            StatusBar.AddStatusBar(statusBar);
 
-            forgot_link.LinkColor = AppSkinHelper.materialSkinManager.ColorScheme.AccentColor;
+            forgot_link.LinkColor = AppSkinHelper.msm.ColorScheme.AccentColor;
             forgot_link.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 
-            AppSkinHelper.materialSkinManager.ThemeChanged += MaterialSkinManager_ThemeChanged;
+            AppSkinHelper.msm.ThemeChanged += MaterialSkinManager_ThemeChanged;
         }
 
         private void MaterialSkinManager_ThemeChanged(object sender)
@@ -149,6 +150,13 @@ namespace BankingApp
                             mod.FormClosed += (s, args) => Close();
                             mod.Show();
                         }
+                        else
+                        {
+                            Hide();
+                            Form dash = new Dashboard();
+                            dash.FormClosed += (s, args) => Close();
+                            dash.Show();
+                        }
                     }
                     else
                     {
@@ -195,10 +203,7 @@ namespace BankingApp
 
         private void Dark_switch_CheckedChanged(object sender, EventArgs e)
         {
-            if (dark_switch.Checked && !AppSkinHelper.IsDark())
-                AppSkinHelper.materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            else if (!dark_switch.Checked)
-                AppSkinHelper.materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            AppSkinHelper.ToggleDark();
         }
     }
 }

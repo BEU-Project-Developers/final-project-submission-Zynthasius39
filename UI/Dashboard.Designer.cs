@@ -32,20 +32,26 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             TabControl = new MaterialSkin.Controls.MaterialTabControl();
-            tabPage1 = new TabPage();
-            userControl11 = new Cards();
-            tabPage2 = new TabPage();
-            userControl21 = new Payments();
+            home = new TabPage();
+            cards = new TabPage();
+            cardsTable = new TableLayoutPanel();
+            payments = new TabPage();
+            paymentsTable = new TableLayoutPanel();
+            account = new TabPage();
             imageList1 = new ImageList(components);
+            logoutButton = new MaterialSkin.Controls.MaterialButton();
             TabControl.SuspendLayout();
-            tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
+            cards.SuspendLayout();
+            payments.SuspendLayout();
+            account.SuspendLayout();
             SuspendLayout();
             // 
             // TabControl
             // 
-            TabControl.Controls.Add(tabPage1);
-            TabControl.Controls.Add(tabPage2);
+            TabControl.Controls.Add(home);
+            TabControl.Controls.Add(cards);
+            TabControl.Controls.Add(payments);
+            TabControl.Controls.Add(account);
             TabControl.Depth = 0;
             TabControl.Dock = DockStyle.Fill;
             TabControl.ImageList = imageList1;
@@ -58,47 +64,78 @@
             TabControl.Size = new Size(1021, 693);
             TabControl.TabIndex = 0;
             // 
-            // tabPage1
+            // home
             // 
-            tabPage1.BackColor = Color.Transparent;
-            tabPage1.Controls.Add(userControl11);
-            tabPage1.ImageKey = "home.png";
-            tabPage1.Location = new Point(4, 57);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1013, 632);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Home";
+            home.ImageKey = "home.png";
+            home.Location = new Point(4, 57);
+            home.Name = "home";
+            home.Size = new Size(1013, 632);
+            home.TabIndex = 2;
+            home.Text = "Home";
+            home.UseVisualStyleBackColor = true;
             // 
-            // userControl11
+            // cards
             // 
-            userControl11.AutoSize = true;
-            userControl11.Dock = DockStyle.Top;
-            userControl11.Location = new Point(3, 3);
-            userControl11.Name = "userControl11";
-            userControl11.Size = new Size(1007, 188);
-            userControl11.TabIndex = 0;
+            cards.BackColor = Color.Transparent;
+            cards.Controls.Add(cardsTable);
+            cards.ImageKey = "credit-card.png";
+            cards.Location = new Point(4, 57);
+            cards.Name = "cards";
+            cards.Padding = new Padding(3);
+            cards.Size = new Size(1013, 632);
+            cards.TabIndex = 0;
+            cards.Text = "Cards";
             // 
-            // tabPage2
+            // cardsTable
             // 
-            tabPage2.Controls.Add(userControl21);
-            tabPage2.ImageKey = "wallet.png";
-            tabPage2.Location = new Point(4, 57);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1013, 632);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Payments";
-            tabPage2.UseVisualStyleBackColor = true;
+            cardsTable.AutoScroll = true;
+            cardsTable.ColumnCount = 1;
+            cardsTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            cardsTable.Dock = DockStyle.Fill;
+            cardsTable.Location = new Point(3, 3);
+            cardsTable.Name = "cardsTable";
+            cardsTable.RowCount = 1;
+            cardsTable.RowStyles.Add(new RowStyle());
+            cardsTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            cardsTable.Size = new Size(1007, 626);
+            cardsTable.TabIndex = 0;
             // 
-            // userControl21
+            // payments
             // 
-            userControl21.AutoSize = true;
-            userControl21.Dock = DockStyle.Fill;
-            userControl21.Location = new Point(3, 3);
-            userControl21.Name = "userControl21";
-            userControl21.Size = new Size(1007, 626);
-            userControl21.TabIndex = 0;
+            payments.Controls.Add(paymentsTable);
+            payments.ImageKey = "wallet.png";
+            payments.Location = new Point(4, 57);
+            payments.Name = "payments";
+            payments.Padding = new Padding(3);
+            payments.Size = new Size(1013, 632);
+            payments.TabIndex = 1;
+            payments.Text = "Payments";
+            payments.UseVisualStyleBackColor = true;
+            // 
+            // paymentsTable
+            // 
+            paymentsTable.AutoScroll = true;
+            paymentsTable.ColumnCount = 1;
+            paymentsTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            paymentsTable.Dock = DockStyle.Fill;
+            paymentsTable.Location = new Point(3, 3);
+            paymentsTable.Name = "paymentsTable";
+            paymentsTable.RowCount = 1;
+            paymentsTable.RowStyles.Add(new RowStyle());
+            paymentsTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            paymentsTable.Size = new Size(1007, 626);
+            paymentsTable.TabIndex = 0;
+            // 
+            // account
+            // 
+            account.Controls.Add(logoutButton);
+            account.ImageKey = "user.png";
+            account.Location = new Point(4, 57);
+            account.Name = "account";
+            account.Size = new Size(1013, 632);
+            account.TabIndex = 3;
+            account.Text = "Account";
+            account.UseVisualStyleBackColor = true;
             // 
             // imageList1
             // 
@@ -106,7 +143,30 @@
             imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
             imageList1.TransparentColor = Color.Transparent;
             imageList1.Images.SetKeyName(0, "home.png");
-            imageList1.Images.SetKeyName(1, "wallet.png");
+            imageList1.Images.SetKeyName(1, "credit-card.png");
+            imageList1.Images.SetKeyName(2, "wallet.png");
+            imageList1.Images.SetKeyName(3, "user.png");
+            // 
+            // logoutButton
+            // 
+            logoutButton.AutoSize = false;
+            logoutButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            logoutButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            logoutButton.Depth = 0;
+            logoutButton.HighEmphasis = true;
+            logoutButton.Icon = null;
+            logoutButton.Location = new Point(20, 20);
+            logoutButton.Margin = new Padding(4, 6, 4, 6);
+            logoutButton.MouseState = MaterialSkin.MouseState.HOVER;
+            logoutButton.Name = "logoutButton";
+            logoutButton.NoAccentTextColor = Color.Empty;
+            logoutButton.Size = new Size(100, 36);
+            logoutButton.TabIndex = 2;
+            logoutButton.Text = "LogOut";
+            logoutButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            logoutButton.UseAccentColor = false;
+            logoutButton.UseVisualStyleBackColor = true;
+            logoutButton.Click += LogoutButton_Click;
             // 
             // Dashboard
             // 
@@ -118,26 +178,28 @@
             DrawerShowIconsWhenHidden = true;
             DrawerTabControl = TabControl;
             FormStyle = FormStyles.ActionBar_48;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(1024, 768);
             Name = "Dashboard";
             Padding = new Padding(0, 72, 3, 3);
             Text = "Dashboard";
             TabControl.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
+            cards.ResumeLayout(false);
+            payments.ResumeLayout(false);
+            account.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private MaterialSkin.Controls.MaterialTabControl TabControl;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage cards;
+        private TabPage payments;
         private ImageList imageList1;
-        private Cards cards;
-        private Cards userControl11;
-        private Payments userControl21;
+        private TableLayoutPanel cardsTable;
+        private TableLayoutPanel paymentsTable;
+        private TabPage home;
+        private TabPage account;
+        private MaterialSkin.Controls.MaterialButton logoutButton;
     }
 }
