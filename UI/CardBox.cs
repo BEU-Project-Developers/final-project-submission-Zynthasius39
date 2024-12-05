@@ -7,6 +7,7 @@ namespace BankingApp.UI
         public CardBox()
         {
             InitializeComponent();
+            cardBack.Region = new Region(FormHelpers.CreateRoundedRectanglePath(cardBack.ClientRectangle, 30));
         }
     }
 }

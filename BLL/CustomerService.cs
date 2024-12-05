@@ -76,5 +76,13 @@ namespace BankingApp.BLL
                 return true;
             return false;
         }
+
+        // TODO: Create UpdateCustomer method integrated with Database
+        public static void ChangePassword(Customer customer, string password)
+        {
+            byte[] inputBytes = Encoding.UTF8.GetBytes(password);
+            byte[] inputHash = SHA256.HashData(inputBytes);
+            customer.Password = Convert.ToHexString(inputHash);
+        }
     }
 }

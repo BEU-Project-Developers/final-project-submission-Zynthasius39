@@ -1,4 +1,5 @@
 ﻿using BankingApp.Models;
+using BankingApp.Models.Enums;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -12,69 +13,35 @@ namespace BankingApp.UI
 {
     public static class FormHelpers
     {
+        private static int _counter = 0;
+        private static readonly List<Image> images = new()
+        {
+            Properties.Resources.card_0,
+            Properties.Resources.card_1,
+        };
+
+        public static Customer CurrentUser = new()
+        {
+            Id = 256,
+            Email = "vcabiyev@beu.edu.az",
+            Name = "Vüqar",
+            Surname = "Cəbiyev",
+            Password = "6702882accdf7b55591d5e4ef6a012ae4cd7264a1ff4e3a07ac471a190e62c8e",
+            Phone = "0556667788",
+            Role = Models.Enums.Rolet.Business,
+        };
+        public static Customer ModUser = new()
+        {
+            Id = 256,
+            Email = "mod@home.alak",
+            Name = "Moderator",
+            Surname = "",
+            Password = "6702882accdf7b55591d5e4ef6a012ae4cd7264a1ff4e3a07ac471a190e62c8e",
+            Phone = "0556667788",
+            Role = Models.Enums.Rolet.Mod,
+        };
         public static readonly int BorderRadius = 30;
 
-        public static List<Point> CalculateCardPositions(Size canvas, Size item, int spacing)
-        {
-            var positions = new List<Point>();
-
-            Size available = new(canvas.Width - (2 * spacing), canvas.Height - (2 * spacing));
-
-            int columns = (available.Width + spacing) / (item.Width + spacing);
-            int rows = (available.Height + spacing) / (item.Height + spacing);
-
-            for (int row = 0; row < rows; row++)
-            {
-                for (int col = 0; col < columns; col++)
-                {
-                    int x = spacing + col * (item.Width + spacing);
-                    int y = spacing + row * (item.Height + spacing);
-
-                    if (x + item.Width <= canvas.Width && y + item.Height <= canvas.Height)
-                    {
-                        positions.Add(new Point(x, y));
-                    }
-                }
-            }
-
-            return positions;
-        }
-
-        public static List<Point> CalculateFlexSpaceAround(Size canvas, Size item, int cardCount)
-        {
-            List<Point> positions = [];
-
-            int columns = (int)Math.Sqrt(cardCount);
-            int rows = (int)Math.Ceiling((double)cardCount / columns);
-
-            int totalCardWidth = columns * item.Width;
-            int totalHorizontalSpacing = canvas.Width - totalCardWidth;
-            int horizontalGap = totalHorizontalSpacing / (columns + 1);
-            int remainingHorizontalSpace = totalHorizontalSpacing % (columns + 1);
-
-            int totalCardHeight = rows * item.Height;
-            int totalVerticalSpacing = canvas.Height - totalCardHeight;
-            int verticalGap = totalVerticalSpacing / (rows + 1);
-            int remainingVerticalSpace = totalVerticalSpacing % (rows + 1);
-
-            int cardIndex = 0;
-            for (int row = 0; row < rows; row++)
-            {
-                for (int col = 0; col < columns; col++)
-                {
-                    if (cardIndex >= cardCount)
-                        break;
-
-                    int x = horizontalGap + col * (item.Width + horizontalGap) + (col < remainingHorizontalSpace ? 1 : 0);
-                    int y = verticalGap + row * (item.Height + verticalGap) + (row < remainingVerticalSpace ? 1 : 0);
-
-                    positions.Add(new Point(x, y));
-                    cardIndex++;
-                }
-            }
-
-            return positions;
-        }
         public static string SeparateBy(string str, int chunkSize)
         {
             char[] reversed = str.ToCharArray();
@@ -113,21 +80,10 @@ namespace BankingApp.UI
             path.CloseFigure();
             return path;
         }
-        public static List<int> CalculateVerticalListPositions(Size item, int gap, int itemCount)
-        {
-            List<int> positions = [];
-
-            for (int i = 0; i < itemCount; i++)
-            {
-                int y = i * (item.Height + gap);
-                positions.Add(y);
-            }
-
-            return positions;
-        }
 
         public static Control AddAccount(Account account)
         {
+            _counter++;
             var container = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -139,7 +95,8 @@ namespace BankingApp.UI
             var icon = new PictureBox
             {
                 Size = new Size(260, 156),
-                Image = Properties.Resources.card_0,
+                BackColor = Color.Transparent,
+                Image = images[_counter % 2],
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 TabStop = false,
                 Parent = container,
@@ -160,17 +117,25 @@ namespace BankingApp.UI
                 Font = new Font("Noto Sans", 36F, FontStyle.Bold, GraphicsUnit.Pixel),
                 BackColor = Color.Transparent,
                 ForeColor = AppSkinHelper.msm.ColorScheme.TextColor,
-                Text = account.Amount.ToString() + " " + account.Currency.ToString(),
+                Text = account.Amount.ToString() + " " + account.Currency.ToDescription(),
                 Parent = container,
             };
             icon.Region = new Region(FormHelpers.CreateRoundedRectanglePath(icon.ClientRectangle, BorderRadius));
             container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            icon.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            info.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            label.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             container.MouseLeave += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundFocusColor; };
             container.SizeChanged += (sender, args) =>
             {
                 label.Location = new Point((icon.Size.Width - label.Size.Width) / 2, (int)(icon.Size.Height * 0.55));
                 icon.Location = new Point(container.Size.Width - 260 - 20, (container.Size.Height - 156) / 2);
                 container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
+            };
+            container.Click += (sender, e) =>
+            {
+                CardBox cb = new();
+                cb.ShowDialog();
             };
             return container;
         }
@@ -189,9 +154,11 @@ namespace BankingApp.UI
             var icon = new PictureBox
             {
                 Size = new Size(50, 50),
+                BackColor = Color.Transparent,
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = payment.Image,
                 TabStop = false,
+                Parent = container,
             };
             var label = new Label
             {
@@ -205,6 +172,8 @@ namespace BankingApp.UI
                 Parent = container,
             };
             container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            icon.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            label.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             container.MouseLeave += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundFocusColor; };
             container.SizeChanged += (sender, args) =>
             {
@@ -212,8 +181,66 @@ namespace BankingApp.UI
                 label.Location = new Point(icon.Size.Width + 40, (container.Size.Height - label.Height) / 2);
                 container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
             };
-            container.Controls.Add(icon);
-            container.Controls.Add(label);
+            container.Click += (sender, e) =>
+            {
+                PaymentBox pb = new();
+                pb.ShowDialog();
+            };
+            return container;
+        }
+
+        public static Control AddTransaction(Transaction transaction)
+        {
+            var container = new Panel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = AppSkinHelper.msm.BackgroundFocusColor,
+                Margin = new Padding(10),
+                Padding = new Padding(10),
+                TabStop = false,
+            };
+            var icon = new PictureBox
+            {
+                Size = new Size(25, 25),
+                BackColor = Color.Transparent,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                TabStop = false,
+                Parent = container,
+            };
+            var label = new Label
+            {
+                AutoSize = true,
+                Font = new Font("Roboto", 18F, FontStyle.Bold, GraphicsUnit.Pixel),
+                BackColor = Color.Transparent,
+                ForeColor = AppSkinHelper.msm.ColorScheme.TextColor,
+                Size = new Size(145, 41),
+                Text = transaction.Amount + " " + transaction.Currency.ToDescription(),
+                Parent = container,
+            };
+            var labelDate = new Label
+            {
+                AutoSize = true,
+                Font = new Font("Roboto", 18F, FontStyle.Regular, GraphicsUnit.Pixel),
+                BackColor = Color.Transparent,
+                ForeColor = AppSkinHelper.msm.ColorScheme.TextColor,
+                Size = new Size(145, 41),
+                Text = transaction.Date.ToString(),
+                Parent = container,
+            };
+            if (transaction.TransactionType == Models.Enums.Transactiont.Withdrawal) icon.Image = Properties.Resources.withdraw;
+            else if (transaction.TransactionType == Models.Enums.Transactiont.Deposit) icon.Image = Properties.Resources.deposit;
+            else icon.Image = Properties.Resources.exchange;
+            container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            label.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            labelDate.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            container.MouseLeave += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundFocusColor; };
+            container.SizeChanged += (sender, args) =>
+            {
+                icon.Location = new Point(20, (container.Size.Height - icon.Size.Height) / 2);
+                label.Location = new Point(icon.Size.Width + 40, (container.Size.Height - label.Height) / 2);
+                labelDate.Location = new Point(container.Size.Width - labelDate.Size.Width - 20, (container.Size.Height - label.Height) / 2);
+                container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
+            };
             return container;
         }
     }

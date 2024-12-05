@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,5 +54,18 @@ namespace BankingApp.Models.Enums
         Withdrawal,
         Deposit,
         Exchange
+    }
+
+    public static class EnumExt
+    {
+        public static string ToDescription(this Currency value)
+            {
+            if (value == Currency.USD) return "$";
+            else if (value == Currency.GOLD) return "G";
+            else if (value == Currency.AZN) return "₼";
+            else if (value == Currency.EUR) return "€";
+            else if (value == Currency.TRY) return "₺";
+            else return "?";
+            }
     }
 }
