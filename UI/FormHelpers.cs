@@ -23,10 +23,10 @@ namespace BankingApp.UI
         public static Customer CurrentUser = new()
         {
             Id = 256,
-            Email = "vcabiyev@beu.edu.az",
+            Email = "",
             Name = "Vüqar",
             Surname = "Cəbiyev",
-            Password = "6702882accdf7b55591d5e4ef6a012ae4cd7264a1ff4e3a07ac471a190e62c8e",
+            Password = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             Phone = "0556667788",
             Role = Models.Enums.Rolet.Business,
         };
@@ -36,7 +36,7 @@ namespace BankingApp.UI
             Email = "mod@home.alak",
             Name = "Moderator",
             Surname = "",
-            Password = "6702882accdf7b55591d5e4ef6a012ae4cd7264a1ff4e3a07ac471a190e62c8e",
+            Password = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             Phone = "0556667788",
             Role = Models.Enums.Rolet.Mod,
         };

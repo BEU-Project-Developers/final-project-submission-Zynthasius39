@@ -48,7 +48,7 @@ namespace BankingApp.UI
                 customerName.Text = FormHelpers.CurrentUser.Name;
             }
 
-            int cardCount = 3;
+            int cardCount = 6;
             for (int i = 0; i < cardCount; i++)
             {
 

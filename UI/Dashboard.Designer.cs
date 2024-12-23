@@ -37,12 +37,14 @@
             infoLayout = new TableLayoutPanel();
             paymentsMini1 = new PaymentsMini();
             transactionsTable = new TableLayoutPanel();
+            tractHistoryLabel = new MaterialSkin.Controls.MaterialLabel();
             customerLayout = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             customerName = new MaterialSkin.Controls.MaterialLabel();
             logoutButton0 = new MaterialSkin.Controls.MaterialButton();
             customerInfo = new MaterialSkin.Controls.MaterialLabel();
             cards = new TabPage();
+            cardAddFloatBtn = new MaterialSkin.Controls.MaterialFloatingActionButton();
             cardsTable = new TableLayoutPanel();
             payments = new TabPage();
             paymentsTable = new TableLayoutPanel();
@@ -61,7 +63,6 @@
             mainStrip = new StatusStrip();
             mainStatus = new ToolStripStatusLabel();
             mainTips = new ToolTip(components);
-            tractHistoryLabel = new MaterialSkin.Controls.MaterialLabel();
             TabControl.SuspendLayout();
             home.SuspendLayout();
             homeLayout.SuspendLayout();
@@ -161,6 +162,19 @@
             transactionsTable.Size = new Size(721, 271);
             transactionsTable.TabIndex = 1;
             // 
+            // tractHistoryLabel
+            // 
+            tractHistoryLabel.AutoSize = true;
+            tractHistoryLabel.Depth = 0;
+            tractHistoryLabel.Font = new Font("Roboto", 24F, FontStyle.Bold, GraphicsUnit.Pixel);
+            tractHistoryLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            tractHistoryLabel.Location = new Point(3, 273);
+            tractHistoryLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            tractHistoryLabel.Name = "tractHistoryLabel";
+            tractHistoryLabel.Size = new Size(210, 29);
+            tractHistoryLabel.TabIndex = 2;
+            tractHistoryLabel.Text = "Transaction History";
+            // 
             // customerLayout
             // 
             customerLayout.ColumnCount = 1;
@@ -246,6 +260,7 @@
             // cards
             // 
             cards.BackColor = Color.Transparent;
+            cards.Controls.Add(cardAddFloatBtn);
             cards.Controls.Add(cardsTable);
             cards.ImageKey = "credit-card.png";
             cards.Location = new Point(4, 57);
@@ -254,6 +269,19 @@
             cards.Size = new Size(1013, 632);
             cards.TabIndex = 0;
             cards.Text = "Cards";
+            // 
+            // cardAddFloatBtn
+            // 
+            cardAddFloatBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            cardAddFloatBtn.Depth = 0;
+            cardAddFloatBtn.Icon = null;
+            cardAddFloatBtn.Location = new Point(898, 526);
+            cardAddFloatBtn.MouseState = MaterialSkin.MouseState.HOVER;
+            cardAddFloatBtn.Name = "cardAddFloatBtn";
+            cardAddFloatBtn.Size = new Size(56, 56);
+            cardAddFloatBtn.TabIndex = 0;
+            cardAddFloatBtn.Text = "+";
+            cardAddFloatBtn.UseVisualStyleBackColor = true;
             // 
             // cardsTable
             // 
@@ -535,19 +563,6 @@
             // 
             mainTips.Popup += MainTips_Popup;
             // 
-            // tractHistoryLabel
-            // 
-            tractHistoryLabel.AutoSize = true;
-            tractHistoryLabel.Depth = 0;
-            tractHistoryLabel.Font = new Font("Roboto", 24F, FontStyle.Bold, GraphicsUnit.Pixel);
-            tractHistoryLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-            tractHistoryLabel.Location = new Point(3, 273);
-            tractHistoryLabel.MouseState = MaterialSkin.MouseState.HOVER;
-            tractHistoryLabel.Name = "tractHistoryLabel";
-            tractHistoryLabel.Size = new Size(210, 29);
-            tractHistoryLabel.TabIndex = 2;
-            tractHistoryLabel.Text = "Transaction History";
-            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -618,5 +633,6 @@
         private MaterialSkin.Controls.MaterialButton cusDelBtn;
         private ToolTip mainTips;
         private MaterialSkin.Controls.MaterialLabel tractHistoryLabel;
+        private MaterialSkin.Controls.MaterialFloatingActionButton cardAddFloatBtn;
     }
 }
