@@ -24,12 +24,12 @@ namespace BankingApp.UI
         {
             components = new System.ComponentModel.Container();
             textBox1 = new MaterialTextBox2();
-            clear_button = new MaterialButton();
-            get_all_button = new MaterialButton();
-            delete_button = new MaterialButton();
-            button2 = new MaterialButton();
+            clearButton = new MaterialButton();
+            getAllButton = new MaterialButton();
+            deleteButton = new MaterialButton();
+            insertDefaultButton = new MaterialButton();
             textBox2 = new MaterialTextBox2();
-            button3 = new MaterialButton();
+            getButton = new MaterialButton();
             statusStrip1 = new StatusStrip();
             statusBar = new ToolStripStatusLabel();
             dataGridView1 = new DataGridView();
@@ -43,8 +43,8 @@ namespace BankingApp.UI
             Manual = new DataGridViewCheckBoxColumn();
             customerBindingSource1 = new BindingSource(components);
             customerBindingSource = new BindingSource(components);
-            logout_button = new MaterialButton();
-            insert_all_button = new MaterialButton();
+            logoutButton = new MaterialButton();
+            insertAllButton = new MaterialButton();
             progress_bar = new MaterialProgressBar();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -80,89 +80,89 @@ namespace BankingApp.UI
             textBox1.TrailingIcon = null;
             textBox1.UseSystemPasswordChar = false;
             // 
-            // clear_button
+            // clearButton
             // 
-            clear_button.AutoSize = false;
-            clear_button.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            clear_button.Density = MaterialButton.MaterialButtonDensity.Default;
-            clear_button.Depth = 0;
-            clear_button.HighEmphasis = true;
-            clear_button.Icon = null;
-            clear_button.Location = new Point(166, 527);
-            clear_button.Margin = new Padding(4, 6, 4, 6);
-            clear_button.MouseState = MaterialSkin.MouseState.HOVER;
-            clear_button.Name = "clear_button";
-            clear_button.NoAccentTextColor = Color.Empty;
-            clear_button.Size = new Size(123, 35);
-            clear_button.TabIndex = 1;
-            clear_button.Text = "Clear";
-            clear_button.Type = MaterialButton.MaterialButtonType.Contained;
-            clear_button.UseAccentColor = false;
-            clear_button.UseVisualStyleBackColor = true;
-            clear_button.Click += Clear_button_Click;
+            clearButton.AutoSize = false;
+            clearButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            clearButton.Density = MaterialButton.MaterialButtonDensity.Default;
+            clearButton.Depth = 0;
+            clearButton.HighEmphasis = true;
+            clearButton.Icon = null;
+            clearButton.Location = new Point(166, 527);
+            clearButton.Margin = new Padding(4, 6, 4, 6);
+            clearButton.MouseState = MaterialSkin.MouseState.HOVER;
+            clearButton.Name = "clearButton";
+            clearButton.NoAccentTextColor = Color.Empty;
+            clearButton.Size = new Size(123, 35);
+            clearButton.TabIndex = 1;
+            clearButton.Text = "Clear";
+            clearButton.Type = MaterialButton.MaterialButtonType.Contained;
+            clearButton.UseAccentColor = false;
+            clearButton.UseVisualStyleBackColor = true;
+            clearButton.Click += Clear_button_Click;
             // 
-            // get_all_button
+            // getAllButton
             // 
-            get_all_button.AutoSize = false;
-            get_all_button.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            get_all_button.Density = MaterialButton.MaterialButtonDensity.Default;
-            get_all_button.Depth = 0;
-            get_all_button.HighEmphasis = true;
-            get_all_button.Icon = null;
-            get_all_button.Location = new Point(166, 196);
-            get_all_button.Margin = new Padding(4, 6, 4, 6);
-            get_all_button.MouseState = MaterialSkin.MouseState.HOVER;
-            get_all_button.Name = "get_all_button";
-            get_all_button.NoAccentTextColor = Color.Empty;
-            get_all_button.Size = new Size(123, 35);
-            get_all_button.TabIndex = 1;
-            get_all_button.Text = "Get All";
-            get_all_button.Type = MaterialButton.MaterialButtonType.Contained;
-            get_all_button.UseAccentColor = false;
-            get_all_button.UseVisualStyleBackColor = true;
-            get_all_button.Click += Get_all_button_Click;
+            getAllButton.AutoSize = false;
+            getAllButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            getAllButton.Density = MaterialButton.MaterialButtonDensity.Default;
+            getAllButton.Depth = 0;
+            getAllButton.HighEmphasis = true;
+            getAllButton.Icon = null;
+            getAllButton.Location = new Point(166, 196);
+            getAllButton.Margin = new Padding(4, 6, 4, 6);
+            getAllButton.MouseState = MaterialSkin.MouseState.HOVER;
+            getAllButton.Name = "getAllButton";
+            getAllButton.NoAccentTextColor = Color.Empty;
+            getAllButton.Size = new Size(123, 35);
+            getAllButton.TabIndex = 1;
+            getAllButton.Text = "Get All";
+            getAllButton.Type = MaterialButton.MaterialButtonType.Contained;
+            getAllButton.UseAccentColor = false;
+            getAllButton.UseVisualStyleBackColor = true;
+            getAllButton.Click += Get_all_button_Click;
             // 
-            // delete_button
+            // deleteButton
             // 
-            delete_button.AutoSize = false;
-            delete_button.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            delete_button.Density = MaterialButton.MaterialButtonDensity.Default;
-            delete_button.Depth = 0;
-            delete_button.HighEmphasis = true;
-            delete_button.Icon = null;
-            delete_button.Location = new Point(166, 83);
-            delete_button.Margin = new Padding(4, 6, 4, 6);
-            delete_button.MouseState = MaterialSkin.MouseState.HOVER;
-            delete_button.Name = "delete_button";
-            delete_button.NoAccentTextColor = Color.Empty;
-            delete_button.Size = new Size(123, 35);
-            delete_button.TabIndex = 1;
-            delete_button.Text = "Delete";
-            delete_button.Type = MaterialButton.MaterialButtonType.Contained;
-            delete_button.UseAccentColor = false;
-            delete_button.UseVisualStyleBackColor = true;
-            delete_button.Click += Delete_button_Click;
+            deleteButton.AutoSize = false;
+            deleteButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            deleteButton.Density = MaterialButton.MaterialButtonDensity.Default;
+            deleteButton.Depth = 0;
+            deleteButton.HighEmphasis = true;
+            deleteButton.Icon = null;
+            deleteButton.Location = new Point(166, 83);
+            deleteButton.Margin = new Padding(4, 6, 4, 6);
+            deleteButton.MouseState = MaterialSkin.MouseState.HOVER;
+            deleteButton.Name = "deleteButton";
+            deleteButton.NoAccentTextColor = Color.Empty;
+            deleteButton.Size = new Size(123, 35);
+            deleteButton.TabIndex = 1;
+            deleteButton.Text = "Delete";
+            deleteButton.Type = MaterialButton.MaterialButtonType.Contained;
+            deleteButton.UseAccentColor = false;
+            deleteButton.UseVisualStyleBackColor = true;
+            deleteButton.Click += Delete_button_Click;
             // 
-            // button2
+            // insertDefaultButton
             // 
-            button2.AutoSize = false;
-            button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button2.Density = MaterialButton.MaterialButtonDensity.Default;
-            button2.Depth = 0;
-            button2.HighEmphasis = true;
-            button2.Icon = null;
-            button2.Location = new Point(20, 467);
-            button2.Margin = new Padding(4, 6, 4, 6);
-            button2.MouseState = MaterialSkin.MouseState.HOVER;
-            button2.Name = "button2";
-            button2.NoAccentTextColor = Color.Empty;
-            button2.Size = new Size(123, 35);
-            button2.TabIndex = 3;
-            button2.Text = "INSERT DEFAULT";
-            button2.Type = MaterialButton.MaterialButtonType.Contained;
-            button2.UseAccentColor = false;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += Button2_Click;
+            insertDefaultButton.AutoSize = false;
+            insertDefaultButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            insertDefaultButton.Density = MaterialButton.MaterialButtonDensity.Default;
+            insertDefaultButton.Depth = 0;
+            insertDefaultButton.HighEmphasis = true;
+            insertDefaultButton.Icon = null;
+            insertDefaultButton.Location = new Point(20, 467);
+            insertDefaultButton.Margin = new Padding(4, 6, 4, 6);
+            insertDefaultButton.MouseState = MaterialSkin.MouseState.HOVER;
+            insertDefaultButton.Name = "insertDefaultButton";
+            insertDefaultButton.NoAccentTextColor = Color.Empty;
+            insertDefaultButton.Size = new Size(123, 35);
+            insertDefaultButton.TabIndex = 3;
+            insertDefaultButton.Text = "INSERT DEFAULT";
+            insertDefaultButton.Type = MaterialButton.MaterialButtonType.Contained;
+            insertDefaultButton.UseAccentColor = false;
+            insertDefaultButton.UseVisualStyleBackColor = true;
+            insertDefaultButton.Click += Insert_default_button_Click;
             // 
             // textBox2
             // 
@@ -192,33 +192,33 @@ namespace BankingApp.UI
             textBox2.TrailingIcon = null;
             textBox2.UseSystemPasswordChar = false;
             // 
-            // button3
+            // getButton
             // 
-            button3.AutoSize = false;
-            button3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button3.Density = MaterialButton.MaterialButtonDensity.Default;
-            button3.Depth = 0;
-            button3.HighEmphasis = true;
-            button3.Icon = null;
-            button3.Location = new Point(166, 139);
-            button3.Margin = new Padding(4, 6, 4, 6);
-            button3.MouseState = MaterialSkin.MouseState.HOVER;
-            button3.Name = "button3";
-            button3.NoAccentTextColor = Color.Empty;
-            button3.Size = new Size(123, 35);
-            button3.TabIndex = 6;
-            button3.Text = "Get";
-            button3.Type = MaterialButton.MaterialButtonType.Contained;
-            button3.UseAccentColor = false;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += Button3_Click;
+            getButton.AutoSize = false;
+            getButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            getButton.Density = MaterialButton.MaterialButtonDensity.Default;
+            getButton.Depth = 0;
+            getButton.HighEmphasis = true;
+            getButton.Icon = null;
+            getButton.Location = new Point(166, 139);
+            getButton.Margin = new Padding(4, 6, 4, 6);
+            getButton.MouseState = MaterialSkin.MouseState.HOVER;
+            getButton.Name = "getButton";
+            getButton.NoAccentTextColor = Color.Empty;
+            getButton.Size = new Size(123, 35);
+            getButton.TabIndex = 6;
+            getButton.Text = "Get";
+            getButton.Type = MaterialButton.MaterialButtonType.Contained;
+            getButton.UseAccentColor = false;
+            getButton.UseVisualStyleBackColor = true;
+            getButton.Click += Button3_Click;
             // 
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusBar });
-            statusStrip1.Location = new Point(3, 655);
+            statusStrip1.Location = new Point(3, 594);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1253, 22);
+            statusStrip1.Size = new Size(1233, 22);
             statusStrip1.TabIndex = 8;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -231,6 +231,7 @@ namespace BankingApp.UI
             // dataGridView1
             // 
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn7, Manual });
             dataGridView1.DataSource = customerBindingSource1;
@@ -244,21 +245,18 @@ namespace BankingApp.UI
             dataGridViewTextBoxColumn1.DataPropertyName = "Id";
             dataGridViewTextBoxColumn1.HeaderText = "Id";
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 50;
             // 
             // dataGridViewTextBoxColumn4
             // 
             dataGridViewTextBoxColumn4.DataPropertyName = "Email";
             dataGridViewTextBoxColumn4.HeaderText = "Email";
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.Width = 150;
             // 
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.DataPropertyName = "Password";
             dataGridViewTextBoxColumn6.HeaderText = "Password";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Width = 150;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -288,7 +286,6 @@ namespace BankingApp.UI
             // 
             Manual.HeaderText = "Insert";
             Manual.Name = "Manual";
-            Manual.Width = 50;
             // 
             // customerBindingSource1
             // 
@@ -298,48 +295,48 @@ namespace BankingApp.UI
             // 
             customerBindingSource.DataSource = typeof(Customer);
             // 
-            // logout_button
+            // logoutButton
             // 
-            logout_button.AutoSize = false;
-            logout_button.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            logout_button.Density = MaterialButton.MaterialButtonDensity.Default;
-            logout_button.Depth = 0;
-            logout_button.Font = new Font("Noto Sans", 9F);
-            logout_button.HighEmphasis = true;
-            logout_button.Icon = null;
-            logout_button.Location = new Point(20, 528);
-            logout_button.Margin = new Padding(4, 6, 4, 6);
-            logout_button.MouseState = MaterialSkin.MouseState.HOVER;
-            logout_button.Name = "logout_button";
-            logout_button.NoAccentTextColor = Color.Empty;
-            logout_button.Size = new Size(123, 35);
-            logout_button.TabIndex = 11;
-            logout_button.Text = "LogOut";
-            logout_button.Type = MaterialButton.MaterialButtonType.Contained;
-            logout_button.UseAccentColor = false;
-            logout_button.UseVisualStyleBackColor = true;
-            logout_button.Click += MaterialButton1_Click;
+            logoutButton.AutoSize = false;
+            logoutButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            logoutButton.Density = MaterialButton.MaterialButtonDensity.Default;
+            logoutButton.Depth = 0;
+            logoutButton.Font = new Font("Noto Sans", 9F);
+            logoutButton.HighEmphasis = true;
+            logoutButton.Icon = null;
+            logoutButton.Location = new Point(20, 528);
+            logoutButton.Margin = new Padding(4, 6, 4, 6);
+            logoutButton.MouseState = MaterialSkin.MouseState.HOVER;
+            logoutButton.Name = "logoutButton";
+            logoutButton.NoAccentTextColor = Color.Empty;
+            logoutButton.Size = new Size(123, 35);
+            logoutButton.TabIndex = 11;
+            logoutButton.Text = "LogOut";
+            logoutButton.Type = MaterialButton.MaterialButtonType.Contained;
+            logoutButton.UseAccentColor = false;
+            logoutButton.UseVisualStyleBackColor = true;
+            logoutButton.Click += MaterialButton1_Click;
             // 
-            // insert_all_button
+            // insertAllButton
             // 
-            insert_all_button.AutoSize = false;
-            insert_all_button.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            insert_all_button.Density = MaterialButton.MaterialButtonDensity.Default;
-            insert_all_button.Depth = 0;
-            insert_all_button.HighEmphasis = true;
-            insert_all_button.Icon = null;
-            insert_all_button.Location = new Point(166, 467);
-            insert_all_button.Margin = new Padding(4, 6, 4, 6);
-            insert_all_button.MouseState = MaterialSkin.MouseState.HOVER;
-            insert_all_button.Name = "insert_all_button";
-            insert_all_button.NoAccentTextColor = Color.Empty;
-            insert_all_button.Size = new Size(123, 35);
-            insert_all_button.TabIndex = 9;
-            insert_all_button.Text = "Insert All";
-            insert_all_button.Type = MaterialButton.MaterialButtonType.Contained;
-            insert_all_button.UseAccentColor = false;
-            insert_all_button.UseVisualStyleBackColor = true;
-            insert_all_button.Click += Insert_all_button_Click;
+            insertAllButton.AutoSize = false;
+            insertAllButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            insertAllButton.Density = MaterialButton.MaterialButtonDensity.Default;
+            insertAllButton.Depth = 0;
+            insertAllButton.HighEmphasis = true;
+            insertAllButton.Icon = null;
+            insertAllButton.Location = new Point(166, 467);
+            insertAllButton.Margin = new Padding(4, 6, 4, 6);
+            insertAllButton.MouseState = MaterialSkin.MouseState.HOVER;
+            insertAllButton.Name = "insertAllButton";
+            insertAllButton.NoAccentTextColor = Color.Empty;
+            insertAllButton.Size = new Size(123, 35);
+            insertAllButton.TabIndex = 9;
+            insertAllButton.Text = "Insert All";
+            insertAllButton.Type = MaterialButton.MaterialButtonType.Contained;
+            insertAllButton.UseAccentColor = false;
+            insertAllButton.UseVisualStyleBackColor = true;
+            insertAllButton.Click += Insert_all_button_Click;
             // 
             // progress_bar
             // 
@@ -354,18 +351,18 @@ namespace BankingApp.UI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1259, 680);
+            ClientSize = new Size(1239, 619);
             Controls.Add(progress_bar);
-            Controls.Add(logout_button);
-            Controls.Add(insert_all_button);
+            Controls.Add(logoutButton);
+            Controls.Add(insertAllButton);
             Controls.Add(dataGridView1);
             Controls.Add(statusStrip1);
-            Controls.Add(button3);
+            Controls.Add(getButton);
             Controls.Add(textBox2);
-            Controls.Add(button2);
-            Controls.Add(clear_button);
-            Controls.Add(delete_button);
-            Controls.Add(get_all_button);
+            Controls.Add(insertDefaultButton);
+            Controls.Add(clearButton);
+            Controls.Add(deleteButton);
+            Controls.Add(getAllButton);
             Controls.Add(textBox1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -384,18 +381,18 @@ namespace BankingApp.UI
         #endregion
 
         private MaterialTextBox2 textBox1;
-        private MaterialButton get_all_button;
-        private MaterialButton delete_button;
-        private MaterialButton clear_button;
-        private MaterialButton button2;
+        private MaterialButton getAllButton;
+        private MaterialButton deleteButton;
+        private MaterialButton clearButton;
+        private MaterialButton insertDefaultButton;
         private MaterialTextBox2 textBox2;
-        private MaterialButton button3;
+        private MaterialButton getButton;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel statusBar;
         private DataGridView dataGridView1;
         private BindingSource customerBindingSource;
-        private MaterialButton insert_all_button;
-        private MaterialSkin.Controls.MaterialButton logout_button;
+        private MaterialButton insertAllButton;
+        private MaterialSkin.Controls.MaterialButton logoutButton;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn surnameDataGridViewTextBoxColumn;

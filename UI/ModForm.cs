@@ -34,6 +34,7 @@ namespace BankingApp.UI
             dataGridView1.BackgroundColor = AppSkinHelper.msm.BackgroundColor;
             dataGridView1.ForeColor = AppSkinHelper.msm.ColorScheme.PrimaryColor;
             dataGridView1.GridColor = AppSkinHelper.msm.ColorScheme.TextColor;
+            dataGridView1.BackgroundColor = AppSkinHelper.msm.BackgroundColor;
 
             dataGridView1.DataSource = _customersList;
         }
@@ -67,7 +68,7 @@ namespace BankingApp.UI
             progress_bar.Value = 100;
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void Insert_default_button_Click(object sender, EventArgs e)
         {
             progress_bar.Value = 0;
             CustomerRepository.Add(new Customer()
@@ -77,7 +78,9 @@ namespace BankingApp.UI
                 Surname = "the goblin",
                 Phone = "+994000000000",
                 Password = "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-                Role = Rolet.Admin
+                Role = Rolet.Admin,
+                RegisterDate = DateTime.Now,
+                TransactionIDs = []
             });
             StatusBar.Status = "Added a predefined Customer";
             progress_bar.Value = 100;
