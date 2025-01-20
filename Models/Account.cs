@@ -19,5 +19,17 @@ namespace BankingApp.Models
         public required DateTime ExpirationDate { get; set; }
         public required decimal Amount { get; set; }
         public required long AccountNumber { get; set; }
+
+        public override string ToString() => String.Format(format: """
+            [---------------------------Account------]
+                ID: {0}
+                Currency: {1}
+                Creation Date: {2}
+                Expiration Date: {3}
+                Amount: {4:N2}
+                Customers: {5}
+                Num: {6}
+            [----------------------------------------]
+            """, Id, Currency, CreationDate, ExpirationDate, Amount, string.Join(", ", CIdList), AccountNumber);
     }
 }

@@ -37,5 +37,11 @@ namespace BankingApp.Models
                 }
             });
         }
+
+        public override string ToString() => String.Format(format: """
+            # Preference
+            #   ID: {0}
+            #   Settings: {1}
+            """, Id, string.Join(", ", Settings));
     }
 }
