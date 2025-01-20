@@ -121,16 +121,19 @@
   <data name="4115235-exit-logout-sign-out_114030" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4115235-exit-logout-sign-out_114030.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SOBK0422040_780x440_mobile21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SOBK0422040_780x440_mobile21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SOBK0422040_780x440_mobile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SOBK0422040_780x440_mobile.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pngwing.com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pngwing.com.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SOBK0422040_780x440_mobile2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SOBK0422040_780x440_mobile2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pngwing.com" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pngwing.com.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SOBK0422040_780x440_mobile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SOBK0422040_780x440_mobile.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SOBK0422040_780x440_mobile21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SOBK0422040_780x440_mobile21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cardpins" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cardpins1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -32,11 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             TabControl = new MaterialSkin.Controls.MaterialTabControl();
             tabPage1 = new TabPage();
-            materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             tabPage2 = new TabPage();
             imageList1 = new ImageList(components);
+            label2 = new Label();
             TabControl.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // TabControl
@@ -58,7 +63,9 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.Transparent;
-            tabPage1.Controls.Add(materialCard1);
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(pictureBox1);
+            tabPage1.Controls.Add(pictureBox2);
             tabPage1.ImageKey = "home.png";
             tabPage1.Location = new Point(4, 57);
             tabPage1.Name = "tabPage1";
@@ -67,18 +74,37 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Home";
             // 
-            // materialCard1
+            // label1
             // 
-            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard1.Depth = 0;
-            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(14, 17);
-            materialCard1.Margin = new Padding(14);
-            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(200, 100);
-            materialCard1.TabIndex = 0;
+            label1.AutoSize = true;
+            label1.FlatStyle = FlatStyle.Flat;
+            label1.Font = new Font("Kredit Back", 27.7499962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Gold;
+            label1.Location = new Point(583, 193);
+            label1.Name = "label1";
+            label1.Size = new Size(360, 44);
+            label1.TabIndex = 1;
+            label1.Text = "5550 1309 6672 6224";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(505, 16);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(416, 263);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(6, 6);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(416, 263);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
             // 
             // tabPage2
             // 
@@ -99,6 +125,18 @@
             imageList1.Images.SetKeyName(0, "home.png");
             imageList1.Images.SetKeyName(1, "wallet.png");
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.FlatStyle = FlatStyle.Flat;
+            label2.Font = new Font("Kredit Back", 27.7499962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Gold;
+            label2.Location = new Point(45, 188);
+            label2.Name = "label2";
+            label2.Size = new Size(360, 44);
+            label2.TabIndex = 1;
+            label2.Text = "5550 1309 6672 6224";
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -116,6 +154,9 @@
             Text = "Dashboard";
             TabControl.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -125,6 +166,9 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private ImageList imageList1;
-        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private Label label1;
+        private Label label2;
     }
 }
