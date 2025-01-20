@@ -82,43 +82,43 @@ namespace BankingApp
 
         private void VerifyFields()
         {
-            if (!VerifyService.VerifyEmail(email_box.Text.Trim()))
-            {
-                email_box.SetErrorState(true);
-                throw new Exception("Invalid E-Mail");
-            }
-            if (string.IsNullOrWhiteSpace(password_box.Text))
-            {
-                password_box.SetErrorState(true);
-                throw new Exception("Password is required");
-            }
-            if (!_isLogin)
-            {
-                if (string.IsNullOrWhiteSpace(name_box.Text))
-                {
-                    name_box.SetErrorState(true);
-                    throw new Exception("Name is required");
-                }
-                if (string.IsNullOrWhiteSpace(surname_box.Text))
-                {
-                    surname_box.SetErrorState(true);
-                    throw new Exception("Surname is required");
-                }
-                if (string.IsNullOrWhiteSpace(phone_box.Text))
-                {
-                    phone_box.SetErrorState(true);
-                    throw new Exception("Phone is required");
-                }
-                if (!role_radio_1.Checked && !role_radio_2.Checked)
-                {
-                    throw new Exception("Select an account type");
-                }
-            }
-            email_box.SetErrorState(false);
-            password_box.SetErrorState(false);
-            name_box.SetErrorState(false);
-            surname_box.SetErrorState(false);
-            phone_box.SetErrorState(false);
+            //if (!VerifyService.VerifyEmail(email_box.Text.Trim()))
+            //{
+            //    email_box.SetErrorState(true);
+            //    throw new Exception("Invalid E-Mail");
+            //}
+            //if (string.IsNullOrWhiteSpace(password_box.Text))
+            //{
+            //    password_box.SetErrorState(true);
+            //    throw new Exception("Password is required");
+            //}
+            //if (!_isLogin)
+            //{
+            //    if (string.IsNullOrWhiteSpace(name_box.Text))
+            //    {
+            //        name_box.SetErrorState(true);
+            //        throw new Exception("Name is required");
+            //    }
+            //    if (string.IsNullOrWhiteSpace(surname_box.Text))
+            //    {
+            //        surname_box.SetErrorState(true);
+            //        throw new Exception("Surname is required");
+            //    }
+            //    if (string.IsNullOrWhiteSpace(phone_box.Text))
+            //    {
+            //        phone_box.SetErrorState(true);
+            //        throw new Exception("Phone is required");
+            //    }
+            //    if (!role_radio_1.Checked && !role_radio_2.Checked)
+            //    {
+            //        throw new Exception("Select an account type");
+            //    }
+            //}
+            //email_box.SetErrorState(false);
+            //password_box.SetErrorState(false);
+            //name_box.SetErrorState(false);
+            //surname_box.SetErrorState(false);
+            //phone_box.SetErrorState(false);
         }
 
         private void Forgot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -145,8 +145,6 @@ namespace BankingApp
                     VerifyFields();
                     //Customer customer = CustomerService.GetCustomer(email_box.Text.Trim()); // Disabled for SDF2
                     Customer customer = FormHelpers.CurrentUser;
-                    //customer = FormHelpers.ModUser; // Uncomment to activate mod Account!
-                    // MOD ACCOUNT DOESN'T WORK WITHOUT DATABASE CONNECTION !!! I only put it to show you the design.
                     if (CustomerService.VerifyPassword(customer, password_box.Text.Trim()))
                     {
                         FormHelpers.CurrentUser = customer;
