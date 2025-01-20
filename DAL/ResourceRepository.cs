@@ -15,7 +15,15 @@ namespace BankingApp.DAL
                 List<Resource> Resources = [];
 
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT resid, restype, currency, amount FROM resources", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        resid,
+                        restype,
+                        currency,
+                        amount
+                    FROM
+                        resources
+                    """, conn);
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -43,7 +51,17 @@ namespace BankingApp.DAL
             {
                 Resource? Resource = null;
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT resid, restype, currency, amount FROM resources WHERE resid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        resid,
+                        restype,
+                        currency,
+                        amount
+                    FROM
+                        resources
+                    WHERE
+                        resid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 using var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -76,7 +94,12 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("DELETE FROM resources WHERE resid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    DELETE FROM
+                        resources
+                    WHERE
+                        resid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 int rowsAff = cmd.ExecuteNonQuery();
                 if (rowsAff > 0)
@@ -101,7 +124,20 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("INSERT INTO resources (restype, currency, amount) VALUES (@restype, @currency, @amount) RETURNING resid", conn);
+                using var cmd = new NpgsqlCommand("""
+                    INSERT INTO resources (
+                        restype,
+                        currency,
+                        amount
+                    )
+                    VALUES (
+                        @restype,
+                        @currency,
+                        @amount
+                    )
+                    RETURNING
+                        resid
+                    """, conn);
                 cmd.Parameters.AddWithValue("restype", Resource.ResourseType);
                 cmd.Parameters.AddWithValue("currency", Resource.Currency);
                 cmd.Parameters.AddWithValue("amount", Resource.Amount);

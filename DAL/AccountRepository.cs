@@ -15,7 +15,19 @@ namespace BankingApp.DAL
                 List<Account> Accounts = [];
 
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT accid, acctype, cids, currency, expiration_date, creation_date, amount, accnumber FROM Accounts", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        accid,
+                        acctype,
+                        cids,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount,
+                        accnumber
+                    FROM
+                        Accounts
+                    """, conn);
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -47,7 +59,21 @@ namespace BankingApp.DAL
             {
                 Account? account = null;
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT accid, acctype, cids, currency, expiration_date, creation_date, amount, accnumber FROM Accounts WHERE accid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        accid,
+                        acctype,
+                        cids,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount,
+                        accnumber
+                    FROM
+                        Accounts
+                    WHERE
+                        accid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 using var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -79,14 +105,77 @@ namespace BankingApp.DAL
             }
         }
 
-        public static Account GetByAccNum(long accnumber)
+        public static List<Account> GetAllByCustomerId(int cid)
+        {
+            try
+            {
+                List<Account> Accounts = [];
+
+                using var conn = Database.GetDataSource().OpenConnection();
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        accid,
+                        acctype,
+                        cids,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount,
+                        accnumber
+                    FROM
+                        Accounts
+                    WHERE
+                        @cid = ANY(cids)
+                    """, conn
+                );
+                cmd.Parameters.AddWithValue("cid", cid);
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Accounts.Add(new Account
+                    {
+                        Id = reader.GetInt32(0),
+                        AccountType = reader.GetFieldValue<Accountt>(1),
+                        CIdList = reader.GetFieldValue<int[]>(2),
+                        Currency = reader.GetFieldValue<Currency>(3),
+                        ExpirationDate = reader.GetFieldValue<DateTime>(4),
+                        CreationDate = reader.GetFieldValue<DateTime>(5),
+                        Amount = reader.GetDecimal(6),
+                        AccountNumber = reader.GetInt64(7),
+                    });
+                }
+
+                return Accounts;
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw new DataAccessException(ex.Message);
+            }
+        }
+
+        public static Account GetByAccNum(long accnum)
         {
             try
             {
                 Account? account = null;
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT accid, acctype, cids, currency, expiration_date, creation_date, amount, accnumber FROM Accounts WHERE accnumber = @accnumber", conn);
-                cmd.Parameters.AddWithValue("accnumber", accnumber);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        accid,
+                        acctype,
+                        cids,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount,
+                        accnumber
+                    FROM
+                        Accounts
+                    WHERE
+                        accnumber = @accnumber
+                    """, conn);
+                cmd.Parameters.AddWithValue("accnumber", accnum);
                 using var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
@@ -122,7 +211,12 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("DELETE FROM Accounts WHERE accid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    DELETE FROM
+                        Accounts
+                    WHERE
+                        accid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 int rowsAff = cmd.ExecuteNonQuery();
                 if (rowsAff > 0)
@@ -147,7 +241,26 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("INSERT INTO Accounts (acctype, cids, currency, expiration_date, creation_date, amount) VALUES (@acctype, @cids, @currency, @expiration_date, @creation_date, @amount) RETURNING cid", conn);
+                using var cmd = new NpgsqlCommand("""
+                    INSERT INTO Accounts (
+                        acctype,
+                        cids,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount
+                    )
+                    VALUES (
+                        @acctype,
+                        @cids,
+                        @currency,
+                        @expiration_date,
+                        @creation_date,
+                        @amount
+                    )
+                    RETURNING
+                        cid
+                    """, conn);
                 cmd.Parameters.AddWithValue("acctype", account.AccountType);
                 cmd.Parameters.AddWithValue("cids", account.CIdList);
                 cmd.Parameters.AddWithValue("currency", account.Currency);

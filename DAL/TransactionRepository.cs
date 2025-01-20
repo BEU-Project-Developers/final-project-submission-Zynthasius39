@@ -15,7 +15,16 @@ namespace BankingApp.DAL
                 List<Transaction> Transactions = [];
 
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT tid, ttype, currency, date, amount FROM transactions", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        tid,
+                        ttype,
+                        currency,
+                        date,
+                        amount
+                    FROM
+                        transactions
+                    """, conn);
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -44,7 +53,18 @@ namespace BankingApp.DAL
             {
                 Transaction? Transaction = null;
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT tid, ttype, currency, date, amount FROM transactions WHERE tid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        tid,
+                        ttype,
+                        currency,
+                        date,
+                        amount
+                    FROM
+                        transactions
+                    WHERE
+                        tid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 using var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -77,7 +97,12 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("DELETE FROM transactions WHERE tid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    DELETE FROM
+                        transactions
+                    WHERE
+                        tid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 int rowsAff = cmd.ExecuteNonQuery();
                 if (rowsAff > 0)
@@ -102,7 +127,22 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("INSERT INTO Transactions (ttype, currency, date, amount) VALUES (@ttype, @currency, @date, @amount) RETURNING tid", conn);
+                using var cmd = new NpgsqlCommand("""
+                    INSERT INTO Transactions (
+                        ttype,
+                        currency,
+                        date,
+                        amount
+                    )
+                    VALUES (
+                        @ttype,
+                        @currency,
+                        @date,
+                        @amount
+                    )
+                    RETURNING
+                        tid
+                    """, conn);
                 cmd.Parameters.AddWithValue("ttype", Transaction.TransactionType);
                 cmd.Parameters.AddWithValue("currency", Transaction.Currency);
                 cmd.Parameters.AddWithValue("date", Transaction.Date);

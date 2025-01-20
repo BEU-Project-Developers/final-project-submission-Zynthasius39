@@ -15,7 +15,18 @@ namespace BankingApp.DAL
                 List<Contract> Contracts = [];
 
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT contid, cid, ctype, currency, expiration_date, creation_date, amount FROM contracts", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        contid,
+                        cid,
+                        ctype,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount
+                    FROM
+                        contracts
+                    """, conn);
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -46,7 +57,18 @@ namespace BankingApp.DAL
             {
                 Contract? Contract = null;
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT contid, cid, ctype, currency, expiration_date, creation_date, amount WHERE contid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        contid,
+                        cid,
+                        ctype,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount
+                    WHERE
+                        contid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 using var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -76,12 +98,66 @@ namespace BankingApp.DAL
                 throw new DataAccessException(ex.Message);
             }
         }
+
+        public static List<Contract> GetAll(int id, Contractt contract_type)
+        {
+            try
+            {
+                List<Contract> Contracts = [];
+
+                using var conn = Database.GetDataSource().OpenConnection();
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        contid,
+                        cid,
+                        ctype,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount
+                    FROM
+                        contracts
+                    WHERE
+                        cid = @cid
+                        AND ctype = @ctype
+                    """, conn);
+                cmd.Parameters.AddWithValue("cid", id);
+                cmd.Parameters.AddWithValue("ctype", contract_type);
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Contracts.Add(new Contract
+                    {
+                        Id = reader.GetInt32(0),
+                        CId = reader.GetInt32(1),
+                        ContractType = reader.GetFieldValue<Contractt>(2),
+                        Currency = reader.GetFieldValue<Currency>(3),
+                        CreationDate = reader.GetFieldValue<DateTime>(4),
+                        ExpirationDate = reader.GetFieldValue<DateTime>(5),
+                        Amount = reader.GetDecimal(6),
+                    });
+                }
+
+                return Contracts;
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw new DataAccessException(ex.Message);
+            }
+        }
+        
         public static int Delete(int id)
         {
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("DELETE FROM contracts WHERE contid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    DELETE FROM
+                        contracts
+                    WHERE
+                        contid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 int rowsAff = cmd.ExecuteNonQuery();
                 if (rowsAff > 0)
@@ -106,7 +182,26 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("INSERT INTO contracts (cid, ctype, currency, expiration_date, creation_date, amount) VALUES (@cid, @ctype, @currency, @expiration_date, @creation_date, @amount) RETURNING contid", conn);
+                using var cmd = new NpgsqlCommand("""
+                    INSERT INTO contracts (
+                        cid,
+                        ctype,
+                        currency,
+                        expiration_date,
+                        creation_date,
+                        amount
+                    )
+                    VALUES (
+                        @cid,
+                        @ctype,
+                        @currency,
+                        @expiration_date,
+                        @creation_date,
+                        @amount
+                    )
+                    RETURNING
+                        contid
+                    """, conn);
                 cmd.Parameters.AddWithValue("cid", contract.CId);
                 cmd.Parameters.AddWithValue("ctype", contract.ContractType);
                 cmd.Parameters.AddWithValue("currency", contract.Currency);

@@ -16,7 +16,13 @@ namespace BankingApp.DAL
                 List<Preference> preferences = [];
 
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT cid, preferences FROM ui_preferences", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        cid,
+                        preferences
+                    FROM
+                        ui_preferences
+                    """, conn);
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -50,7 +56,15 @@ namespace BankingApp.DAL
             {
                 Preference? preference = null;
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT cid, preferences FROM ui_preferences WHERE cid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        cid,
+                        preferences
+                    FROM
+                        ui_preferences
+                    WHERE
+                        cid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 using var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -86,7 +100,12 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("DELETE FROM ui_preferences WHERE cid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    DELETE FROM
+                        ui_preferences
+                    WHERE
+                        cid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", id);
                 int rowsAff = cmd.ExecuteNonQuery();
                 if (rowsAff > 0)
@@ -111,7 +130,18 @@ namespace BankingApp.DAL
             try
             {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("INSERT INTO Preferences (cid, preferences) VALUES (@cid, @preferences) RETURNING cid", conn);
+                using var cmd = new NpgsqlCommand("""
+                    INSERT INTO Preferences (
+                        cid,
+                        preferences
+                    )
+                    VALUES (
+                        @cid,
+                        @preferences
+                    )
+                    RETURNING
+                        cid
+                    """, conn);
                 cmd.Parameters.AddWithValue("cid", preference.Id);
                 cmd.Parameters.AddWithValue("preferences", preference.Settings.ToArray());
 
@@ -137,7 +167,14 @@ namespace BankingApp.DAL
         {
             try {
                 using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("UPDATE ui_preferences SET preferences = @preferences WHERE cid = @id", conn);
+                using var cmd = new NpgsqlCommand("""
+                    UPDATE
+                        ui_preferences 
+                    SET
+                        preferences = @preferences
+                    WHERE
+                        cid = @id
+                    """, conn);
                 cmd.Parameters.AddWithValue("id", preference.Id);
                 cmd.Parameters.AddWithValue("preferences", preference.Settings.ToArray());
                 int rowsAff = cmd.ExecuteNonQuery();
