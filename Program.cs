@@ -9,7 +9,7 @@ namespace BankingApp
         [STAThread]
         static void Main()
         {
-            AppSkin.Initialize();
+            AppSkinHelper.Initialize();
             ApplicationConfiguration.Initialize();
             Application.Run(new Dashboard());
         }

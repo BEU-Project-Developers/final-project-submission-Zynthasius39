@@ -1,11 +1,8 @@
 ﻿using BankingApp.DAL;
 using BankingApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BankingApp.BLL
 {
@@ -13,11 +10,34 @@ namespace BankingApp.BLL
     {
         public static Customer GetCustomer(int id)
         {
-            return CustomerRepository.Get(id);
+            try
+            {
+                return CustomerRepository.Get(id);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
+            catch (CustomerException)
+            {
+                throw new Exception("Invalid E-Mail or Password");
+            }
         }
+
         public static Customer GetCustomer(string email)
         {
-            return CustomerRepository.Get(email);
+            try
+            {
+                return CustomerRepository.Get(email);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
+            catch (CustomerException)
+            {
+                throw new Exception("Wrong E-Mail or Password");
+            }
         }
 
         public static int CreateCustomer(Customer customer)
@@ -26,12 +46,25 @@ namespace BankingApp.BLL
             byte[] inputHash = SHA256.HashData(inputBytes);
             customer.Password = Convert.ToHexString(inputHash);
 
-            return CustomerRepository.Add(customer);
+            try
+            {
+                return CustomerRepository.Add(customer);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
         }
 
         public static void DeleteCustomer(int id)
         {
-            CustomerRepository.Delete(id);
+            try {
+                CustomerRepository.Delete(id);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
         }
 
         public static bool VerifyPassword(Customer customer, string password)
@@ -39,7 +72,7 @@ namespace BankingApp.BLL
             byte[] inputBytes = Encoding.UTF8.GetBytes(password);
             byte[] inputHash = SHA256.HashData(inputBytes);
 
-            if (customer.Password.ToUpper() == Convert.ToHexString(inputHash).ToUpper())
+            if (customer.Password.Equals(Convert.ToHexString(inputHash), StringComparison.CurrentCultureIgnoreCase))
                 return true;
             return false;
         }

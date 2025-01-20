@@ -16,13 +16,24 @@ namespace BankingApp.DAL
 
         static Database()
         {
-            NpgsqlDataSourceBuilder builder = new NpgsqlDataSourceBuilder(ConfigurationManager.ConnectionStrings["BankingDatabaseConnectionString"].ToString());
+            NpgsqlDataSourceBuilder builder = new(ConfigurationManager.ConnectionStrings["BankingDatabase"].ToString());
 
+            builder.MapEnum<Accountt>();
             builder.MapEnum<Rolet>();
+            builder.MapEnum<Contractt>();
+            builder.MapEnum<Resourcet>();
+            builder.MapEnum<Transactiont>();
+            builder.MapEnum<Currency>();
 
             _dataSource = builder.Build();
         }
 
         public static NpgsqlDataSource GetDataSource() => _dataSource;
+    }
+
+    public class DataAccessException : Exception
+    {
+        public DataAccessException() : base() { }
+        public DataAccessException(string message) : base(message) { }
     }
 }

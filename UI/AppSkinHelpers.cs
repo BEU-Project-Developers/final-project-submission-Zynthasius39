@@ -1,6 +1,7 @@
-﻿using System.Net.NetworkInformation;
+﻿using MaterialSkin;
+using System.Net.NetworkInformation;
 
-internal static class AppSkin
+internal static class AppSkinHelper
 {
     public static MaterialSkin.MaterialSkinManager materialSkinManager = MaterialSkin.MaterialSkinManager.Instance;
 
@@ -14,5 +15,10 @@ internal static class AppSkin
             MaterialSkin.Primary.Indigo100,
             MaterialSkin.Accent.Pink200,
             MaterialSkin.TextShade.WHITE);
+    }
+
+    public static bool IsDark()
+    {
+        return materialSkinManager.Theme == MaterialSkinManager.Themes.DARK;
     }
 }
