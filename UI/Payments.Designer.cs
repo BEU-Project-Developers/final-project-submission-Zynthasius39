@@ -1,6 +1,6 @@
 ﻿namespace BankingApp.UI
 {
-    partial class UserControl1
+    partial class Payments
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,29 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            accounts_label = new MaterialSkin.Controls.MaterialLabel();
+            payments_label = new MaterialSkin.Controls.MaterialLabel();
             SuspendLayout();
             // 
-            // accounts_label
+            // payments_label
             // 
-            accounts_label.AutoSize = true;
-            accounts_label.Depth = 0;
-            accounts_label.Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel);
-            accounts_label.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
-            accounts_label.Location = new Point(20, 20);
-            accounts_label.MouseState = MaterialSkin.MouseState.HOVER;
-            accounts_label.Name = "accounts_label";
-            accounts_label.Size = new Size(145, 41);
-            accounts_label.TabIndex = 0;
-            accounts_label.Text = "Accounts";
+            payments_label.AutoSize = true;
+            payments_label.Depth = 0;
+            payments_label.Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel);
+            payments_label.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
+            payments_label.Location = new Point(20, 20);
+            payments_label.MouseState = MaterialSkin.MouseState.HOVER;
+            payments_label.Name = "payments_label";
+            payments_label.Size = new Size(153, 41);
+            payments_label.TabIndex = 1;
+            payments_label.Text = "Payments";
             // 
-            // UserControl1
+            // Payments
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            Controls.Add(accounts_label);
-            Name = "UserControl1";
+            Controls.Add(payments_label);
+            Name = "Payments";
             Size = new Size(1000, 562);
             ResumeLayout(false);
             PerformLayout();
@@ -58,6 +57,6 @@
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialLabel accounts_label;
+        private MaterialSkin.Controls.MaterialLabel payments_label;
     }
 }
