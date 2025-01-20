@@ -8,7 +8,13 @@ internal static class AppSkinHelper
     public static void Initialize()
     {
         msm.EnforceBackcolorOnAllComponents = true;
-        ToggleDark();
+        msm.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+        msm.ColorScheme = new MaterialSkin.ColorScheme(
+            MaterialSkin.Primary.Amber800,
+            MaterialSkin.Primary.Amber900,
+            MaterialSkin.Primary.Amber200,
+            MaterialSkin.Accent.Orange700,
+            MaterialSkin.TextShade.WHITE);
     }
 
     public static bool IsDark()

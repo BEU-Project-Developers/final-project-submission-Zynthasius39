@@ -11,7 +11,7 @@ namespace BankingApp
         {
             AppSkinHelper.Initialize();
             ApplicationConfiguration.Initialize();
-            Application.Run(new Dashboard());
+            Application.Run(new LoginForm());
         }
     }
 }

@@ -21,11 +21,18 @@ namespace BankingApp
             InitializeComponent();
             MaterialSkinManager_ThemeChanged(this);
             AppSkinHelper.msm.AddFormToManage(this);
+            StatusBar.AddStatusBar(statusBar);
+
+            if (AppSkinHelper.IsDark())
+            {
+                dark_switch.Checked = true;
+            } else
+            {
+                dark_switch.Checked = false;
+            }
 
             banking_banner.Location = new Point((Width - banking_banner.Width) / 2 - 10, banking_banner.Location.Y);
             banking_title.Location = new Point((Width - banking_title.Width) / 2 - 10, banking_title.Location.Y);
-
-            StatusBar.AddStatusBar(statusBar);
 
             forgot_link.LinkColor = AppSkinHelper.msm.ColorScheme.AccentColor;
             forgot_link.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
@@ -43,7 +50,6 @@ namespace BankingApp
             {
                 banking_banner.Image = Properties.Resources.gringotts_black;
             }
-
         }
 
         private void Switch_Menu()
@@ -137,9 +143,13 @@ namespace BankingApp
                 try
                 {
                     VerifyFields();
-                    Customer customer = CustomerService.GetCustomer(email_box.Text.Trim());
+                    //Customer customer = CustomerService.GetCustomer(email_box.Text.Trim()); // Disabled for SDF2
+                    Customer customer = FormHelpers.CurrentUser;
+                    //customer = FormHelpers.ModUser; // Uncomment to activate mod Account!
+                    // MOD ACCOUNT DOESN'T WORK WITHOUT DATABASE CONNECTION !!! I only put it to show you the design.
                     if (CustomerService.VerifyPassword(customer, password_box.Text.Trim()))
                     {
+                        FormHelpers.CurrentUser = customer;
                         Debug.WriteLine(customer.Id + " logged in at " + DateTime.Now);
                         StatusBar.Status = "Welcome back, " + customer.Name + "!";
                         LoginService.LoggedIn = customer.Id;
