@@ -18,6 +18,18 @@ namespace BankingApp.BLL
             }
         }
 
+        public static List<Account> GetAccountsByCustomerId(int cid)
+        {
+            try
+            {
+                return AccountRepository.GetAllByCustomerId(cid);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
+        }
+
         public static Account GetAccountByAccNum(long accNum)
         {
             try
