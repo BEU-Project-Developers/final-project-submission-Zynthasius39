@@ -37,13 +37,12 @@ namespace BankingApp.DAL
         {
             Customer? customer = null;
 
-            try
+            using var conn = Database.GetDataSource().OpenConnection();
+            using var cmd = new NpgsqlCommand("SELECT cid, name, surname, email, phone, password, role FROM customers WHERE cid = @id", conn);
+            cmd.Parameters.AddWithValue("id", id);
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
             {
-                using var conn = Database.GetDataSource().OpenConnection();
-                using var cmd = new NpgsqlCommand("SELECT cid, name, surname, email, phone, password, role FROM customers WHERE cid = @id", conn);
-                cmd.Parameters.AddWithValue("id", id);
-                using var reader = cmd.ExecuteReader();
-                reader.Read();
                 customer = new Customer
                 {
                     Id = reader.GetInt32(0),
@@ -55,12 +54,7 @@ namespace BankingApp.DAL
                     Role = reader.GetFieldValue<Rolet>(6),
                 };
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
-            if (customer == null)
+            else
             {
                 throw new Exception("Customer Not Found");
             }
