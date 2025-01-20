@@ -51,30 +51,7 @@ namespace BankingApp
 
         private void signup_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (_isLogin)
-            {
-                submit_button.Text = "Register";
-                signup_link.Text = "Already registered ?";
-                forgot_link.Visible = false;
-                name_box.Visible = true;
-                surname_box.Visible = true;
-                phone_box.Visible = true;
-                role_radio_1.Visible = true;
-                role_radio_2.Visible = true;
-                _isLogin = false;
-            }
-            else
-            {
-                submit_button.Text = "Login";
-                signup_link.Text = "Not a Customer ?";
-                forgot_link.Visible = true;
-                name_box.Visible = false;
-                surname_box.Visible = false;
-                phone_box.Visible = false;
-                role_radio_1.Visible = false;
-                role_radio_2.Visible = false;
-                _isLogin = true;
-            }
+            switch_Menu();
         }
 
         private void submit_button_Click(object sender, EventArgs e)
