@@ -40,7 +40,7 @@ namespace BankingApp
             role_radio_1 = new MaterialRadioButton();
             role_radio_2 = new MaterialRadioButton();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            statusBar = new ToolStripStatusLabel();
             phone_box = new MaterialTextBox2();
             banking_banner = new PictureBox();
             banking_title = new MaterialLabel();
@@ -61,7 +61,7 @@ namespace BankingApp
             email_box.HideSelection = true;
             email_box.Hint = "E-Mail";
             email_box.LeadingIcon = null;
-            email_box.Location = new Point(62, 325);
+            email_box.Location = new Point(36, 334);
             email_box.MaxLength = 50;
             email_box.MouseState = MaterialSkin.MouseState.OUT;
             email_box.Name = "email_box";
@@ -92,7 +92,7 @@ namespace BankingApp
             password_box.HideSelection = true;
             password_box.Hint = "Password";
             password_box.LeadingIcon = null;
-            password_box.Location = new Point(62, 379);
+            password_box.Location = new Point(36, 388);
             password_box.MaxLength = 50;
             password_box.MouseState = MaterialSkin.MouseState.OUT;
             password_box.Name = "password_box";
@@ -126,7 +126,7 @@ namespace BankingApp
             submit_button.ForeColor = SystemColors.Control;
             submit_button.HighEmphasis = true;
             submit_button.Icon = null;
-            submit_button.Location = new Point(62, 682);
+            submit_button.Location = new Point(36, 691);
             submit_button.Margin = new Padding(4, 6, 4, 6);
             submit_button.MouseState = MaterialSkin.MouseState.HOVER;
             submit_button.Name = "submit_button";
@@ -145,7 +145,7 @@ namespace BankingApp
             forgot_link.BackColor = Color.Transparent;
             forgot_link.Font = new Font("Noto Sans", 9F);
             forgot_link.LinkColor = Color.Blue;
-            forgot_link.Location = new Point(62, 658);
+            forgot_link.Location = new Point(36, 667);
             forgot_link.Name = "forgot_link";
             forgot_link.Size = new Size(310, 18);
             forgot_link.TabIndex = 8;
@@ -165,7 +165,7 @@ namespace BankingApp
             name_box.HideSelection = true;
             name_box.Hint = "Name";
             name_box.LeadingIcon = null;
-            name_box.Location = new Point(62, 433);
+            name_box.Location = new Point(36, 442);
             name_box.MaxLength = 50;
             name_box.MouseState = MaterialSkin.MouseState.OUT;
             name_box.Name = "name_box";
@@ -196,7 +196,7 @@ namespace BankingApp
             surname_box.HideSelection = true;
             surname_box.Hint = "Surname";
             surname_box.LeadingIcon = null;
-            surname_box.Location = new Point(62, 489);
+            surname_box.Location = new Point(36, 498);
             surname_box.MaxLength = 50;
             surname_box.MouseState = MaterialSkin.MouseState.OUT;
             surname_box.Name = "surname_box";
@@ -223,7 +223,7 @@ namespace BankingApp
             role_radio_1.Depth = 0;
             role_radio_1.Font = new Font("Noto Sans", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
             role_radio_1.ForeColor = Color.BlueViolet;
-            role_radio_1.Location = new Point(106, 596);
+            role_radio_1.Location = new Point(80, 605);
             role_radio_1.Margin = new Padding(0);
             role_radio_1.MouseLocation = new Point(-1, -1);
             role_radio_1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -244,7 +244,7 @@ namespace BankingApp
             role_radio_2.Depth = 0;
             role_radio_2.Font = new Font("Noto Sans", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
             role_radio_2.ForeColor = Color.BlueViolet;
-            role_radio_2.Location = new Point(221, 596);
+            role_radio_2.Location = new Point(195, 605);
             role_radio_2.Margin = new Padding(0);
             role_radio_2.MouseLocation = new Point(-1, -1);
             role_radio_2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -261,18 +261,18 @@ namespace BankingApp
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(3, 888);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { statusBar });
+            statusStrip1.Location = new Point(3, 906);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(429, 22);
+            statusStrip1.Size = new Size(377, 22);
             statusStrip1.TabIndex = 12;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // statusBar
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(118, 17);
-            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            statusBar.Name = "statusBar";
+            statusBar.Size = new Size(55, 17);
+            statusBar.Text = "statusBar";
             // 
             // phone_box
             // 
@@ -285,7 +285,7 @@ namespace BankingApp
             phone_box.HideSelection = true;
             phone_box.Hint = "Phone";
             phone_box.LeadingIcon = null;
-            phone_box.Location = new Point(62, 545);
+            phone_box.Location = new Point(36, 554);
             phone_box.MaxLength = 50;
             phone_box.MouseState = MaterialSkin.MouseState.OUT;
             phone_box.Name = "phone_box";
@@ -310,8 +310,8 @@ namespace BankingApp
             banking_banner.Anchor = AnchorStyles.None;
             banking_banner.BackColor = Color.Transparent;
             banking_banner.BackgroundImageLayout = ImageLayout.None;
-            banking_banner.Image = Properties.Resources.gringotts_black;
-            banking_banner.Location = new Point(130, 73);
+            banking_banner.Image = Properties.Resources.gringotts_white;
+            banking_banner.Location = new Point(104, 82);
             banking_banner.Name = "banking_banner";
             banking_banner.Size = new Size(175, 175);
             banking_banner.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -324,7 +324,7 @@ namespace BankingApp
             banking_title.AutoSize = true;
             banking_title.Depth = 0;
             banking_title.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            banking_title.Location = new Point(130, 277);
+            banking_title.Location = new Point(104, 286);
             banking_title.MouseState = MaterialSkin.MouseState.HOVER;
             banking_title.Name = "banking_title";
             banking_title.Size = new Size(181, 19);
@@ -334,9 +334,11 @@ namespace BankingApp
             // dark_switch
             // 
             dark_switch.AutoSize = true;
+            dark_switch.Checked = true;
+            dark_switch.CheckState = CheckState.Checked;
             dark_switch.Depth = 0;
             dark_switch.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            dark_switch.Location = new Point(25, 845);
+            dark_switch.Location = new Point(26, 816);
             dark_switch.Margin = new Padding(0);
             dark_switch.MouseLocation = new Point(-1, -1);
             dark_switch.MouseState = MaterialSkin.MouseState.HOVER;
@@ -362,7 +364,7 @@ namespace BankingApp
             signup_button.ForeColor = SystemColors.WindowText;
             signup_button.HighEmphasis = true;
             signup_button.Icon = null;
-            signup_button.Location = new Point(62, 730);
+            signup_button.Location = new Point(36, 739);
             signup_button.Margin = new Padding(4, 6, 4, 6);
             signup_button.MouseState = MaterialSkin.MouseState.HOVER;
             signup_button.Name = "signup_button";
@@ -382,7 +384,7 @@ namespace BankingApp
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(435, 913);
+            ClientSize = new Size(383, 931);
             Controls.Add(dark_switch);
             Controls.Add(banking_title);
             Controls.Add(phone_box);
@@ -421,7 +423,7 @@ namespace BankingApp
         private MaterialRadioButton role_radio_1;
         private MaterialRadioButton role_radio_2;
         private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel statusBar;
         private MaterialTextBox2 phone_box;
         private PictureBox banking_banner;
         private MaterialLabel banking_title;

@@ -1,19 +1,7 @@
 ﻿using BankingApp.Models;
 using BankingApp.Models.Enums;
 using MaterialSkin.Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Diagnostics;
 using System.Collections;
-using System.Drawing.Drawing2D;
-using BankingApp.Properties;
 
 namespace BankingApp.UI
 {
@@ -21,15 +9,58 @@ namespace BankingApp.UI
     {
         public Dashboard()
         {
+
             InitializeComponent();
 
-            IEnumerator i = TabControl.TabPages.GetEnumerator();
-            while (i.MoveNext())
+            IEnumerator it = TabControl.TabPages.GetEnumerator();
+            while (it.MoveNext())
             {
-                TabPage j = (TabPage)i.Current;
-                j.BackColor = AppSkinHelper.materialSkinManager.BackgroundColor;
+                TabPage jt = (TabPage)it.Current;
+                jt.BackColor = AppSkinHelper.msm.BackgroundColor;
             }
 
+            Account acc = new()
+            {
+                AccountNumber = 1234567812345678,
+                AccountType = Accountt.Credit,
+                CIdList = [],
+                Amount = 0,
+                CreationDate = DateTime.Now,
+                ExpirationDate = DateTime.Now,
+                Currency = Currency.USD,
+                Id = 0,
+            };
+
+            Payment pay = new()
+            {
+                Id = 0,
+                Name = "AzTelekom",
+                Amount = 0,
+                Destination = 1234567812345678,
+            };
+
+            int cardCount = 8;
+            for (int i = 0; i < cardCount; i++)
+            {
+                cardsTable.RowCount += 1;
+                cardsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 200));
+                cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, i);
+            }
+
+            for (int i = 0; i < cardCount; i++)
+            {
+                paymentsTable.RowCount += 1;
+                paymentsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 100));
+                paymentsTable.Controls.Add(FormHelpers.AddPayment(pay), 0, i);
+            }
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+            LoginForm loginForm = new();
+            loginForm.FormClosed += (sender, args) => { Close(); };
+            loginForm.Show();
         }
     }
 }

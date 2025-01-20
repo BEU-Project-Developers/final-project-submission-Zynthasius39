@@ -75,6 +75,19 @@ namespace BankingApp.UI
 
             return positions;
         }
+        public static string SeparateBy(string str, int chunkSize)
+        {
+            char[] reversed = str.ToCharArray();
+            Array.Reverse(reversed);
+            string reversedString = new string(reversed);
+
+            string separated = string.Join(" ", SplitIntoChunks(reversedString, chunkSize));
+
+            char[] finalReversed = separated.ToCharArray();
+            Array.Reverse(finalReversed);
+
+            return new string(finalReversed);
+        }
 
         public static string[] SplitIntoChunks(string str, int chunkSize)
         {
@@ -113,41 +126,61 @@ namespace BankingApp.UI
             return positions;
         }
 
-        public static Control AddAccount(Control control, Account account, Point location)
+        public static Control AddAccount(Account account)
         {
             var container = new Panel
             {
-                
-                Size = Cards.ContainerSize,
-                Location = location,
-                BackColor = AppSkinHelper.materialSkinManager.BackgroundFocusColor,
-                ForeColor = Color.FromArgb(222, 0, 0, 0),
+                Dock = DockStyle.Fill,
+                BackColor = AppSkinHelper.msm.BackgroundFocusColor,
                 Margin = new Padding(10),
                 Padding = new Padding(10),
                 TabStop = false,
             };
-            var cardImage = new PictureBox
+            var icon = new PictureBox
             {
                 Size = new Size(260, 156),
-                Location = new Point(container.Size.Width - 260 - 20, (container.Size.Height - 156) / 2),
                 Image = Properties.Resources.card_0,
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 TabStop = false,
+                Parent = container,
             };
-            cardImage.Region = new Region(FormHelpers.CreateRoundedRectanglePath(cardImage.ClientRectangle, BorderRadius));
-            container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
-            container.Controls.Add(cardImage);
-            control.Controls.Add(container);
+            var label = new Label
+            {
+                AutoSize = true,
+                Font = new Font("Kredit Back", 24F, FontStyle.Regular, GraphicsUnit.Pixel),
+                BackColor = Color.Transparent,
+                ForeColor = Color.Gold,
+                Text = FormHelpers.SeparateBy(account.AccountNumber.ToString(), 4),
+                Parent = icon,
+            };
+            var info = new Label
+            {
+                Location = new Point(20, 20),
+                AutoSize = true,
+                Font = new Font("Noto Sans", 36F, FontStyle.Bold, GraphicsUnit.Pixel),
+                BackColor = Color.Transparent,
+                ForeColor = AppSkinHelper.msm.ColorScheme.TextColor,
+                Text = account.Amount.ToString() + " " + account.Currency.ToString(),
+                Parent = container,
+            };
+            icon.Region = new Region(FormHelpers.CreateRoundedRectanglePath(icon.ClientRectangle, BorderRadius));
+            container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            container.MouseLeave += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundFocusColor; };
+            container.SizeChanged += (sender, args) =>
+            {
+                label.Location = new Point((icon.Size.Width - label.Size.Width) / 2, (int)(icon.Size.Height * 0.55));
+                icon.Location = new Point(container.Size.Width - 260 - 20, (container.Size.Height - 156) / 2);
+                container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
+            };
             return container;
         }
 
-        public static void AddPayment(Control control, Payment payment, Point location)
+        public static Control AddPayment(Payment payment)
         {
             var container = new Panel
             {
-                Size = Payments.ContainerSize,
-                Location = location,
-                BackColor = AppSkinHelper.materialSkinManager.BackgroundFocusColor,
+                Dock = DockStyle.Fill,
+                BackColor = AppSkinHelper.msm.BackgroundFocusColor,
                 ForeColor = Color.FromArgb(222, 0, 0, 0),
                 Margin = new Padding(10),
                 Padding = new Padding(10),
@@ -156,27 +189,32 @@ namespace BankingApp.UI
             var icon = new PictureBox
             {
                 Size = new Size(50, 50),
-                Location = new Point(20, (container.Size.Height - 50) / 2),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = payment.Image,
+                TabStop = false,
             };
-            var label = new MaterialLabel
+            var label = new Label
             {
                 AutoSize = true,
-                Depth = 0,
-                Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel),
-                FontType = MaterialSkin.MaterialSkinManager.fontType.H4,
+                Font = new Font("Roboto", 28F, FontStyle.Regular, GraphicsUnit.Pixel),
+                BackColor = Color.Transparent,
+                ForeColor = AppSkinHelper.msm.ColorScheme.TextColor,
                 Location = new Point(20, 20),
-                MouseState = MaterialSkin.MouseState.HOVER,
-                TabIndex = 0,
                 Size = new Size(145, 41),
                 Text = payment.Name,
+                Parent = container,
             };
-            label.Location = new Point(icon.Size.Width + 40, (container.Size.Height - label.Height) / 2);
-            container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
+            container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            container.MouseLeave += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundFocusColor; };
+            container.SizeChanged += (sender, args) =>
+            {
+                icon.Location = new Point(20, (container.Size.Height - 50) / 2);
+                label.Location = new Point(icon.Size.Width + 40, (container.Size.Height - label.Height) / 2);
+                container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
+            };
             container.Controls.Add(icon);
             container.Controls.Add(label);
-            control.Controls.Add(container);
+            return container;
         }
     }
 }

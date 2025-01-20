@@ -31,7 +31,7 @@ namespace BankingApp.UI
             textBox2 = new MaterialTextBox2();
             button3 = new MaterialButton();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            statusBar = new ToolStripStatusLabel();
             dataGridView1 = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
@@ -215,18 +215,18 @@ namespace BankingApp.UI
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { statusBar });
             statusStrip1.Location = new Point(3, 655);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(1253, 22);
             statusStrip1.TabIndex = 8;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // statusBar
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(39, 17);
-            toolStripStatusLabel1.Text = "Status";
+            statusBar.Name = "statusBar";
+            statusBar.Size = new Size(39, 17);
+            statusBar.Text = "Status";
             // 
             // dataGridView1
             // 
@@ -391,7 +391,7 @@ namespace BankingApp.UI
         private MaterialTextBox2 textBox2;
         private MaterialButton button3;
         private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel statusBar;
         private DataGridView dataGridView1;
         private BindingSource customerBindingSource;
         private MaterialButton insert_all_button;

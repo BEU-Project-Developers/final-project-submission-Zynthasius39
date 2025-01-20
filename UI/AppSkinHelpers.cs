@@ -3,22 +3,39 @@ using System.Net.NetworkInformation;
 
 internal static class AppSkinHelper
 {
-    public static MaterialSkin.MaterialSkinManager materialSkinManager = MaterialSkin.MaterialSkinManager.Instance;
+    public static MaterialSkin.MaterialSkinManager msm = MaterialSkin.MaterialSkinManager.Instance;
 
     public static void Initialize()
     {
-        materialSkinManager.EnforceBackcolorOnAllComponents = true;
-        materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
-        materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(
-            MaterialSkin.Primary.Indigo500,
-            MaterialSkin.Primary.Indigo700,
-            MaterialSkin.Primary.Indigo100,
-            MaterialSkin.Accent.Pink200,
-            MaterialSkin.TextShade.WHITE);
+        msm.EnforceBackcolorOnAllComponents = true;
+        ToggleDark();
     }
 
     public static bool IsDark()
     {
-        return materialSkinManager.Theme == MaterialSkinManager.Themes.DARK;
+        return msm.Theme == MaterialSkinManager.Themes.DARK;
+    }
+
+    public static void ToggleDark()
+    {
+        if (IsDark())
+        {
+            msm.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            msm.ColorScheme = new MaterialSkin.ColorScheme(
+                MaterialSkin.Primary.Amber800,
+                MaterialSkin.Primary.Amber900,
+                MaterialSkin.Primary.Amber200,
+                MaterialSkin.Accent.Orange400,
+                MaterialSkin.TextShade.BLACK);
+        } else
+        {
+            msm.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+            msm.ColorScheme = new MaterialSkin.ColorScheme(
+                MaterialSkin.Primary.Amber800,
+                MaterialSkin.Primary.Amber900,
+                MaterialSkin.Primary.Amber200,
+                MaterialSkin.Accent.Orange700,
+                MaterialSkin.TextShade.WHITE);
+        }
     }
 }
