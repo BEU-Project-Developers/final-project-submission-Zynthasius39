@@ -163,6 +163,7 @@ namespace BankingApp
 
                     // Uncomment to enable offline mode
                     //Customer customer = FormHelpers.OfflineUser;
+                    // Comment next line too
                     Customer customer = CustomerService.GetCustomer(email_box.Text.Trim());
                     if (CustomerService.VerifyPassword(customer, password_box.Text.Trim()))
                     {
