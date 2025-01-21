@@ -45,7 +45,6 @@
             customerInfo = new MaterialSkin.Controls.MaterialLabel();
             refreshButton = new MaterialSkin.Controls.MaterialButton();
             cards = new TabPage();
-            cardAddFloatBtn = new MaterialSkin.Controls.MaterialFloatingActionButton();
             cardsTable = new TableLayoutPanel();
             payments = new TabPage();
             paymentsTable = new TableLayoutPanel();
@@ -280,7 +279,6 @@
             // cards
             // 
             cards.BackColor = Color.Transparent;
-            cards.Controls.Add(cardAddFloatBtn);
             cards.Controls.Add(cardsTable);
             cards.ImageKey = "credit-card.png";
             cards.Location = new Point(4, 57);
@@ -289,19 +287,6 @@
             cards.Size = new Size(1013, 632);
             cards.TabIndex = 0;
             cards.Text = "Cards";
-            // 
-            // cardAddFloatBtn
-            // 
-            cardAddFloatBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cardAddFloatBtn.Depth = 0;
-            cardAddFloatBtn.Icon = null;
-            cardAddFloatBtn.Location = new Point(898, 526);
-            cardAddFloatBtn.MouseState = MaterialSkin.MouseState.HOVER;
-            cardAddFloatBtn.Name = "cardAddFloatBtn";
-            cardAddFloatBtn.Size = new Size(56, 56);
-            cardAddFloatBtn.TabIndex = 0;
-            cardAddFloatBtn.Text = "+";
-            cardAddFloatBtn.UseVisualStyleBackColor = true;
             // 
             // cardsTable
             // 
@@ -601,7 +586,6 @@
         private MaterialSkin.Controls.MaterialButton cusDelBtn;
         private ToolTip mainTips;
         private MaterialSkin.Controls.MaterialLabel tractHistoryLabel;
-        private MaterialSkin.Controls.MaterialFloatingActionButton cardAddFloatBtn;
         private MaterialSkin.Controls.MaterialButton refreshButton;
         private MaterialSkin.Controls.MaterialLabel accountOp4;
         private MaterialSkin.Controls.MaterialComboBox accComboBox;

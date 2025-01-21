@@ -2,12 +2,12 @@
 using BankingApp.Models.Enums;
 using MaterialSkin.Controls;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace BankingApp.UI
 {
     public partial class Dashboard : MaterialForm
     {
-        private readonly TableLayoutPanel _payments, _cards, _transactions;
         public Dashboard()
         {
             InitializeComponent();
@@ -18,14 +18,10 @@ namespace BankingApp.UI
             // Subscribing the status bar to custom statusbar manager
             StatusBar.AddStatusBar(mainStatus);
 
-            // Storing table references for fast-refresh
-            _payments = paymentsTable;
-            _cards = cardsTable;
-            _transactions = transactionsTable;
-
             // Load dashboard
             // Fetching from database
             Dashboard_Load();
+
 
             // Tooltips
             mainTips.SetToolTip(logoutButton0, "Logout of your account");
@@ -62,13 +58,16 @@ namespace BankingApp.UI
                         FormHelpers.UserAccounts.Count,
                         FormHelpers.UserContracts.Count,
                         FormHelpers.CurrentUser.TransactionIDs.Length,
-                        FormHelpers.CurrentUser.RegisterDate.ToShortDateString()
+                                FormHelpers.CurrentUser.RegisterDate.ToShortDateString()
                         );
 
+                    // Clearing cards
+                    cardsTable.RowStyles.Clear();
+                    cardsTable.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                    cardsTable.Controls.Clear();
+                    accComboBox.Items.Clear();
                     // Adding cards
                     // Settings combo box
-                    cardsTable = _cards;
-                    accComboBox.Items.Clear();
                     FormHelpers.UserAccounts.ForEach(acc =>
                         {
                             accComboBox.Items.Add(acc.AccountNumber);
@@ -84,13 +83,17 @@ namespace BankingApp.UI
                             accComboBox.SelectedValue = FormHelpers.UserAccounts[0].AccountNumber;
                         }
 
+                    // Clearing transactions
+                    transactionsTable.RowStyles.Clear();
+                    transactionsTable.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                    transactionsTable.Controls.Clear();
                     // Adding transactions
-                    transactionsTable = _transactions;
-                    FormHelpers.UserTransactions.ForEach(tx =>
+                    for (int i = 0; i < FormHelpers.UserTransactions.Count; i++)
                         {
+                            if (i == 11) break;
                             transactionsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 50));
-                            transactionsTable.Controls.Add(FormHelpers.AddTransaction(tx), 0, transactionsTable.RowStyles.Count - 3);
-                        });
+                            transactionsTable.Controls.Add(FormHelpers.AddTransaction(FormHelpers.UserTransactions[i]), 0, transactionsTable.RowStyles.Count - 3);
+                        };
                 }
             }
             catch (Exception ex)
@@ -99,9 +102,12 @@ namespace BankingApp.UI
                 StatusBar.Status = ex.Message;
             }
 
+            // Clearing payments
+            paymentsTable.RowStyles.Clear();
+            paymentsTable.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            paymentsTable.Controls.Clear();
             // Adding default payments
             // Doesn't interfere with customer itself
-            paymentsTable = _payments;
             FormHelpers.Payments?.ForEach(pay =>
                 {
                     paymentsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 100));
