@@ -47,6 +47,48 @@ namespace BankingApp.DAL
             }
         }
 
+        public static List<Transaction> GetAllByTransactionIds(int[] tids)
+        {
+            try
+            {
+                List<Transaction> Transactions = [];
+
+                using var conn = Database.GetDataSource().OpenConnection();
+                using var cmd = new NpgsqlCommand("""
+                    SELECT
+                        tid,
+                        ttype,
+                        currency,
+                        date,
+                        amount
+                    FROM
+                        transactions
+                    WHERE
+                        tid = ANY(@tids)
+                    """, conn);
+                cmd.Parameters.AddWithValue("tids", tids);
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Transactions.Add(new Transaction
+                    {
+                        Id = reader.GetInt32(0),
+                        TransactionType = reader.GetFieldValue<Transactiont>(1),
+                        Currency = reader.GetFieldValue<Currency>(2),
+                        Date = reader.GetFieldValue<DateTime>(3),
+                        Amount = reader.GetDecimal(4),
+                    });
+                }
+
+                return Transactions;
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw new DataAccessException(ex.Message);
+            }
+        }
+
         public static Transaction Get(int id)
         {
             try

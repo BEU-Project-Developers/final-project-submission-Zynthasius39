@@ -19,6 +19,7 @@ namespace BankingApp.UI
         public static Customer? CurrentUser;
         public static List<Account>? UserAccounts;
         public static List<Contract>? UserContracts;
+        public static List<Transaction>? UserTransactions;
 
         public static List<Payment>? Payments;
 
@@ -179,13 +180,17 @@ namespace BankingApp.UI
             };
             var icon = new PictureBox
             {
-                Size = new Size(50, 50),
                 BackColor = Color.Transparent,
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = payment.Image,
+                Size = new Size(50, 50),
                 TabStop = false,
                 Parent = container,
             };
+            if (icon.Image != null)
+            {
+                icon.Size = new Size(50, (icon.Image.Height * 50) / icon.Image.Width);
+            }
             var label = new Label
             {
                 AutoSize = true,
@@ -197,19 +202,30 @@ namespace BankingApp.UI
                 Text = payment.Name,
                 Parent = container,
             };
+            var amount = new Label
+            {
+                AutoSize = true,
+                Font = new Font("Roboto", 28F, FontStyle.Regular, GraphicsUnit.Pixel),
+                BackColor = Color.Transparent,
+                ForeColor = AppSkinHelper.msm.ColorScheme.TextColor,
+                Size = new Size(145, 41),
+                Text = $"{payment.Amount} {payment.Currency.ToDescription()}",
+                Parent = container,
+            };
             container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             icon.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             label.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             container.MouseLeave += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundFocusColor; };
             container.SizeChanged += (sender, args) =>
             {
-                icon.Location = new Point(20, (container.Size.Height - 50) / 2);
+                icon.Location = new Point(20, (container.Size.Height - icon.Size.Height) / 2);
+                amount.Location = new Point(container.Size.Width - amount.Size.Width - 20, (container.Size.Height - amount.Size.Height) / 2);
                 label.Location = new Point(icon.Size.Width + 40, (container.Size.Height - label.Height) / 2);
                 container.Region = new Region(FormHelpers.CreateRoundedRectanglePath(container.ClientRectangle, BorderRadius));
             };
             container.Click += (sender, e) =>
             {
-                PaymentBox pb = new();
+                PaymentBox pb = new(payment);
                 pb.ShowDialog();
             };
             return container;

@@ -19,6 +19,17 @@ namespace BankingApp.BLL
                 throw new Exception("Failed to connect to Database");
             }
         }
+        public static List<Transaction> GetTransactionsByCustomer(Customer customer)
+        {
+            try
+            {
+                return TransactionRepository.GetAllByTransactionIds(customer.TransactionIDs);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
+        }
 
         public static int CreateTransaction(Transaction Transaction)
         {

@@ -22,6 +22,7 @@ namespace BankingApp.UI
                     customerName.Text = FormHelpers.CurrentUser.Name;
                     FormHelpers.UserAccounts = AccountService.GetAccountsByCustomerId(FormHelpers.CurrentUser.Id);
                     FormHelpers.UserContracts = ContractService.GetContractsByType(FormHelpers.CurrentUser.Id, Contractt.Loan);
+                    FormHelpers.UserTransactions = TransactionService.GetTransactionsByCustomer(FormHelpers.CurrentUser);
 
                     customerInfo.Text = string.Format(format: """
                         Net Worth: {0}
@@ -44,6 +45,12 @@ namespace BankingApp.UI
                             cardsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 200));
                             cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, cardsTable.RowStyles.Count - 3);
                         });
+
+                    FormHelpers.UserTransactions.ForEach(tx =>
+                        {
+                            transactionsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 50));
+                            transactionsTable.Controls.Add(FormHelpers.AddTransaction(tx), 0, transactionsTable.RowStyles.Count - 3);
+                        });
                 }
             }
             catch (Exception ex)
@@ -57,37 +64,6 @@ namespace BankingApp.UI
                     paymentsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 100));
                     paymentsTable.Controls.Add(FormHelpers.AddPayment(pay), 0, paymentsTable.RowStyles.Count - 3);
                 });
-
-            // NOTE: Fetch from Database
-
-
-            /*
-            for (int i = 0; i < cardCount; i++)
-            {
-                paymentsTable.RowCount += 1;
-                paymentsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 100));
-                paymentsTable.Controls.Add(FormHelpers.AddPayment(pay), 0, i);
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                List<Transactiont> transactiont = [
-                    Transactiont.Withdrawal,
-                    Transactiont.Deposit,
-                    Transactiont.Exchange,
-                ];
-                List<Currency> currencyt = [
-                    Currency.AZN,
-                    Currency.USD,
-                    Currency.TRY,
-                ];
-                tract.TransactionType = transactiont[i % 3];
-                tract.Currency = currencyt[i % 3];
-                transactionsTable.RowCount += 1;
-                transactionsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 50));
-                transactionsTable.Controls.Add(FormHelpers.AddTransaction(tract), 0, i);
-            }
-            */
 
             mainTips.SetToolTip(logoutButton0, "Logout of your account");
         }
