@@ -117,6 +117,7 @@
             amountText.TextAlign = HorizontalAlignment.Left;
             amountText.TrailingIcon = null;
             amountText.UseSystemPasswordChar = false;
+            amountText.Click += amountText_Click;
             // 
             // addBtn1
             // 

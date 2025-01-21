@@ -47,6 +47,7 @@ namespace BankingApp.UI
                     FormHelpers.UserContracts = ContractService.GetContractsByType(FormHelpers.CurrentUser.Id, Contractt.Loan);
                     FormHelpers.UserTransactions = TransactionService.GetTransactionsByCustomer(FormHelpers.CurrentUser);
 
+
                     // User info
                     customerInfo.Text = string.Format(format: """
                         Net Worth: {0}
@@ -65,12 +66,23 @@ namespace BankingApp.UI
                         );
 
                     // Adding cards
+                    // Settings combo box
                     cardsTable = _cards;
+                    accComboBox.Items.Clear();
                     FormHelpers.UserAccounts.ForEach(acc =>
                         {
+                            accComboBox.Items.Add(acc.AccountNumber);
                             cardsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 200));
                             cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, cardsTable.RowStyles.Count - 3);
                         });
+
+                    // Set default default account first one
+                    if (FormHelpers.UserAccounts != null)
+                        if (FormHelpers.UserAccounts.Count > 0)
+                        {
+                            FormHelpers.UserDefAccount = FormHelpers.UserAccounts[0];
+                            accComboBox.SelectedValue = FormHelpers.UserAccounts[0].AccountNumber;
+                        }
 
                     // Adding transactions
                     transactionsTable = _transactions;
@@ -127,6 +139,18 @@ namespace BankingApp.UI
         {
             // Fast-Refresh
             Dashboard_Load();
+        }
+
+        private void accComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Update default account
+            if (FormHelpers.UserAccounts != null)
+            {
+                FormHelpers.UserDefAccount = FormHelpers.UserAccounts[accComboBox.SelectedIndex];
+            } else
+            {
+                StatusBar.Status = "Couldn't set default account!";
+            }
         }
     }
 }

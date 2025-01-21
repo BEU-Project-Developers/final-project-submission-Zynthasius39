@@ -122,6 +122,7 @@
             blockCard.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             blockCard.UseAccentColor = false;
             blockCard.UseVisualStyleBackColor = true;
+            blockCard.Click += blockCard_Click;
             // 
             // transfer
             // 

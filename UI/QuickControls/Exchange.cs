@@ -29,16 +29,17 @@ namespace BankingApp.UI.QuickControls
 
         private void Exchange_Btn_Click(object sender, EventArgs e)
         {
-            if (_account != null)
-            {
+            Account? account;
+            if (FormHelpers.UserDefAccount != null) {
+                account = FormHelpers.UserDefAccount;
                 string oldCur = exchTo.Text.ToLower();
-                if (oldCur == "azn") _account.Currency = Models.Enums.Currency.AZN;
-                else if (oldCur == "usd") _account.Currency = Models.Enums.Currency.USD;
-                else if (oldCur == "try") _account.Currency = Models.Enums.Currency.TRY;
-                else if (oldCur == "gold") _account.Currency = Models.Enums.Currency.GOLD;
-                else if (oldCur == "eur") _account.Currency = Models.Enums.Currency.EUR;
+                if (oldCur == "azn") account.Currency = Models.Enums.Currency.AZN;
+                else if (oldCur == "usd") account.Currency = Models.Enums.Currency.USD;
+                else if (oldCur == "try") account.Currency = Models.Enums.Currency.TRY;
+                else if (oldCur == "gold") account.Currency = Models.Enums.Currency.GOLD;
+                else if (oldCur == "eur") account.Currency = Models.Enums.Currency.EUR;
                 else StatusBar.Status = "Couldn't find the exchange currency!";
-                AccountService.UpdateAccount(_account);
+                AccountService.UpdateAccount(account);
             }
         }
     }

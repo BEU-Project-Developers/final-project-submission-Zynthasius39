@@ -1,9 +1,11 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.BLL;
+using BankingApp.Models;
 using BankingApp.UI.QuickControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,23 +16,15 @@ namespace BankingApp.UI
 {
     public partial class PaymentsMini : UserControl
     {
-        private Account? _account;
         public PaymentsMini()
         {
             InitializeComponent();
         }
-
-        public PaymentsMini(Account account)
-        {
-            _account = account;
-            InitializeComponent();
-        }
-
         private void QuickPayBtn_Click(object sender, EventArgs e)
         {
-            if (_account != null)
+            if (FormHelpers.UserAccounts != null)
             {
-                QuickBox qb = new(new QuickPay(_account));
+                QuickBox qb = new(new QuickPay());
                 qb.Show();
             }
             else
@@ -41,9 +35,9 @@ namespace BankingApp.UI
 
         private void exchangeBtn_Click(object sender, EventArgs e)
         {
-            if (_account != null)
+            if (FormHelpers.UserAccounts != null)
             {
-                QuickBox qb = new(new Exchange(_account));
+                QuickBox qb = new(new Exchange());
                 qb.Show();
             }
             else
@@ -62,6 +56,17 @@ namespace BankingApp.UI
         {
             QuickBox qb = new(new Donate());
             qb.Show();
+        }
+
+        private void blockCard_Click(object sender, EventArgs e)
+        {
+            if (FormHelpers.UserDefAccount != null)
+            {
+                Debug.WriteLine(FormHelpers.UserDefAccount.ToString());
+                FormHelpers.UserDefAccount.CVV = 0;
+                AccountService.UpdateAccount(FormHelpers.UserDefAccount);
+                StatusBar.Status = "Account frozen!";
+            }
         }
     }
 }

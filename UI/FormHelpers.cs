@@ -17,6 +17,7 @@ namespace BankingApp.UI
         ];
 
         public static Customer? CurrentUser;
+        public static Account? UserDefAccount;
         public static List<Account>? UserAccounts;
         public static List<Contract>? UserContracts;
         public static List<Transaction>? UserTransactions;

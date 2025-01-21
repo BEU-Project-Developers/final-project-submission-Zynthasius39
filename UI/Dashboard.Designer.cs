@@ -35,8 +35,8 @@
             home = new TabPage();
             homeLayout = new TableLayoutPanel();
             infoLayout = new TableLayoutPanel();
-            transactionsTable = new TableLayoutPanel();
             paymentsMini1 = new PaymentsMini();
+            transactionsTable = new TableLayoutPanel();
             tractHistoryLabel = new MaterialSkin.Controls.MaterialLabel();
             customerLayout = new TableLayoutPanel();
             profilePic = new PictureBox();
@@ -56,6 +56,8 @@
             accountBtn0 = new MaterialSkin.Controls.MaterialButton();
             accountOp3 = new MaterialSkin.Controls.MaterialLabel();
             cusDelBtn = new MaterialSkin.Controls.MaterialButton();
+            accountOp4 = new MaterialSkin.Controls.MaterialLabel();
+            accComboBox = new MaterialSkin.Controls.MaterialComboBox();
             imageList1 = new ImageList(components);
             mainStrip = new StatusStrip();
             mainStatus = new ToolStripStatusLabel();
@@ -192,12 +194,12 @@
             customerLayout.Size = new Size(238, 586);
             customerLayout.TabIndex = 2;
             // 
-            // pictureBox1
+            // profilePic
             // 
             profilePic.Dock = DockStyle.Fill;
             profilePic.Location = new Point(10, 10);
             profilePic.Margin = new Padding(10);
-            profilePic.Name = "pictureBox1";
+            profilePic.Name = "profilePic";
             profilePic.Size = new Size(218, 208);
             profilePic.SizeMode = PictureBoxSizeMode.Zoom;
             profilePic.TabIndex = 0;
@@ -362,6 +364,8 @@
             tableLayoutPanel1.Controls.Add(accountBtn0, 1, 0);
             tableLayoutPanel1.Controls.Add(accountOp3, 0, 1);
             tableLayoutPanel1.Controls.Add(cusDelBtn, 1, 1);
+            tableLayoutPanel1.Controls.Add(accountOp4, 0, 2);
+            tableLayoutPanel1.Controls.Add(accComboBox, 1, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -472,6 +476,44 @@
             cusDelBtn.UseVisualStyleBackColor = true;
             cusDelBtn.Click += DeleteAccount_Click;
             // 
+            // accountOp4
+            // 
+            accountOp4.AutoSize = true;
+            accountOp4.Depth = 0;
+            accountOp4.Dock = DockStyle.Fill;
+            accountOp4.Font = new Font("Roboto", 24F, FontStyle.Bold, GraphicsUnit.Pixel);
+            accountOp4.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            accountOp4.Location = new Point(23, 120);
+            accountOp4.MouseState = MaterialSkin.MouseState.HOVER;
+            accountOp4.Name = "accountOp4";
+            accountOp4.Size = new Size(772, 50);
+            accountOp4.TabIndex = 5;
+            accountOp4.Text = "Default Account";
+            // 
+            // accComboBox
+            // 
+            accComboBox.AutoResize = false;
+            accComboBox.BackColor = Color.FromArgb(255, 255, 255);
+            accComboBox.Depth = 0;
+            accComboBox.Dock = DockStyle.Fill;
+            accComboBox.DrawMode = DrawMode.OwnerDrawVariable;
+            accComboBox.DropDownHeight = 174;
+            accComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            accComboBox.DropDownWidth = 121;
+            accComboBox.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            accComboBox.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            accComboBox.FormattingEnabled = true;
+            accComboBox.IntegralHeight = false;
+            accComboBox.ItemHeight = 43;
+            accComboBox.Location = new Point(801, 123);
+            accComboBox.MaxDropDownItems = 4;
+            accComboBox.MouseState = MaterialSkin.MouseState.OUT;
+            accComboBox.Name = "accComboBox";
+            accComboBox.Size = new Size(189, 49);
+            accComboBox.StartIndex = 0;
+            accComboBox.TabIndex = 6;
+            accComboBox.SelectedIndexChanged += accComboBox_SelectedIndexChanged;
+            // 
             // imageList1
             // 
             imageList1.ColorDepth = ColorDepth.Depth32Bit;
@@ -494,7 +536,7 @@
             // 
             mainStatus.Name = "mainStatus";
             mainStatus.Size = new Size(0, 17);
-            //
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -561,5 +603,7 @@
         private MaterialSkin.Controls.MaterialLabel tractHistoryLabel;
         private MaterialSkin.Controls.MaterialFloatingActionButton cardAddFloatBtn;
         private MaterialSkin.Controls.MaterialButton refreshButton;
+        private MaterialSkin.Controls.MaterialLabel accountOp4;
+        private MaterialSkin.Controls.MaterialComboBox accComboBox;
     }
 }

@@ -32,6 +32,7 @@
             destText = new MaterialSkin.Controls.MaterialTextBox2();
             srcText = new MaterialSkin.Controls.MaterialTextBox2();
             submitBtn = new MaterialSkin.Controls.MaterialButton();
+            amountBox = new MaterialSkin.Controls.MaterialTextBox2();
             SuspendLayout();
             // 
             // mainLabel
@@ -110,7 +111,7 @@
             submitBtn.Depth = 0;
             submitBtn.HighEmphasis = true;
             submitBtn.Icon = null;
-            submitBtn.Location = new Point(178, 308);
+            submitBtn.Location = new Point(178, 338);
             submitBtn.Margin = new Padding(4, 6, 4, 6);
             submitBtn.MouseState = MaterialSkin.MouseState.HOVER;
             submitBtn.Name = "submitBtn";
@@ -121,6 +122,36 @@
             submitBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             submitBtn.UseAccentColor = false;
             submitBtn.UseVisualStyleBackColor = true;
+            submitBtn.Click += submitBtn_Click;
+            // 
+            // amountBox
+            // 
+            amountBox.AnimateReadOnly = false;
+            amountBox.BackgroundImageLayout = ImageLayout.None;
+            amountBox.CharacterCasing = CharacterCasing.Normal;
+            amountBox.Depth = 0;
+            amountBox.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            amountBox.HideSelection = true;
+            amountBox.Hint = "Amount";
+            amountBox.LeadingIcon = null;
+            amountBox.Location = new Point(178, 263);
+            amountBox.MaxLength = 32767;
+            amountBox.MouseState = MaterialSkin.MouseState.OUT;
+            amountBox.Name = "amountBox";
+            amountBox.PasswordChar = '\0';
+            amountBox.PrefixSuffixText = null;
+            amountBox.ReadOnly = false;
+            amountBox.RightToLeft = RightToLeft.No;
+            amountBox.SelectedText = "";
+            amountBox.SelectionLength = 0;
+            amountBox.SelectionStart = 0;
+            amountBox.ShortcutsEnabled = true;
+            amountBox.Size = new Size(414, 48);
+            amountBox.TabIndex = 0;
+            amountBox.TabStop = false;
+            amountBox.TextAlign = HorizontalAlignment.Left;
+            amountBox.TrailingIcon = null;
+            amountBox.UseSystemPasswordChar = false;
             // 
             // Transfer
             // 
@@ -129,6 +160,7 @@
             Controls.Add(mainLabel);
             Controls.Add(srcText);
             Controls.Add(submitBtn);
+            Controls.Add(amountBox);
             Controls.Add(destText);
             Name = "Transfer";
             Size = new Size(784, 461);
@@ -142,5 +174,6 @@
         private MaterialSkin.Controls.MaterialTextBox2 destText;
         private MaterialSkin.Controls.MaterialTextBox2 srcText;
         private MaterialSkin.Controls.MaterialButton submitBtn;
+        private MaterialSkin.Controls.MaterialTextBox2 amountBox;
     }
 }

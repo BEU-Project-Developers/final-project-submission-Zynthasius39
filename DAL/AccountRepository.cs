@@ -332,6 +332,7 @@ namespace BankingApp.DAL
                 cmd.Parameters.AddWithValue("expr_date", newAccount.ExpirationDate);
                 cmd.Parameters.AddWithValue("crt_date", newAccount.CreationDate);
                 cmd.Parameters.AddWithValue("amount", newAccount.Amount);
+                cmd.Parameters.AddWithValue("cvv", newAccount.CVV);
                 cmd.Parameters.AddWithValue("accnumber", newAccount.AccountNumber);
                 int rowsAff = cmd.ExecuteNonQuery();
                 if (rowsAff <= 0)

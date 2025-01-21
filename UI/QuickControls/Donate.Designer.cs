@@ -67,6 +67,7 @@
             addBtn0.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             addBtn0.UseAccentColor = false;
             addBtn0.UseVisualStyleBackColor = true;
+            addBtn0.Click += addBtn0_Click;
             // 
             // addBtn1
             // 
@@ -87,6 +88,7 @@
             addBtn1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             addBtn1.UseAccentColor = false;
             addBtn1.UseVisualStyleBackColor = true;
+            addBtn1.Click += addBtn1_Click;
             // 
             // addBtn2
             // 
@@ -107,6 +109,7 @@
             addBtn2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             addBtn2.UseAccentColor = false;
             addBtn2.UseVisualStyleBackColor = true;
+            addBtn2.Click += addBtn2_Click;
             // 
             // addBtn3
             // 
@@ -127,6 +130,7 @@
             addBtn3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             addBtn3.UseAccentColor = false;
             addBtn3.UseVisualStyleBackColor = true;
+            addBtn3.Click += addBtn3_Click;
             // 
             // clrBtn
             // 
@@ -147,6 +151,7 @@
             clrBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             clrBtn.UseAccentColor = false;
             clrBtn.UseVisualStyleBackColor = true;
+            clrBtn.Click += clrBtn_Click;
             // 
             // submitBtn
             // 
@@ -167,6 +172,7 @@
             submitBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             submitBtn.UseAccentColor = false;
             submitBtn.UseVisualStyleBackColor = true;
+            submitBtn.Click += submitBtn_Click;
             // 
             // amountText
             // 

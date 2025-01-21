@@ -52,7 +52,7 @@
             amountText.Depth = 0;
             amountText.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             amountText.HideSelection = true;
-            amountText.Hint = "Amount";
+            amountText.Hint = "Account";
             amountText.LeadingIcon = null;
             amountText.Location = new Point(241, 162);
             amountText.MaxLength = 32767;
