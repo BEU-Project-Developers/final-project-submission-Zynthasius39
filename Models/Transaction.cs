@@ -4,6 +4,11 @@ namespace BankingApp.Models
 {
     public class Transaction
     {
+        /// <summary>
+        /// Transaction Model
+        /// 
+        /// Playing entity role
+        /// </summary>
         public required int Id { get; set; }
         public required Transactiont TransactionType { get; set; }
         public required Currency Currency { get; set; }

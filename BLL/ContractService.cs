@@ -9,6 +9,14 @@ namespace BankingApp.BLL
 {
     public static class ContractService
     {
+        /// <summary>
+        /// Contract Service
+        ///     Used to connect UI with Repositories
+        ///     More understanable code userspace
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static Contract GetContract(int id)
         {
             try

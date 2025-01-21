@@ -6,8 +6,17 @@ namespace BankingApp.BLL
 {
     public static class AccountService
     {
+        /// <summary>
+        /// Account Service
+        ///     Used to connect UI with Repositories
+        ///     More understanable code userspace
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static Account GetAccount(int id)
         {
+
             try
             {
                 return AccountRepository.Get(id);

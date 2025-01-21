@@ -9,6 +9,12 @@ namespace BankingApp.DAL
 {
     public static class PreferenceRepository
     {
+        /// <summary>
+        /// Preference Repository
+        ///     Holds UI settings to communicate
+        ///     Interact, update, delete
+        ///     the Database
+        /// </summary>
         public static List<Preference> GetAll()
         {
             try

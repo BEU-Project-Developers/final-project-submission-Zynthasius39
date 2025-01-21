@@ -9,6 +9,11 @@ namespace BankingApp.Models
 {
     public class Resource
     {
+        /// <summary>
+        /// Resource Model
+        /// 
+        /// Playing entity role
+        /// </summary>
         public required int Id { get; set; }
         public required Resourcet ResourseType { get; set; }
         public required Currency Currency { get; set; }

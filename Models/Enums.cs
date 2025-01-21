@@ -1,5 +1,10 @@
 ﻿namespace BankingApp.Models.Enums
 {
+    /// <summary>
+    /// Enums
+    /// 
+    /// Playing entity role
+    /// </summary>
     public enum Accountt
     {
         Savings,

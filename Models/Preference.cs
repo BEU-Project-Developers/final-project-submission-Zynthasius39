@@ -8,6 +8,11 @@ namespace BankingApp.Models
 {
     public class Preference
     {
+        /// <summary>
+        /// Preference Model
+        /// 
+        /// Playing entity role
+        /// </summary>
         public required int Id { get; set; }
 
         public List<KeyValuePair<string, string>> Settings { get; set; } = [];

@@ -211,7 +211,7 @@ namespace BankingApp.UI
             getButton.Type = MaterialButton.MaterialButtonType.Contained;
             getButton.UseAccentColor = false;
             getButton.UseVisualStyleBackColor = true;
-            getButton.Click += Button3_Click;
+            getButton.Click += Add_Btn_Click;
             // 
             // statusStrip1
             // 
@@ -315,7 +315,7 @@ namespace BankingApp.UI
             logoutButton.Type = MaterialButton.MaterialButtonType.Contained;
             logoutButton.UseAccentColor = false;
             logoutButton.UseVisualStyleBackColor = true;
-            logoutButton.Click += MaterialButton1_Click;
+            logoutButton.Click += Logout_Btn_Click;
             // 
             // insertAllButton
             // 

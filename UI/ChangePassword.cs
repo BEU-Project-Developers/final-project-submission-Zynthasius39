@@ -16,6 +16,9 @@ namespace BankingApp.UI
         {
             if (FormHelpers.CurrentUser != null)
             {
+                // Verify trimmed password
+                // Hash it using SHA256
+                // Update the database accordingly
                 if (CustomerService.VerifyPassword(FormHelpers.CurrentUser, curPassText.Text.Trim()))
                 {
                     if (newPassText0.Text.Equals(newPassText1.Text))

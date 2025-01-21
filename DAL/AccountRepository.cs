@@ -8,6 +8,12 @@ namespace BankingApp.DAL
 {
     public static class AccountRepository
     {
+        /// <summary>
+        /// Account Repository
+        ///     Holds logic to communicate
+        ///     Interact, update, delete
+        ///     the Database
+        /// </summary>
         public static List<Account> GetAll()
         {
             try

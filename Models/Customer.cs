@@ -4,6 +4,11 @@ namespace BankingApp.Models
 {
     public class Customer
     {
+        /// <summary>
+        /// Customer Model
+        /// 
+        /// Playing entity role
+        /// </summary>
         public int Id { get; set; }
         public required string Name { get; set; } = string.Empty;
         public required string Surname { get; set; } = string.Empty;

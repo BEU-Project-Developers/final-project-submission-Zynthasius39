@@ -11,6 +11,11 @@ namespace BankingApp.Models
     
     public class Account
     {
+        /// <summary>
+        /// Account Model
+        /// 
+        /// Playing entity role
+        /// </summary>
         public required int Id { get; set; }
         public required int[] CIdList { get; set; } = [];
         public required Accountt AccountType { get; set; }

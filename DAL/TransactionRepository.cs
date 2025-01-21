@@ -10,6 +10,12 @@ namespace BankingApp.DAL
     {
         public static List<Transaction> GetAll()
         {
+            /// <summary>
+            /// Transaction Repository
+            ///     Holds UI settings to communicate
+            ///     Interact, update, delete
+            ///     the Database
+            /// </summary>
             try
             {
                 List<Transaction> Transactions = [];

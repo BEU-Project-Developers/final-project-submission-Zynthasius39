@@ -23,14 +23,16 @@ namespace BankingApp.UI
         public ModForm()
         {
             InitializeComponent();
+            // Add this form to custom skin helper
             AppSkinHelper.msm.AddFormToManage(this);
 
+            // Force window size
             Size = new Size(1245, 643);
             MaximumSize = Size;
             MinimumSize = Size;
-
             FormBorderStyle = FormBorderStyle.Fixed3D;
 
+            // MaterialUI coloring
             dataGridView1.BackgroundColor = AppSkinHelper.msm.BackgroundColor;
             dataGridView1.ForeColor = AppSkinHelper.msm.ColorScheme.PrimaryColor;
             dataGridView1.GridColor = AppSkinHelper.msm.ColorScheme.TextColor;
@@ -71,6 +73,8 @@ namespace BankingApp.UI
         private void Insert_default_button_Click(object sender, EventArgs e)
         {
             progress_bar.Value = 0;
+
+            // Example Customer
             CustomerRepository.Add(new Customer()
             {
                 Email = "admin@home.alak",
@@ -86,7 +90,7 @@ namespace BankingApp.UI
             progress_bar.Value = 100;
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        private void Add_Btn_Click(object sender, EventArgs e)
         {
             progress_bar.Value = 0;
             Customer customer;
@@ -127,9 +131,10 @@ namespace BankingApp.UI
             }
         }
 
-        private void MaterialButton1_Click(object sender, EventArgs e)
+        private void Logout_Btn_Click(object sender, EventArgs e)
         {
             Hide();
+            // Go back to login
             Form login = new LoginForm();
             login.FormClosed += (s, args) => Close();
             login.Show();

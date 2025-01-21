@@ -4,6 +4,11 @@ namespace BankingApp.Models
 {
     public class Payment
     {
+        /// <summary>
+        /// Payment Model
+        /// 
+        /// Playing entity role
+        /// </summary>
         public required int Id { get; set; }
         public required string Name { get; set; }
         public required long Destination { get; set; }

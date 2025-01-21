@@ -8,6 +8,14 @@ namespace BankingApp.BLL
 {
     public static class TransactionService
     {
+        /// <summary>
+        /// Transaction Service
+        ///     Used to connect UI with Repositories
+        ///     More understanable code userspace
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static Transaction GetTransaction(int id)
         {
             try

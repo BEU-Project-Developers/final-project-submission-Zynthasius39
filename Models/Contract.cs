@@ -4,6 +4,11 @@ namespace BankingApp.Models
 {
     public class Contract
     {
+        /// <summary>
+        /// Contract Model
+        /// 
+        /// Playing entity role
+        /// </summary>
         public required int Id { get; set; }
         public required int CId { get; set; }
         public required Contractt ContractType {  get; set; }

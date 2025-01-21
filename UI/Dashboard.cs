@@ -11,14 +11,23 @@ namespace BankingApp.UI
         public Dashboard()
         {
             InitializeComponent();
+
+            // Using custom class to store MaterialUI theme
             AppSkinHelper.msm.AddFormToManage(this);
+
+            // Subscribing the status bar to custom statusbar manager
             StatusBar.AddStatusBar(mainStatus);
 
+            // Storing table references for fast-refresh
             _payments = paymentsTable;
             _cards = cardsTable;
             _transactions = transactionsTable;
+
+            // Load dashboard
+            // Fetching from database
             Dashboard_Load();
 
+            // Tooltips
             mainTips.SetToolTip(logoutButton0, "Logout of your account");
         }
 
@@ -26,16 +35,19 @@ namespace BankingApp.UI
         {
             try
             {
+                // Load Image using custom PATH
                 profilePic.Image = new Bitmap(FormHelpers.PATH + @"\user.png");
                 FormHelpers.Payments = PaymentService.GetAllPayments();
 
                 if (FormHelpers.CurrentUser != null)
                 {
+                    // Fetch User's Accounts, Contracts, Transactions using their services respectively
                     customerName.Text = FormHelpers.CurrentUser.Name;
                     FormHelpers.UserAccounts = AccountService.GetAccountsByCustomerId(FormHelpers.CurrentUser.Id);
                     FormHelpers.UserContracts = ContractService.GetContractsByType(FormHelpers.CurrentUser.Id, Contractt.Loan);
                     FormHelpers.UserTransactions = TransactionService.GetTransactionsByCustomer(FormHelpers.CurrentUser);
 
+                    // User info
                     customerInfo.Text = string.Format(format: """
                         Net Worth: {0}
                         Total Debt: {1}
@@ -52,6 +64,7 @@ namespace BankingApp.UI
                         FormHelpers.CurrentUser.RegisterDate.ToShortDateString()
                         );
 
+                    // Adding cards
                     cardsTable = _cards;
                     FormHelpers.UserAccounts.ForEach(acc =>
                         {
@@ -59,6 +72,7 @@ namespace BankingApp.UI
                             cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, cardsTable.RowStyles.Count - 3);
                         });
 
+                    // Adding transactions
                     transactionsTable = _transactions;
                     FormHelpers.UserTransactions.ForEach(tx =>
                         {
@@ -73,6 +87,8 @@ namespace BankingApp.UI
                 StatusBar.Status = ex.Message;
             }
 
+            // Adding default payments
+            // Doesn't interfere with customer itself
             paymentsTable = _payments;
             FormHelpers.Payments?.ForEach(pay =>
                 {
@@ -82,12 +98,9 @@ namespace BankingApp.UI
 
         }
 
-        private void Dashboard_SizeChanged(object sender, EventArgs e)
-        {
-        }
-
         private void LogoutButton_Click(object sender, EventArgs e)
         {
+            // Logout main event
             Hide();
             LoginForm loginForm = new();
             loginForm.FormClosed += (sender, args) => { Close(); };
@@ -96,6 +109,7 @@ namespace BankingApp.UI
 
         private void ChangePassword_Click(object sender, EventArgs e)
         {
+            // Change password using a Customer Service
             ChangePassword changePassword = new ChangePassword();
             changePassword.Show();
         }
@@ -104,12 +118,14 @@ namespace BankingApp.UI
         {
             if (FormHelpers.CurrentUser != null)
             {
+                // Delete account from database using a Customer Service
                 CustomerService.DeleteCustomer(FormHelpers.CurrentUser.Id);
                 LogoutButton_Click(sender, e);
             }
         }
         private void Refresh_Btn_Click(object sender, EventArgs e)
         {
+            // Fast-Refresh
             Dashboard_Load();
         }
     }

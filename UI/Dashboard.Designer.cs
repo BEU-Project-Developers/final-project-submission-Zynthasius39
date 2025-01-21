@@ -511,7 +511,6 @@
             Name = "Dashboard";
             Padding = new Padding(0, 72, 3, 3);
             Text = "Dashboard";
-            SizeChanged += Dashboard_SizeChanged;
             TabControl.ResumeLayout(false);
             home.ResumeLayout(false);
             homeLayout.ResumeLayout(false);

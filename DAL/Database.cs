@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 
 namespace BankingApp.DAL
 {
+    /// <summary>
+    /// Shared Datasource Class
+    ///     Used to share single dataSource with entire solution
+    ///     to reduce traffic and connection count
+    /// </summary>
     public static class Database
     {
         private static readonly NpgsqlDataSource _dataSource;

@@ -8,6 +8,12 @@ namespace BankingApp.DAL
 {
     public static class ResourceRepository
     {
+        /// <summary>
+        /// Resource Repository
+        ///     Holds UI settings to communicate
+        ///     Interact, update, delete
+        ///     the Database
+        /// </summary>
         public static List<Resource> GetAll()
         {
             try

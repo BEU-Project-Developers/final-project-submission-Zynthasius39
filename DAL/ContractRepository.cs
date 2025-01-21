@@ -8,6 +8,12 @@ namespace BankingApp.DAL
 {
     public static class ContractRepository
     {
+        /// <summary>
+        /// Contract Repository
+        ///     Holds logic to communicate
+        ///     Interact, update, delete
+        ///     the Database
+        /// </summary>
         public static List<Contract> GetAll()
         {
             try

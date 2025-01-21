@@ -13,13 +13,11 @@ namespace BankingApp
         private bool _isLogin = true;
         private Bitmap? gringots_black;
         private Bitmap? gringots_white;
-
         public LoginForm()
         {
             try
             {
-                Debug.WriteLine(AccountService.GetAccountByAccNum(4994223476156262).ToString());
-
+                // Load Images using custom PATH
                 gringots_white = new(FormHelpers.PATH + @"\gringotts_white.png");
                 gringots_black = new(FormHelpers.PATH + @"\gringotts_black.png");
             }
@@ -29,10 +27,12 @@ namespace BankingApp
             }
 
             InitializeComponent();
+
             MaterialSkinManager_ThemeChanged(this);
             AppSkinHelper.msm.AddFormToManage(this);
             StatusBar.AddStatusBar(statusBar);
 
+            // Theme initialization
             if (AppSkinHelper.IsDark())
             {
                 dark_switch.Checked = true;
@@ -42,12 +42,14 @@ namespace BankingApp
                 dark_switch.Checked = false;
             }
 
+            // Dynamic location of banner and title when initializing
             banking_banner.Location = new Point((Width - banking_banner.Width) / 2 - 10, banking_banner.Location.Y);
             banking_title.Location = new Point((Width - banking_title.Width) / 2 - 10, banking_title.Location.Y);
 
             forgot_link.LinkColor = AppSkinHelper.msm.ColorScheme.AccentColor;
             forgot_link.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
 
+            // Theme change event
             AppSkinHelper.msm.ThemeChanged += MaterialSkinManager_ThemeChanged;
         }
 
@@ -65,6 +67,7 @@ namespace BankingApp
 
         private void Switch_Menu()
         {
+            // Switch between Login / Signup
             if (_isLogin)
             {
                 signup_button.Text = "Login";
@@ -93,6 +96,9 @@ namespace BankingApp
 
         private void VerifyFields()
         {
+            // Verify trimmed fields
+            // Set error state of textboxes
+            // Throw exceptions to be caught and shown using StatusBar
             if (!VerifyService.VerifyEmail(email_box.Text.Trim()))
             {
                 email_box.SetErrorState(true);

@@ -9,6 +9,12 @@ namespace BankingApp.DAL
 {
     public static class PaymentRepository
     {
+        /// <summary>
+        /// Payment Repository
+        ///     Holds logic to communicate
+        ///     Interact, update, delete
+        ///     the Database
+        /// </summary>
         public static List<Payment> GetAll()
         {
             try
