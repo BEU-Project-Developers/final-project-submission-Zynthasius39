@@ -63,6 +63,7 @@
             mainStrip = new StatusStrip();
             mainStatus = new ToolStripStatusLabel();
             mainTips = new ToolTip(components);
+            refreshButton = new MaterialSkin.Controls.MaterialButton();
             TabControl.SuspendLayout();
             home.SuspendLayout();
             homeLayout.SuspendLayout();
@@ -183,13 +184,15 @@
             customerLayout.Controls.Add(customerName, 0, 1);
             customerLayout.Controls.Add(logoutButton0, 0, 3);
             customerLayout.Controls.Add(customerInfo, 0, 2);
+            customerLayout.Controls.Add(refreshButton, 0, 4);
             customerLayout.Dock = DockStyle.Fill;
             customerLayout.Location = new Point(732, 3);
             customerLayout.Name = "customerLayout";
-            customerLayout.RowCount = 4;
+            customerLayout.RowCount = 5;
             customerLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             customerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             customerLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            customerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             customerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             customerLayout.Size = new Size(238, 586);
             customerLayout.TabIndex = 2;
@@ -197,11 +200,11 @@
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = new Bitmap(FormHelpers.PATH + @"\user.png");
             pictureBox1.Location = new Point(10, 10);
             pictureBox1.Margin = new Padding(10);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(218, 233);
+            pictureBox1.Size = new Size(218, 208);
+            pictureBox1.Image = new Bitmap(FormHelpers.PATH + @"\user.png");
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -213,7 +216,7 @@
             customerName.Dock = DockStyle.Fill;
             customerName.Font = new Font("Roboto", 24F, FontStyle.Bold, GraphicsUnit.Pixel);
             customerName.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-            customerName.Location = new Point(3, 253);
+            customerName.Location = new Point(3, 228);
             customerName.MouseState = MaterialSkin.MouseState.HOVER;
             customerName.Name = "customerName";
             customerName.Size = new Size(232, 30);
@@ -230,7 +233,7 @@
             logoutButton0.Dock = DockStyle.Fill;
             logoutButton0.HighEmphasis = true;
             logoutButton0.Icon = null;
-            logoutButton0.Location = new Point(4, 542);
+            logoutButton0.Location = new Point(4, 492);
             logoutButton0.Margin = new Padding(4, 6, 4, 6);
             logoutButton0.MouseState = MaterialSkin.MouseState.HOVER;
             logoutButton0.Name = "logoutButton0";
@@ -249,11 +252,11 @@
             customerInfo.Depth = 0;
             customerInfo.Dock = DockStyle.Fill;
             customerInfo.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            customerInfo.Location = new Point(10, 293);
+            customerInfo.Location = new Point(10, 268);
             customerInfo.Margin = new Padding(10);
             customerInfo.MouseState = MaterialSkin.MouseState.HOVER;
             customerInfo.Name = "customerInfo";
-            customerInfo.Size = new Size(218, 233);
+            customerInfo.Size = new Size(218, 208);
             customerInfo.TabIndex = 3;
             customerInfo.Text = "NetWorth:\r\nTotal Shares: \r\nTotal Debt: \r\nActive accounts:\r\nActive contracts:\r\nTotal Transactions:\r\nRegistered in:";
             // 
@@ -563,6 +566,27 @@
             // 
             mainTips.Popup += MainTips_Popup;
             // 
+            // refreshButton
+            // 
+            refreshButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            refreshButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            refreshButton.Depth = 0;
+            refreshButton.Dock = DockStyle.Fill;
+            refreshButton.HighEmphasis = true;
+            refreshButton.Icon = null;
+            refreshButton.Location = new Point(4, 542);
+            refreshButton.Margin = new Padding(4, 6, 4, 6);
+            refreshButton.MouseState = MaterialSkin.MouseState.HOVER;
+            refreshButton.Name = "refreshButton";
+            refreshButton.NoAccentTextColor = Color.Empty;
+            refreshButton.Size = new Size(230, 38);
+            refreshButton.TabIndex = 4;
+            refreshButton.Text = "Refresh";
+            refreshButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            refreshButton.UseAccentColor = false;
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += Refresh_Btn_Click;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -579,7 +603,6 @@
             Name = "Dashboard";
             Padding = new Padding(0, 72, 3, 3);
             Text = "Dashboard";
-            Load += Dashboard_Load;
             SizeChanged += Dashboard_SizeChanged;
             TabControl.ResumeLayout(false);
             home.ResumeLayout(false);
@@ -634,5 +657,6 @@
         private ToolTip mainTips;
         private MaterialSkin.Controls.MaterialLabel tractHistoryLabel;
         private MaterialSkin.Controls.MaterialFloatingActionButton cardAddFloatBtn;
+        private MaterialSkin.Controls.MaterialButton refreshButton;
     }
 }

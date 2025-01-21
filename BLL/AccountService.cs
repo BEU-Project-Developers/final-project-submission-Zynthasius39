@@ -54,11 +54,23 @@ namespace BankingApp.BLL
             }
         }
 
-        public static void DeleteCustomer(int id)
+        public static void DeleteAccount(int id)
         {
             try
             {
                 AccountRepository.Delete(id);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
+        }
+
+        public static void ReissueAccount(Account account)
+        {
+            try
+            {
+                AccountRepository.Update(account.Id, account);
             }
             catch (DataAccessException)
             {

@@ -7,12 +7,23 @@ namespace BankingApp.UI
 {
     public partial class Dashboard : MaterialForm
     {
+        private readonly TableLayoutPanel _payments, _cards, _transactions;
         public Dashboard()
         {
             InitializeComponent();
             AppSkinHelper.msm.AddFormToManage(this);
             StatusBar.AddStatusBar(mainStatus);
 
+            _payments = paymentsTable;
+            _cards = cardsTable;
+            _transactions = transactionsTable;
+            Dashboard_Load();
+
+            mainTips.SetToolTip(logoutButton0, "Logout of your account");
+        }
+
+        private void Dashboard_Load()
+        {
             try
             {
                 FormHelpers.Payments = PaymentService.GetAllPayments();
@@ -40,12 +51,14 @@ namespace BankingApp.UI
                         FormHelpers.CurrentUser.RegisterDate.ToShortDateString()
                         );
 
+                    cardsTable = _cards;
                     FormHelpers.UserAccounts.ForEach(acc =>
                         {
                             cardsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 200));
                             cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, cardsTable.RowStyles.Count - 3);
                         });
 
+                    transactionsTable = _transactions;
                     FormHelpers.UserTransactions.ForEach(tx =>
                         {
                             transactionsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 50));
@@ -59,17 +72,12 @@ namespace BankingApp.UI
                 StatusBar.Status = ex.Message;
             }
 
+            paymentsTable = _payments;
             FormHelpers.Payments?.ForEach(pay =>
                 {
                     paymentsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 100));
                     paymentsTable.Controls.Add(FormHelpers.AddPayment(pay), 0, paymentsTable.RowStyles.Count - 3);
                 });
-
-            mainTips.SetToolTip(logoutButton0, "Logout of your account");
-        }
-
-        private void Dashboard_Load(object sender, EventArgs e)
-        {
         }
 
         private void Dashboard_SizeChanged(object sender, EventArgs e)
@@ -107,6 +115,11 @@ namespace BankingApp.UI
         private void MainTips_Popup(object sender, PopupEventArgs e)
         {
 
+        }
+
+        private void Refresh_Btn_Click(object sender, EventArgs e)
+        {
+            Dashboard_Load();
         }
     }
 }

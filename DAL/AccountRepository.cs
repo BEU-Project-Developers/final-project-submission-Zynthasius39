@@ -296,6 +296,50 @@ namespace BankingApp.DAL
                 throw new DataAccessException(ex.Message);
             }
         }
+
+        public static void Update(int oldAccId, Account newAccount)
+        {
+            try
+            {
+                using var conn = Database.GetDataSource().OpenConnection();
+                using var cmd = new NpgsqlCommand("""
+                    UPDATE
+                        Accounts
+                    SET
+                        accid = @accid,
+                        acctype = @acctype,
+                        cids = @cids,
+                        currency = @currency,
+                        expiration_date = @expr_date,
+                        creation_date = @crt_date,
+                        amount = @amount,
+                        accnumber = @accnumber,
+                        cvv = @cvv
+                    WHERE
+                        accid = @oldaccid
+                    """, conn);
+                cmd.Parameters.AddWithValue("oldaccid", oldAccId);
+                cmd.Parameters.AddWithValue("accid", newAccount.Id);
+                cmd.Parameters.AddWithValue("acctype", newAccount.AccountType);
+                cmd.Parameters.AddWithValue("cids", newAccount.CIdList);
+                cmd.Parameters.AddWithValue("currency", newAccount.Currency);
+                cmd.Parameters.AddWithValue("expr_date", newAccount.ExpirationDate);
+                cmd.Parameters.AddWithValue("crt_date", newAccount.CreationDate);
+                cmd.Parameters.AddWithValue("amount", newAccount.Amount);
+                cmd.Parameters.AddWithValue("accnumber", newAccount.AccountNumber);
+                int rowsAff = cmd.ExecuteNonQuery();
+                if (rowsAff <= 0)
+                {
+                    Debug.WriteLine("No account found to update");
+                    throw new AccountException("Account not Found");
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw new DataAccessException(ex.Message);
+            }
+        }
     }
 
     public class AccountException : Exception

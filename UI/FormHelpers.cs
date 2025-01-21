@@ -80,6 +80,17 @@ namespace BankingApp.UI
             return chunks;
         }
 
+        public static string RandomAccountNumberGenerator()
+        {
+            Random random = new Random();
+            return string.Concat(
+                random.Next(1000, 9999).ToString(),
+                random.Next(1000, 9999).ToString(),
+                random.Next(1000, 9999).ToString(),
+                random.Next(1000, 9999).ToString()
+            );
+        }
+
         public static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int radius)
         {
             GraphicsPath path = new();
