@@ -277,7 +277,7 @@
             // 
             cardAddFloatBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             cardAddFloatBtn.Depth = 0;
-            cardAddFloatBtn.Icon = Properties.Resources.plus;
+            cardAddFloatBtn.Icon = new Bitmap(FormHelpers.PATH + @"\plus.png");
             cardAddFloatBtn.Location = new Point(898, 526);
             cardAddFloatBtn.MouseState = MaterialSkin.MouseState.HOVER;
             cardAddFloatBtn.Name = "cardAddFloatBtn";

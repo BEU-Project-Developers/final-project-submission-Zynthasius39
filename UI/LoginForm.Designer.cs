@@ -310,7 +310,7 @@ namespace BankingApp
             banking_banner.Anchor = AnchorStyles.None;
             banking_banner.BackColor = Color.Transparent;
             banking_banner.BackgroundImageLayout = ImageLayout.None;
-            banking_banner.Image = Properties.Resources.gringotts_white;
+            banking_banner.Image = gringots_white;
             banking_banner.Location = new Point(113, 44);
             banking_banner.Name = "banking_banner";
             banking_banner.Size = new Size(175, 175);

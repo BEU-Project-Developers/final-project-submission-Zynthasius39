@@ -280,9 +280,9 @@ namespace BankingApp.UI
                 Text = transaction.Date.ToString(),
                 Parent = container,
             };
-            if (transaction.TransactionType == Models.Enums.Transactiont.Withdrawal) icon.Image = Properties.Resources.withdraw;
-            else if (transaction.TransactionType == Models.Enums.Transactiont.Deposit) icon.Image = Properties.Resources.deposit;
-            else icon.Image = Properties.Resources.exchange;
+            if (transaction.TransactionType == Models.Enums.Transactiont.Withdrawal) icon.Image = new Bitmap(FormHelpers.PATH + @"\withdraw.png");
+            else if (transaction.TransactionType == Models.Enums.Transactiont.Deposit) icon.Image = new Bitmap(FormHelpers.PATH + @"\deposit.png");
+            else icon.Image = new Bitmap(FormHelpers.PATH + @"\exchange.png");
             container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             label.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             labelDate.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
