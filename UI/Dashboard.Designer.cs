@@ -35,8 +35,8 @@
             home = new TabPage();
             homeLayout = new TableLayoutPanel();
             infoLayout = new TableLayoutPanel();
-            paymentsMini1 = new PaymentsMini(FormHelpers.UserAccounts?[0]);
             transactionsTable = new TableLayoutPanel();
+            paymentsMini1 = new PaymentsMini();
             tractHistoryLabel = new MaterialSkin.Controls.MaterialLabel();
             customerLayout = new TableLayoutPanel();
             profilePic = new PictureBox();

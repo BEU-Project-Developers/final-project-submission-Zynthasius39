@@ -175,7 +175,7 @@ namespace BankingApp.DAL
                         cid = @id
                     """, conn);
                 cmd.Parameters.AddWithValue("id", id);
-                int rowsAff =  cmd.ExecuteNonQuery();
+                int rowsAff = cmd.ExecuteNonQuery();
                 if (rowsAff > 0)
                 {
                     return rowsAff;
@@ -240,6 +240,48 @@ namespace BankingApp.DAL
                 {
                     Debug.WriteLine("Null New Customer ID");
                     throw new CustomerException("Customer couldn't be added");
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw new DataAccessException(ex.Message);
+            }
+        }
+        public static void Update(int oldAccId, Customer newCustomer)
+        {
+            try
+            {
+                using var conn = Database.GetDataSource().OpenConnection();
+                using var cmd = new NpgsqlCommand("""
+                UPDATE
+                    Customers
+                SET
+                    name = @name,
+                    surname = @surname,
+                    email = @email,
+                    phone = @phone,
+                    password = @password,
+                    role = @role,
+                    tids = @tids,
+                    register_date = @register_date
+                WHERE
+                    cid = @oldcid
+                """, conn);
+                cmd.Parameters.AddWithValue("oldcid", oldAccId);
+                cmd.Parameters.AddWithValue("name", newCustomer.Name);
+                cmd.Parameters.AddWithValue("surname", newCustomer.Surname);
+                cmd.Parameters.AddWithValue("email", newCustomer.Email);
+                cmd.Parameters.AddWithValue("phone", newCustomer.Phone);
+                cmd.Parameters.AddWithValue("password", newCustomer.Password);
+                cmd.Parameters.AddWithValue("role", newCustomer.Role);
+                cmd.Parameters.AddWithValue("tids", newCustomer.TransactionIDs);
+                cmd.Parameters.AddWithValue("register_date", newCustomer.RegisterDate);
+                int rowsAff = cmd.ExecuteNonQuery();
+                if (rowsAff <= 0)
+                {
+                    Debug.WriteLine("No customer found to update");
+                    throw new AccountException("Customer not Found");
                 }
             }
             catch (NpgsqlException ex)

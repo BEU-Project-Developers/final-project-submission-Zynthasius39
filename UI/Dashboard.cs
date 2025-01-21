@@ -26,6 +26,7 @@ namespace BankingApp.UI
         {
             try
             {
+                profilePic.Image = new Bitmap(FormHelpers.PATH + @"\user.png");
                 FormHelpers.Payments = PaymentService.GetAllPayments();
 
                 if (FormHelpers.CurrentUser != null)
@@ -78,6 +79,7 @@ namespace BankingApp.UI
                     paymentsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 100));
                     paymentsTable.Controls.Add(FormHelpers.AddPayment(pay), 0, paymentsTable.RowStyles.Count - 3);
                 });
+
         }
 
         private void Dashboard_SizeChanged(object sender, EventArgs e)
@@ -102,7 +104,7 @@ namespace BankingApp.UI
         {
             if (FormHelpers.CurrentUser != null)
             {
-                FormHelpers.CurrentUser.Password = "";
+                CustomerService.DeleteCustomer(FormHelpers.CurrentUser.Id);
                 LogoutButton_Click(sender, e);
             }
         }

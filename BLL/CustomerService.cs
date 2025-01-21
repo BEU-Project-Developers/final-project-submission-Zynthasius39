@@ -66,6 +66,17 @@ namespace BankingApp.BLL
                 throw new Exception("Failed to connect to Database");
             }
         }
+        public static void UpdateCustomer(Customer newCustomer)
+        {
+            try
+            {
+                CustomerRepository.Update(newCustomer.Id, newCustomer);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
+        }
 
         public static bool VerifyPassword(Customer customer, string password)
         {
@@ -77,12 +88,12 @@ namespace BankingApp.BLL
             return false;
         }
 
-        // TODO: Create UpdateCustomer method integrated with Database
         public static void ChangePassword(Customer customer, string password)
         {
             byte[] inputBytes = Encoding.UTF8.GetBytes(password);
             byte[] inputHash = SHA256.HashData(inputBytes);
             customer.Password = Convert.ToHexString(inputHash);
+            UpdateCustomer(customer);
         }
     }
 }

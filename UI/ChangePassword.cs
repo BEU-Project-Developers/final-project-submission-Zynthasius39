@@ -14,19 +14,22 @@ namespace BankingApp.UI
 
         private void ChPassBtn_Click(object sender, EventArgs e)
         {
-            if (CustomerService.VerifyPassword(FormHelpers.CurrentUser, curPassText.Text.Trim()))
+            if (FormHelpers.CurrentUser != null)
             {
-                if (newPassText0.Text.Equals(newPassText1.Text))
+                if (CustomerService.VerifyPassword(FormHelpers.CurrentUser, curPassText.Text.Trim()))
                 {
-                    CustomerService.ChangePassword(FormHelpers.CurrentUser, newPassText0.Text);
-                    StatusBar.Status = "Password changed successfully!";
-                    Close();
+                    if (newPassText0.Text.Equals(newPassText1.Text))
+                    {
+                        CustomerService.ChangePassword(FormHelpers.CurrentUser, newPassText0.Text);
+                        StatusBar.Status = "Password changed successfully!";
+                        Close();
+                    }
+                    else
+                        StatusBar.Status = "New passwords don't match!";
                 }
                 else
-                    StatusBar.Status = "New passwords don't match!";
+                    StatusBar.Status = "Wrong password!";
             }
-            else
-                StatusBar.Status = "Wrong password!";
         }
     }
 }
