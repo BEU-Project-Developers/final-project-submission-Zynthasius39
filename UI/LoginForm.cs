@@ -1,23 +1,30 @@
 using BankingApp.BLL;
-using BankingApp.DAL;
 using BankingApp.Models;
 using BankingApp.Models.Enums;
 using BankingApp.UI;
-using MaterialSkin;
 using MaterialSkin.Controls;
-using Npgsql;
 using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace BankingApp
 {
     public partial class LoginForm : MaterialForm
     {
         private bool _isLogin = true;
+        private Bitmap? gringots_black;
+        private Bitmap? gringots_white;
 
         public LoginForm()
         {
+            try
+            {
+                gringots_white = new(FormHelpers.PATH + @"\gringotts_white.png");
+                gringots_black = new(FormHelpers.PATH + @"\gringotts_black.png");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
             InitializeComponent();
             MaterialSkinManager_ThemeChanged(this);
             AppSkinHelper.msm.AddFormToManage(this);
@@ -26,7 +33,8 @@ namespace BankingApp
             if (AppSkinHelper.IsDark())
             {
                 dark_switch.Checked = true;
-            } else
+            }
+            else
             {
                 dark_switch.Checked = false;
             }
@@ -44,11 +52,11 @@ namespace BankingApp
         {
             if (AppSkinHelper.IsDark())
             {
-                banking_banner.Image = Properties.Resources.gringotts_white;
+                banking_banner.Image = gringots_white;
             }
             else
             {
-                banking_banner.Image = Properties.Resources.gringotts_black;
+                banking_banner.Image = gringots_black;
             }
         }
 
@@ -82,43 +90,43 @@ namespace BankingApp
 
         private void VerifyFields()
         {
-            //if (!VerifyService.VerifyEmail(email_box.Text.Trim()))
-            //{
-            //    email_box.SetErrorState(true);
-            //    throw new Exception("Invalid E-Mail");
-            //}
-            //if (string.IsNullOrWhiteSpace(password_box.Text))
-            //{
-            //    password_box.SetErrorState(true);
-            //    throw new Exception("Password is required");
-            //}
-            //if (!_isLogin)
-            //{
-            //    if (string.IsNullOrWhiteSpace(name_box.Text))
-            //    {
-            //        name_box.SetErrorState(true);
-            //        throw new Exception("Name is required");
-            //    }
-            //    if (string.IsNullOrWhiteSpace(surname_box.Text))
-            //    {
-            //        surname_box.SetErrorState(true);
-            //        throw new Exception("Surname is required");
-            //    }
-            //    if (string.IsNullOrWhiteSpace(phone_box.Text))
-            //    {
-            //        phone_box.SetErrorState(true);
-            //        throw new Exception("Phone is required");
-            //    }
-            //    if (!role_radio_1.Checked && !role_radio_2.Checked)
-            //    {
-            //        throw new Exception("Select an account type");
-            //    }
-            //}
-            //email_box.SetErrorState(false);
-            //password_box.SetErrorState(false);
-            //name_box.SetErrorState(false);
-            //surname_box.SetErrorState(false);
-            //phone_box.SetErrorState(false);
+            if (!VerifyService.VerifyEmail(email_box.Text.Trim()))
+            {
+                email_box.SetErrorState(true);
+                throw new Exception("Invalid E-Mail");
+            }
+            if (string.IsNullOrWhiteSpace(password_box.Text))
+            {
+                password_box.SetErrorState(true);
+                throw new Exception("Password is required");
+            }
+            if (!_isLogin)
+            {
+                if (string.IsNullOrWhiteSpace(name_box.Text))
+                {
+                    name_box.SetErrorState(true);
+                    throw new Exception("Name is required");
+                }
+                if (string.IsNullOrWhiteSpace(surname_box.Text))
+                {
+                    surname_box.SetErrorState(true);
+                    throw new Exception("Surname is required");
+                }
+                if (string.IsNullOrWhiteSpace(phone_box.Text))
+                {
+                    phone_box.SetErrorState(true);
+                    throw new Exception("Phone is required");
+                }
+                if (!role_radio_1.Checked && !role_radio_2.Checked)
+                {
+                    throw new Exception("Select an account type");
+                }
+            }
+            email_box.SetErrorState(false);
+            password_box.SetErrorState(false);
+            name_box.SetErrorState(false);
+            surname_box.SetErrorState(false);
+            phone_box.SetErrorState(false);
         }
 
         private void Forgot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -143,14 +151,15 @@ namespace BankingApp
                 try
                 {
                     VerifyFields();
-                    //Customer customer = CustomerService.GetCustomer(email_box.Text.Trim()); // Disabled for SDF2
-                    Customer customer = FormHelpers.CurrentUser;
+
+                    // Uncomment to enable offline mode
+                    //Customer customer = FormHelpers.OfflineUser;
+                    Customer customer = CustomerService.GetCustomer(email_box.Text.Trim());
                     if (CustomerService.VerifyPassword(customer, password_box.Text.Trim()))
                     {
                         FormHelpers.CurrentUser = customer;
                         Debug.WriteLine(customer.Id + " logged in at " + DateTime.Now);
                         StatusBar.Status = "Welcome back, " + customer.Name + "!";
-                        LoginService.LoggedIn = customer.Id;
                         if (customer.Role == Rolet.Admin || customer.Role == Rolet.Mod)
                         {
                             Hide();
@@ -195,7 +204,9 @@ namespace BankingApp
                         Name = name_box.Text.Trim(),
                         Surname = surname_box.Text.Trim(),
                         Phone = phone_box.Text.Trim(),
-                        Role = rolet
+                        Role = rolet,
+                        RegisterDate = DateTime.Now,
+                        TransactionIDs = []
                     });
                     StatusBar.Status = "Successfully registered. You can now login to your account!";
                 }
