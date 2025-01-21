@@ -197,7 +197,7 @@
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.user;
+            pictureBox1.Image = new Bitmap(FormHelpers.PATH + @"\user.png");
             pictureBox1.Location = new Point(10, 10);
             pictureBox1.Margin = new Padding(10);
             pictureBox1.Name = "pictureBox1";
@@ -274,7 +274,7 @@
             // 
             cardAddFloatBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             cardAddFloatBtn.Depth = 0;
-            cardAddFloatBtn.Icon = null;
+            cardAddFloatBtn.Icon = Properties.Resources.plus;
             cardAddFloatBtn.Location = new Point(898, 526);
             cardAddFloatBtn.MouseState = MaterialSkin.MouseState.HOVER;
             cardAddFloatBtn.Name = "cardAddFloatBtn";

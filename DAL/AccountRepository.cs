@@ -24,7 +24,8 @@ namespace BankingApp.DAL
                         expiration_date,
                         creation_date,
                         amount,
-                        accnumber
+                        accnumber,
+                        cvv
                     FROM
                         Accounts
                     """, conn);
@@ -41,6 +42,7 @@ namespace BankingApp.DAL
                         CreationDate = reader.GetFieldValue<DateTime>(5),
                         Amount = reader.GetDecimal(6),
                         AccountNumber = reader.GetInt64(7),
+                        CVV = reader.GetInt32(8),
                     });
                 }
 
@@ -68,7 +70,8 @@ namespace BankingApp.DAL
                         expiration_date,
                         creation_date,
                         amount,
-                        accnumber
+                        accnumber,
+                        cvv
                     FROM
                         Accounts
                     WHERE
@@ -88,6 +91,7 @@ namespace BankingApp.DAL
                         CreationDate = reader.GetFieldValue<DateTime>(5),
                         Amount = reader.GetDecimal(6),
                         AccountNumber = reader.GetInt64(7),
+                        CVV = reader.GetInt32(8),
                     };
                 }
                 else
@@ -121,7 +125,8 @@ namespace BankingApp.DAL
                         expiration_date,
                         creation_date,
                         amount,
-                        accnumber
+                        accnumber,
+                        cvv
                     FROM
                         Accounts
                     WHERE
@@ -142,6 +147,7 @@ namespace BankingApp.DAL
                         CreationDate = reader.GetFieldValue<DateTime>(5),
                         Amount = reader.GetDecimal(6),
                         AccountNumber = reader.GetInt64(7),
+                        CVV = reader.GetInt32(8),
                     });
                 }
 
@@ -169,7 +175,8 @@ namespace BankingApp.DAL
                         expiration_date,
                         creation_date,
                         amount,
-                        accnumber
+                        accnumber,
+                        cvv
                     FROM
                         Accounts
                     WHERE
@@ -189,6 +196,7 @@ namespace BankingApp.DAL
                         CreationDate = reader.GetFieldValue<DateTime>(5),
                         Amount = reader.GetDecimal(6),
                         AccountNumber = reader.GetInt64(7),
+                        CVV = reader.GetInt32(8),
                     };
                 }
                 else
@@ -248,7 +256,8 @@ namespace BankingApp.DAL
                         currency,
                         expiration_date,
                         creation_date,
-                        amount
+                        amount,
+                        cvv
                     )
                     VALUES (
                         @acctype,
@@ -257,6 +266,7 @@ namespace BankingApp.DAL
                         @expiration_date,
                         @creation_date,
                         @amount
+                        @cvv
                     )
                     RETURNING
                         cid
@@ -267,6 +277,7 @@ namespace BankingApp.DAL
                 cmd.Parameters.AddWithValue("expiration_date", account.ExpirationDate);
                 cmd.Parameters.AddWithValue("creation_date", account.CreationDate);
                 cmd.Parameters.AddWithValue("amount", account.Amount);
+                cmd.Parameters.AddWithValue("cvv", account.CVV);
 
                 int? newId = (int?)cmd.ExecuteScalar();
                 if (newId.HasValue)

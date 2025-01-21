@@ -1,26 +1,29 @@
 ﻿using BankingApp.Models;
 using BankingApp.Models.Enums;
-using MaterialSkin.Controls;
-using System;
-using System.Collections.Generic;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankingApp.UI
 {
-    public static class FormHelpers
+    internal static class FormHelpers
     {
-        private static int _counter = 0;
-        private static readonly List<Image> images = new()
-        {
-            Properties.Resources.card_0,
-            Properties.Resources.card_1,
-        };
+        public const string PATH = @"..\..\..\Assets";
 
-        public static Customer CurrentUser = new()
+        private static readonly List<Bitmap> images =
+        [
+            new Bitmap(PATH + @"\credit.png"),
+            new Bitmap(PATH + @"\debit.png"),
+            new Bitmap(PATH + @"\investing.png"),
+            new Bitmap(PATH + @"\savings.png"),
+        ];
+
+        public static Customer? CurrentUser;
+        public static List<Account>? UserAccounts;
+        public static List<Contract>? UserContracts;
+
+        public static List<Payment>? Payments;
+
+        // Offline User
+        public static readonly Customer OfflineUser = new()
         {
             Id = 256,
             Email = "",
@@ -29,8 +32,12 @@ namespace BankingApp.UI
             Password = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             Phone = "0556667788",
             Role = Models.Enums.Rolet.Business,
+            RegisterDate = DateTime.Now,
+            TransactionIDs = []
         };
-        public static Customer ModUser = new()
+
+        // Offline Mod User
+        public static readonly Customer OfflineModUser = new()
         {
             Id = 256,
             Email = "mod@home.alak",
@@ -39,6 +46,8 @@ namespace BankingApp.UI
             Password = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             Phone = "0556667788",
             Role = Models.Enums.Rolet.Mod,
+            RegisterDate = DateTime.Now,
+            TransactionIDs = []
         };
         public static readonly int BorderRadius = 30;
 
@@ -46,7 +55,7 @@ namespace BankingApp.UI
         {
             char[] reversed = str.ToCharArray();
             Array.Reverse(reversed);
-            string reversedString = new string(reversed);
+            string reversedString = new(reversed);
 
             string separated = string.Join(" ", SplitIntoChunks(reversedString, chunkSize));
 
@@ -72,7 +81,7 @@ namespace BankingApp.UI
 
         public static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int radius)
         {
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
             path.AddArc(rect.Left, rect.Top, radius, radius, 180, 90);
             path.AddArc(rect.Right - radius, rect.Top, radius, radius, 270, 90);
             path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
@@ -83,7 +92,6 @@ namespace BankingApp.UI
 
         public static Control AddAccount(Account account)
         {
-            _counter++;
             var container = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -96,11 +104,18 @@ namespace BankingApp.UI
             {
                 Size = new Size(260, 156),
                 BackColor = Color.Transparent,
-                Image = images[_counter % 2],
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 TabStop = false,
                 Parent = container,
             };
+            if (account.AccountType == Accountt.Credit)
+                icon.Image = images[0];
+            else if (account.AccountType == Accountt.Debit)
+                icon.Image = images[1];
+            else if (account.AccountType == Accountt.Investing)
+                icon.Image = images[2];
+            else if (account.AccountType == Accountt.Savings)
+                icon.Image = images[3];
             var label = new Label
             {
                 AutoSize = true,
@@ -109,6 +124,16 @@ namespace BankingApp.UI
                 ForeColor = Color.Gold,
                 Text = FormHelpers.SeparateBy(account.AccountNumber.ToString(), 4),
                 Parent = icon,
+            };
+            var expr_label = new Label
+            {
+                Location = new Point(20, 100),
+                AutoSize = true,
+                Font = new Font("Noto Sans", 24F, FontStyle.Regular, GraphicsUnit.Pixel),
+                BackColor = Color.Transparent,
+                ForeColor = AppSkinHelper.msm.ColorScheme.TextColor,
+                Text = account.ExpirationDate.ToString("MMMM dd, yyyy"),
+                Parent = container,
             };
             var info = new Label
             {
@@ -124,6 +149,7 @@ namespace BankingApp.UI
             container.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             icon.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             info.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
+            expr_label.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             label.MouseEnter += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundHoverColor; };
             container.MouseLeave += (sender, args) => { container.BackColor = AppSkinHelper.msm.BackgroundFocusColor; };
             container.SizeChanged += (sender, args) =>
@@ -134,7 +160,7 @@ namespace BankingApp.UI
             };
             container.Click += (sender, e) =>
             {
-                CardBox cb = new();
+                CardBox cb = new(account);
                 cb.ShowDialog();
             };
             return container;

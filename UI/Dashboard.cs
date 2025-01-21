@@ -1,42 +1,12 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.BLL;
 using BankingApp.Models.Enums;
 using MaterialSkin.Controls;
-using System.Collections;
+using System.Diagnostics;
 
 namespace BankingApp.UI
 {
     public partial class Dashboard : MaterialForm
     {
-        private readonly Account acc = new()
-        {
-            AccountNumber = 1234567812345678,
-            AccountType = Accountt.Credit,
-            CIdList = [],
-            Amount = 0,
-            CreationDate = DateTime.Now,
-            ExpirationDate = DateTime.Now,
-            Currency = Currency.USD,
-            Id = 0,
-        };
-
-        private readonly Payment pay = new()
-        {
-            Id = 0,
-            Name = "AzTelekom",
-            Amount = 0,
-            Image = Properties.Resources.aztelekom,
-            Destination = 1234567812345678,
-        };
-
-        private readonly Transaction tract = new()
-        {
-            Id = 0,
-            Amount = 0,
-            Currency = Currency.USD,
-            Date = DateTime.Now,
-            TransactionType = Transactiont.Withdrawal,
-        };
-
         public Dashboard()
         {
             InitializeComponent();
@@ -46,17 +16,47 @@ namespace BankingApp.UI
             if (FormHelpers.CurrentUser != null)
             {
                 customerName.Text = FormHelpers.CurrentUser.Name;
+                try
+                {
+                    FormHelpers.UserAccounts = AccountService.GetAccountsByCustomerId(FormHelpers.CurrentUser.Id);
+                    FormHelpers.UserContracts = ContractService.GetContractsByType(FormHelpers.CurrentUser.Id, Contractt.Loan);
+
+                    customerInfo.Text = string.Format(format: """
+                        Net Worth: {0}
+                        Total Debt: {1}
+                        Active Accounts: {2}
+                        Active Contracts: {3}
+                        Total Transactions: {4}
+                        Registered: {5}
+                        """,
+                        FormHelpers.UserAccounts.Sum(acc => acc.Amount),
+                        FormHelpers.UserContracts.Sum(con => con.Amount),
+                        FormHelpers.UserAccounts.Count,
+                        FormHelpers.UserContracts.Count,
+                        FormHelpers.CurrentUser.TransactionIDs.Length,
+                        FormHelpers.CurrentUser.RegisterDate.ToShortDateString()
+                        );
+
+                    FormHelpers.UserAccounts.ForEach(acc =>
+                        {
+                            cardsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 200));
+                            cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, cardsTable.RowStyles.Count - 3);
+                        });
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    StatusBar.Status = ex.Message;
+                }
+
             }
 
-            int cardCount = 6;
-            for (int i = 0; i < cardCount; i++)
-            {
+            // NOTE: Fetch from Database
 
-                cardsTable.RowCount += 1;
-                cardsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 200));
-                cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, i);
-            }
 
+            /*
             for (int i = 0; i < cardCount; i++)
             {
                 paymentsTable.RowCount += 1;
@@ -82,9 +82,9 @@ namespace BankingApp.UI
                 transactionsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 50));
                 transactionsTable.Controls.Add(FormHelpers.AddTransaction(tract), 0, i);
             }
+            */
 
             mainTips.SetToolTip(logoutButton0, "Logout of your account");
-            mainTips.SetToolTip(logoutButton1, "Logout of your account");
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -111,8 +111,11 @@ namespace BankingApp.UI
 
         private void DeleteAccount_Click(object sender, EventArgs e)
         {
-            FormHelpers.CurrentUser.Password = "";
-            LogoutButton_Click(sender, e);
+            if (FormHelpers.CurrentUser != null)
+            {
+                FormHelpers.CurrentUser.Password = "";
+                LogoutButton_Click(sender, e);
+            }
         }
 
         private void PaymentsMini1_Load(object sender, EventArgs e)

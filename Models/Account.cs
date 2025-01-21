@@ -19,6 +19,7 @@ namespace BankingApp.Models
         public required DateTime ExpirationDate { get; set; }
         public required decimal Amount { get; set; }
         public required long AccountNumber { get; set; }
+        public required int CVV { get; set; }
 
         public override string ToString() => String.Format(format: """
             [---------------------------Account------]
@@ -27,9 +28,10 @@ namespace BankingApp.Models
                 Creation Date: {2}
                 Expiration Date: {3}
                 Amount: {4:N2}
-                Customers: {5}
-                Num: {6}
+                CVV: {5}
+                Customers: {6}
+                Num: {7}
             [----------------------------------------]
-            """, Id, Currency, CreationDate, ExpirationDate, Amount, string.Join(", ", CIdList), AccountNumber);
+            """, Id, Currency, CreationDate, ExpirationDate, Amount, CVV, string.Join(", ", CIdList), AccountNumber);
     }
 }
