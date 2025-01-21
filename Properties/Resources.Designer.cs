@@ -63,9 +63,9 @@ namespace BankingApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap aztelekom {
+        internal static System.Drawing.Bitmap azercell {
             get {
-                object obj = ResourceManager.GetObject("aztelekom", resourceCulture);
+                object obj = ResourceManager.GetObject("azercell", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
