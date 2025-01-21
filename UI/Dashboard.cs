@@ -46,8 +46,8 @@ namespace BankingApp.UI
 
                     // User info
                     customerInfo.Text = string.Format(format: """
-                        Net Worth: {0}
-                        Total Debt: {1}
+                        Net Worth: {0} $
+                        Total Debt: {1} $
                         Active Accounts: {2}
                         Active Contracts: {3}
                         Total Transactions: {4}
