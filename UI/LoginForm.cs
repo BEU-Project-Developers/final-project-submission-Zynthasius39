@@ -18,6 +18,8 @@ namespace BankingApp
         {
             try
             {
+                Debug.WriteLine(AccountService.GetAccountByAccNum(4994223476156262).ToString());
+
                 gringots_white = new(FormHelpers.PATH + @"\gringotts_white.png");
                 gringots_black = new(FormHelpers.PATH + @"\gringotts_black.png");
             }

@@ -35,14 +35,15 @@
             home = new TabPage();
             homeLayout = new TableLayoutPanel();
             infoLayout = new TableLayoutPanel();
-            paymentsMini1 = new PaymentsMini();
+            paymentsMini1 = new PaymentsMini(FormHelpers.UserAccounts?[0]);
             transactionsTable = new TableLayoutPanel();
             tractHistoryLabel = new MaterialSkin.Controls.MaterialLabel();
             customerLayout = new TableLayoutPanel();
-            pictureBox1 = new PictureBox();
+            profilePic = new PictureBox();
             customerName = new MaterialSkin.Controls.MaterialLabel();
             logoutButton0 = new MaterialSkin.Controls.MaterialButton();
             customerInfo = new MaterialSkin.Controls.MaterialLabel();
+            refreshButton = new MaterialSkin.Controls.MaterialButton();
             cards = new TabPage();
             cardAddFloatBtn = new MaterialSkin.Controls.MaterialFloatingActionButton();
             cardsTable = new TableLayoutPanel();
@@ -53,23 +54,18 @@
             logoutButton1 = new MaterialSkin.Controls.MaterialButton();
             accountOp0 = new MaterialSkin.Controls.MaterialLabel();
             accountBtn0 = new MaterialSkin.Controls.MaterialButton();
-            accountOp1 = new MaterialSkin.Controls.MaterialLabel();
-            regionCombo = new MaterialSkin.Controls.MaterialComboBox();
-            accountOp2 = new MaterialSkin.Controls.MaterialLabel();
-            accDelCombo = new MaterialSkin.Controls.MaterialComboBox();
             accountOp3 = new MaterialSkin.Controls.MaterialLabel();
             cusDelBtn = new MaterialSkin.Controls.MaterialButton();
             imageList1 = new ImageList(components);
             mainStrip = new StatusStrip();
             mainStatus = new ToolStripStatusLabel();
             mainTips = new ToolTip(components);
-            refreshButton = new MaterialSkin.Controls.MaterialButton();
             TabControl.SuspendLayout();
             home.SuspendLayout();
             homeLayout.SuspendLayout();
             infoLayout.SuspendLayout();
             customerLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)profilePic).BeginInit();
             cards.SuspendLayout();
             payments.SuspendLayout();
             account.SuspendLayout();
@@ -146,7 +142,6 @@
             paymentsMini1.Name = "paymentsMini1";
             paymentsMini1.Size = new Size(717, 267);
             paymentsMini1.TabIndex = 0;
-            paymentsMini1.Load += PaymentsMini1_Load;
             // 
             // transactionsTable
             // 
@@ -180,7 +175,7 @@
             // 
             customerLayout.ColumnCount = 1;
             customerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            customerLayout.Controls.Add(pictureBox1, 0, 0);
+            customerLayout.Controls.Add(profilePic, 0, 0);
             customerLayout.Controls.Add(customerName, 0, 1);
             customerLayout.Controls.Add(logoutButton0, 0, 3);
             customerLayout.Controls.Add(customerInfo, 0, 2);
@@ -199,15 +194,14 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Location = new Point(10, 10);
-            pictureBox1.Margin = new Padding(10);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(218, 208);
-            pictureBox1.Image = new Bitmap(FormHelpers.PATH + @"\user.png");
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            profilePic.Dock = DockStyle.Fill;
+            profilePic.Location = new Point(10, 10);
+            profilePic.Margin = new Padding(10);
+            profilePic.Name = "pictureBox1";
+            profilePic.Size = new Size(218, 208);
+            profilePic.SizeMode = PictureBoxSizeMode.Zoom;
+            profilePic.TabIndex = 0;
+            profilePic.TabStop = false;
             // 
             // customerName
             // 
@@ -260,6 +254,27 @@
             customerInfo.TabIndex = 3;
             customerInfo.Text = "NetWorth:\r\nTotal Shares: \r\nTotal Debt: \r\nActive accounts:\r\nActive contracts:\r\nTotal Transactions:\r\nRegistered in:";
             // 
+            // refreshButton
+            // 
+            refreshButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            refreshButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            refreshButton.Depth = 0;
+            refreshButton.Dock = DockStyle.Fill;
+            refreshButton.HighEmphasis = true;
+            refreshButton.Icon = null;
+            refreshButton.Location = new Point(4, 542);
+            refreshButton.Margin = new Padding(4, 6, 4, 6);
+            refreshButton.MouseState = MaterialSkin.MouseState.HOVER;
+            refreshButton.Name = "refreshButton";
+            refreshButton.NoAccentTextColor = Color.Empty;
+            refreshButton.Size = new Size(230, 38);
+            refreshButton.TabIndex = 4;
+            refreshButton.Text = "Refresh";
+            refreshButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            refreshButton.UseAccentColor = false;
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += Refresh_Btn_Click;
+            // 
             // cards
             // 
             cards.BackColor = Color.Transparent;
@@ -277,7 +292,7 @@
             // 
             cardAddFloatBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             cardAddFloatBtn.Depth = 0;
-            cardAddFloatBtn.Icon = new Bitmap(FormHelpers.PATH + @"\plus.png");
+            cardAddFloatBtn.Icon = null;
             cardAddFloatBtn.Location = new Point(898, 526);
             cardAddFloatBtn.MouseState = MaterialSkin.MouseState.HOVER;
             cardAddFloatBtn.Name = "cardAddFloatBtn";
@@ -342,28 +357,24 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.Controls.Add(logoutButton1, 1, 7);
+            tableLayoutPanel1.Controls.Add(logoutButton1, 1, 5);
             tableLayoutPanel1.Controls.Add(accountOp0, 0, 0);
             tableLayoutPanel1.Controls.Add(accountBtn0, 1, 0);
-            tableLayoutPanel1.Controls.Add(accountOp1, 0, 1);
-            tableLayoutPanel1.Controls.Add(regionCombo, 1, 1);
-            tableLayoutPanel1.Controls.Add(accountOp2, 0, 2);
-            tableLayoutPanel1.Controls.Add(accDelCombo, 1, 2);
-            tableLayoutPanel1.Controls.Add(accountOp3, 0, 3);
-            tableLayoutPanel1.Controls.Add(cusDelBtn, 1, 3);
+            tableLayoutPanel1.Controls.Add(accountOp3, 0, 1);
+            tableLayoutPanel1.Controls.Add(cusDelBtn, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(20);
-            tableLayoutPanel1.RowCount = 8;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowCount = 6;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(1013, 632);
             tableLayoutPanel1.TabIndex = 3;
             // 
@@ -425,84 +436,6 @@
             accountBtn0.UseVisualStyleBackColor = true;
             accountBtn0.Click += ChangePassword_Click;
             // 
-            // accountOp1
-            // 
-            accountOp1.AutoSize = true;
-            accountOp1.Depth = 0;
-            accountOp1.Dock = DockStyle.Fill;
-            accountOp1.Font = new Font("Roboto", 24F, FontStyle.Bold, GraphicsUnit.Pixel);
-            accountOp1.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-            accountOp1.Location = new Point(23, 70);
-            accountOp1.MouseState = MaterialSkin.MouseState.HOVER;
-            accountOp1.Name = "accountOp1";
-            accountOp1.Size = new Size(772, 50);
-            accountOp1.TabIndex = 3;
-            accountOp1.Text = "Change your region";
-            accountOp1.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // regionCombo
-            // 
-            regionCombo.AutoResize = false;
-            regionCombo.BackColor = Color.FromArgb(255, 255, 255);
-            regionCombo.Depth = 0;
-            regionCombo.Dock = DockStyle.Fill;
-            regionCombo.DrawMode = DrawMode.OwnerDrawVariable;
-            regionCombo.DropDownHeight = 174;
-            regionCombo.DropDownStyle = ComboBoxStyle.DropDownList;
-            regionCombo.DropDownWidth = 121;
-            regionCombo.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            regionCombo.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            regionCombo.FormattingEnabled = true;
-            regionCombo.IntegralHeight = false;
-            regionCombo.ItemHeight = 43;
-            regionCombo.Items.AddRange(new object[] { "Azerbaijan", "Germany", "United Kingdom", "United States of America" });
-            regionCombo.Location = new Point(801, 73);
-            regionCombo.MaxDropDownItems = 4;
-            regionCombo.MouseState = MaterialSkin.MouseState.OUT;
-            regionCombo.Name = "regionCombo";
-            regionCombo.Size = new Size(189, 49);
-            regionCombo.StartIndex = 0;
-            regionCombo.TabIndex = 5;
-            // 
-            // accountOp2
-            // 
-            accountOp2.AutoSize = true;
-            accountOp2.Depth = 0;
-            accountOp2.Dock = DockStyle.Fill;
-            accountOp2.Font = new Font("Roboto", 24F, FontStyle.Bold, GraphicsUnit.Pixel);
-            accountOp2.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-            accountOp2.Location = new Point(23, 120);
-            accountOp2.MouseState = MaterialSkin.MouseState.HOVER;
-            accountOp2.Name = "accountOp2";
-            accountOp2.Size = new Size(772, 50);
-            accountOp2.TabIndex = 3;
-            accountOp2.Text = "Revoke a card";
-            accountOp2.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // accDelCombo
-            // 
-            accDelCombo.AutoResize = false;
-            accDelCombo.BackColor = Color.FromArgb(255, 255, 255);
-            accDelCombo.Depth = 0;
-            accDelCombo.Dock = DockStyle.Fill;
-            accDelCombo.DrawMode = DrawMode.OwnerDrawVariable;
-            accDelCombo.DropDownHeight = 174;
-            accDelCombo.DropDownStyle = ComboBoxStyle.DropDownList;
-            accDelCombo.DropDownWidth = 121;
-            accDelCombo.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            accDelCombo.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            accDelCombo.FormattingEnabled = true;
-            accDelCombo.IntegralHeight = false;
-            accDelCombo.ItemHeight = 43;
-            accDelCombo.Items.AddRange(new object[] { "5425233430109903", "5425233430109903", "2222420000001113", "2223000048410010" });
-            accDelCombo.Location = new Point(801, 123);
-            accDelCombo.MaxDropDownItems = 4;
-            accDelCombo.MouseState = MaterialSkin.MouseState.OUT;
-            accDelCombo.Name = "accDelCombo";
-            accDelCombo.Size = new Size(189, 49);
-            accDelCombo.StartIndex = 0;
-            accDelCombo.TabIndex = 5;
-            // 
             // accountOp3
             // 
             accountOp3.AutoSize = true;
@@ -510,7 +443,7 @@
             accountOp3.Dock = DockStyle.Fill;
             accountOp3.Font = new Font("Roboto", 24F, FontStyle.Bold, GraphicsUnit.Pixel);
             accountOp3.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-            accountOp3.Location = new Point(23, 170);
+            accountOp3.Location = new Point(23, 70);
             accountOp3.MouseState = MaterialSkin.MouseState.HOVER;
             accountOp3.Name = "accountOp3";
             accountOp3.Size = new Size(772, 50);
@@ -526,7 +459,7 @@
             cusDelBtn.Dock = DockStyle.Fill;
             cusDelBtn.HighEmphasis = true;
             cusDelBtn.Icon = null;
-            cusDelBtn.Location = new Point(802, 176);
+            cusDelBtn.Location = new Point(802, 76);
             cusDelBtn.Margin = new Padding(4, 6, 4, 6);
             cusDelBtn.MouseState = MaterialSkin.MouseState.HOVER;
             cusDelBtn.Name = "cusDelBtn";
@@ -561,32 +494,7 @@
             // 
             mainStatus.Name = "mainStatus";
             mainStatus.Size = new Size(0, 17);
-            // 
-            // mainTips
-            // 
-            mainTips.Popup += MainTips_Popup;
-            // 
-            // refreshButton
-            // 
-            refreshButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            refreshButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            refreshButton.Depth = 0;
-            refreshButton.Dock = DockStyle.Fill;
-            refreshButton.HighEmphasis = true;
-            refreshButton.Icon = null;
-            refreshButton.Location = new Point(4, 542);
-            refreshButton.Margin = new Padding(4, 6, 4, 6);
-            refreshButton.MouseState = MaterialSkin.MouseState.HOVER;
-            refreshButton.Name = "refreshButton";
-            refreshButton.NoAccentTextColor = Color.Empty;
-            refreshButton.Size = new Size(230, 38);
-            refreshButton.TabIndex = 4;
-            refreshButton.Text = "Refresh";
-            refreshButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            refreshButton.UseAccentColor = false;
-            refreshButton.UseVisualStyleBackColor = true;
-            refreshButton.Click += Refresh_Btn_Click;
-            // 
+            //
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -611,7 +519,7 @@
             infoLayout.PerformLayout();
             customerLayout.ResumeLayout(false);
             customerLayout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)profilePic).EndInit();
             cards.ResumeLayout(false);
             payments.ResumeLayout(false);
             account.ResumeLayout(false);
@@ -637,7 +545,7 @@
         private TableLayoutPanel homeLayout;
         private TableLayoutPanel infoLayout;
         private TableLayoutPanel customerLayout;
-        private PictureBox pictureBox1;
+        private PictureBox profilePic;
         private MaterialSkin.Controls.MaterialLabel customerName;
         private MaterialSkin.Controls.MaterialButton logoutButton0;
         private MaterialSkin.Controls.MaterialLabel customerInfo;
@@ -648,10 +556,6 @@
         private MaterialSkin.Controls.MaterialButton accountBtn0;
         private StatusStrip mainStrip;
         private ToolStripStatusLabel mainStatus;
-        private MaterialSkin.Controls.MaterialLabel accountOp1;
-        private MaterialSkin.Controls.MaterialComboBox regionCombo;
-        private MaterialSkin.Controls.MaterialLabel accountOp2;
-        private MaterialSkin.Controls.MaterialComboBox accDelCombo;
         private MaterialSkin.Controls.MaterialLabel accountOp3;
         private MaterialSkin.Controls.MaterialButton cusDelBtn;
         private ToolTip mainTips;

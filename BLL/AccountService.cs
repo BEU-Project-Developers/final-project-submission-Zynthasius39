@@ -66,6 +66,18 @@ namespace BankingApp.BLL
             }
         }
 
+        public static void UpdateAccount(Account newAccount)
+        {
+            try
+            {
+                AccountRepository.Update(newAccount.Id, newAccount);
+            }
+            catch (DataAccessException)
+            {
+                throw new Exception("Failed to connect to Database");
+            }
+        }
+
         public static void ReissueAccount(Account account)
         {
             try

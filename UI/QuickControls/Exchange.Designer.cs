@@ -115,6 +115,7 @@
             submitBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             submitBtn.UseAccentColor = false;
             submitBtn.UseVisualStyleBackColor = true;
+            submitBtn.Click += Exchange_Btn_Click;
             // 
             // Exchange
             // 

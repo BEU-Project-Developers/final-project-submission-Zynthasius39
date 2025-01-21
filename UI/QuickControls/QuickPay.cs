@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BankingApp.BLL;
+using BankingApp.Models;
 
 namespace BankingApp.UI.QuickControls
 {
     public partial class QuickPay : UserControl
     {
+        private Account _account;
         private decimal _amount = 0;
-        public QuickPay()
+        public QuickPay(Account account)
         {
+            _account = account;
             InitializeComponent();
         }
 
@@ -50,7 +45,8 @@ namespace BankingApp.UI.QuickControls
 
         private void Submit_Click(object sender, EventArgs e)
         {
-            // TODO: Integrate with Services
+            _account.Amount -= _amount;
+            AccountService.UpdateAccount(_account);
         }
     }
 }

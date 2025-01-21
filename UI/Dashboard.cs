@@ -106,17 +106,6 @@ namespace BankingApp.UI
                 LogoutButton_Click(sender, e);
             }
         }
-
-        private void PaymentsMini1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MainTips_Popup(object sender, PopupEventArgs e)
-        {
-
-        }
-
         private void Refresh_Btn_Click(object sender, EventArgs e)
         {
             Dashboard_Load();
