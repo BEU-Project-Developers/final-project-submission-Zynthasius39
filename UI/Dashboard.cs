@@ -13,11 +13,13 @@ namespace BankingApp.UI
             AppSkinHelper.msm.AddFormToManage(this);
             StatusBar.AddStatusBar(mainStatus);
 
-            if (FormHelpers.CurrentUser != null)
+            try
             {
-                customerName.Text = FormHelpers.CurrentUser.Name;
-                try
+                FormHelpers.Payments = PaymentService.GetAllPayments();
+
+                if (FormHelpers.CurrentUser != null)
                 {
+                    customerName.Text = FormHelpers.CurrentUser.Name;
                     FormHelpers.UserAccounts = AccountService.GetAccountsByCustomerId(FormHelpers.CurrentUser.Id);
                     FormHelpers.UserContracts = ContractService.GetContractsByType(FormHelpers.CurrentUser.Id, Contractt.Loan);
 
@@ -42,16 +44,19 @@ namespace BankingApp.UI
                             cardsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 200));
                             cardsTable.Controls.Add(FormHelpers.AddAccount(acc), 0, cardsTable.RowStyles.Count - 3);
                         });
-
-
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                    StatusBar.Status = ex.Message;
-                }
-
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                StatusBar.Status = ex.Message;
+            }
+
+            FormHelpers.Payments?.ForEach(pay =>
+                {
+                    paymentsTable.RowStyles.Insert(0, new RowStyle(SizeType.Absolute, 100));
+                    paymentsTable.Controls.Add(FormHelpers.AddPayment(pay), 0, paymentsTable.RowStyles.Count - 3);
+                });
 
             // NOTE: Fetch from Database
 
