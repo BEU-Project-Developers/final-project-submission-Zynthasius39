@@ -474,6 +474,7 @@
             accountOp4.Size = new Size(772, 50);
             accountOp4.TabIndex = 5;
             accountOp4.Text = "Default Account";
+            accountOp4.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // accComboBox
             // 
